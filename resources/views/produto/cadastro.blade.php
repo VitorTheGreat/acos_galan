@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-1">
-                                  <input type="text" class="form-control" placeholder="Estoque">
+                                  <input type="text" class="form-control" placeholder="QTD Estoque">
                                 </div>
                                 <div class="col-1">
                                     <input type="text" class="form-control" placeholder="NCM">
@@ -69,7 +69,7 @@
                                   </div>
                             </div>
                             <div class="form-row">
-                                <div class="col form-group">
+                                <div class="col-6 form-group">
                                     <label for="exampleFormControlSelect1">Fornecedor</label>
                                     <select class="form-control" data-style="btn btn-link" id="exampleFormControlSelect1">
                                       <option>SP</option>
@@ -79,6 +79,17 @@
                                       <option>5</option>
                                     </select>
                                 </div>
+                                <div class="col-6 form-group">
+                                    <label for="exampleFormControlSelect1">Loja/Estoque Fisico</label>
+                                    <select class="form-control" data-style="btn btn-link" id="exampleFormControlSelect1">
+                                      <option>loja 1</option>
+                                      <option>loja 2</option>
+                                      <option>loja 3</option>
+                                      <option>loja 4</option>
+                                      <option>loja 5</option>
+                                    </select>
+                                </div>
+
                             </div>
                             <button type="button" class="btn btn-success">Cadastrar</button>
                           </form>
