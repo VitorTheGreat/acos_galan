@@ -70,3 +70,8 @@ Route::get('/cadastro/cliente', function () {
 Route::get('/cadastro/fornecedor', function () {
     return view('fornecedor.cadastro');
 })->middleware('auth');
+
+
+Route::get('/movimentacao/vendas', function(){
+	return view('movimentacao.vendas');
+})->middleware('auth');

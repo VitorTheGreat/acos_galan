@@ -1,0 +1,45 @@
+version: "3"
+services:
+ mysql:
+  container_name: 'mysql'
+  image: mysql:5.7
+  restart: always
+  ports:
+   - 3307:3306
+  environment:
+   MYSQL_ROOT_PASSWORD: DATABASE
+   MYSQL_DATABASE: DATABASE
+   MYSQL_USER: DATABASE
+   MYSQL_PASSWORD: DATABASE
+  networks:
+   - microservices
+  volumes:
+   - "./data:/var/lib/mysql"
+ phpmyadmin:
+  container_name: 'phpmyadmin'
+  image: phpmyadmin/phpmyadmin
+  networks:
+   - microservices
+  environment:
+   PMA_HOST: mysql
+   PMA_PORT: 3306
+  ports:
+   - '8081:80'
+  volumes:
+   - /sessions
+ app:
+  container_name: 'acos_galan'
+  image: webdevops/php-apache-dev:alpine
+  ports:
+   - 81:80
+  environment:
+   WEB_DOCUMENT_ROOT: /app/public
+   PHP_DISPLAY_ERRORS: 1
+  volumes:
+   - "/srv/http/acos_galan:/app"
+  #  - "./php_custom.ini:/etc/php7/php.ini"
+  #  - "/etc/php/php.ini:/etc/php7/php.ini"
+  networks:
+   - microservices
+networks:
+ microservices:
