@@ -21,7 +21,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/movimentacao/vendas">Vendas</a>
-                    <a class="dropdown-item" href="#">Orçamentos</a>
+                    <a class="dropdown-item" href="/movimentacao/orcamento">Orçamentos</a>
                     <a class="dropdown-item" href="#">Trocas de mercadoria</a>
                     <a class="dropdown-item" href="#">Compras</a>
                     <a class="dropdown-item" href="#">Pedidos de Compra</a>

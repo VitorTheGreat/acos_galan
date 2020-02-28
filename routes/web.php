@@ -56,22 +56,32 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
-//Views Produto
-Route::get('/cadastro/produto', function () {
-    return view('produto.cadastro');
-})->middleware('auth');
+//Cadastros
+Route::middleware(['middleware' => 'auth'])->prefix('cadastro')->group(function(){
+	//Produto
+	Route::get('produto', function () {
+	    return view('produto.cadastro');
+	});
 
-//Views Cliente
-Route::get('/cadastro/cliente', function () {
-    return view('cliente.cadastro');
-})->middleware('auth');
+	//Cliente
+	Route::get('cliente', function () {
+	    return view('cliente.cadastro');
+	});
 
-//Views Fornecedor
-Route::get('/cadastro/fornecedor', function () {
-    return view('fornecedor.cadastro');
-})->middleware('auth');
+	//Fornecedor
+	Route::get('fornecedor', function () {
+	    return view('fornecedor.cadastro');
+	});
+});
 
-
-Route::get('/movimentacao/vendas', function(){
-	return view('movimentacao.vendas');
-})->middleware('auth');
+//Movimentação
+Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(function(){
+	//Vendas
+	Route::get('vendas', function(){
+		return view('movimentacao.vendas');
+	});
+	//Orçamentos
+	Route::get('orcamento', function() {
+		return view('movimentacao.orcamento');
+	});
+});

@@ -6,12 +6,12 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h1>Vendas</h1>
+                <h1>Orçamento</h1>
                 <hr>
                 <div class="card">
                     <div class="card-header card-header-primary">
                       {{--  <h4 class="card-title ">Simple Table</h4>  --}}
-                      <p class="card-category"> Vendas</p>
+                      <p class="card-category"> Orçamento</p>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
