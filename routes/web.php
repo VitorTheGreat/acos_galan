@@ -58,17 +58,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 //Cadastros
 Route::middleware(['middleware' => 'auth'])->prefix('cadastro')->group(function(){
-	//Produto
 	Route::get('produto', function () {
 	    return view('produto.cadastro');
 	});
-
-	//Cliente
 	Route::get('cliente', function () {
 	    return view('cliente.cadastro');
 	});
-
-	//Fornecedor
 	Route::get('fornecedor', function () {
 	    return view('fornecedor.cadastro');
 	});
@@ -76,12 +71,22 @@ Route::middleware(['middleware' => 'auth'])->prefix('cadastro')->group(function(
 
 //Movimentação
 Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(function(){
-	//Vendas
 	Route::get('vendas', function(){
 		return view('movimentacao.vendas');
 	});
-	//Orçamentos
 	Route::get('orcamento', function() {
 		return view('movimentacao.orcamento');
+	});
+	Route::get('trocas', function() {
+		return view('movimentacao.trocas');
+	});
+	Route::get('compras', function() {
+		return view('movimentacao.compras');
+	});
+	Route::get('pedidos-compra', function() {
+		return view('movimentacao.pedidosCompra');
+	});
+	Route::get('saida-caixa', function() {
+		return view('movimentacao.saidaCaixa');
 	});
 });

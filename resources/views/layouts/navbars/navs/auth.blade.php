@@ -22,10 +22,10 @@
                 <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/movimentacao/vendas">Vendas</a>
                     <a class="dropdown-item" href="/movimentacao/orcamento">Orçamentos</a>
-                    <a class="dropdown-item" href="#">Trocas de mercadoria</a>
-                    <a class="dropdown-item" href="#">Compras</a>
-                    <a class="dropdown-item" href="#">Pedidos de Compra</a>
-                    <a class="dropdown-item" href="#">Saídas do Caixa</a>
+                    <a class="dropdown-item" href="/movimentacao/trocas">Trocas de mercadoria</a>
+                    <a class="dropdown-item" href="/movimentacao/compras">Compras</a>
+                    <a class="dropdown-item" href="/movimentacao/pedidos-compra">Pedidos de Compra</a>
+                    <a class="dropdown-item" href="/movimentacao/saida-caixa">Saídas do Caixa</a>
                 </div>
             </li>
         </ul>
