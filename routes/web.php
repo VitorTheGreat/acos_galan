@@ -56,22 +56,37 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
-//Views Produto
-Route::get('/cadastro/produto', function () {
-    return view('produto.cadastro');
-})->middleware('auth');
+//Cadastros
+Route::middleware(['middleware' => 'auth'])->prefix('cadastro')->group(function(){
+	Route::get('produto', function () {
+	    return view('produto.cadastro');
+	});
+	Route::get('cliente', function () {
+	    return view('cliente.cadastro');
+	});
+	Route::get('fornecedor', function () {
+	    return view('fornecedor.cadastro');
+	});
+});
 
-//Views Cliente
-Route::get('/cadastro/cliente', function () {
-    return view('cliente.cadastro');
-})->middleware('auth');
-
-//Views Fornecedor
-Route::get('/cadastro/fornecedor', function () {
-    return view('fornecedor.cadastro');
-})->middleware('auth');
-
-
-Route::get('/movimentacao/vendas', function(){
-	return view('movimentacao.vendas');
-})->middleware('auth');
+//Movimentação
+Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(function(){
+	Route::get('vendas', function(){
+		return view('movimentacao.vendas');
+	});
+	Route::get('orcamento', function() {
+		return view('movimentacao.orcamento');
+	});
+	Route::get('trocas', function() {
+		return view('movimentacao.trocas');
+	});
+	Route::get('compras', function() {
+		return view('movimentacao.compras');
+	});
+	Route::get('pedidos-compra', function() {
+		return view('movimentacao.pedidosCompra');
+	});
+	Route::get('saida-caixa', function() {
+		return view('movimentacao.saidaCaixa');
+	});
+});
