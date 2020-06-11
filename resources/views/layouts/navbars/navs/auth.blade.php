@@ -9,10 +9,10 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/cadastro/cliente">Cliente</a>
-                    <a class="dropdown-item" href="/cadastro/fornecedor">Fornecedor</a>
                     <a class="dropdown-item" href="/cadastro/produto">Produto</a>
-                    <a class="dropdown-item" href="/user">Usuário</a>
+                    <a class="dropdown-item" href="/cadastro/fornecedor">Fornecedor</a>
                     <a class="dropdown-item" href="/cadastro/estoque">Estoque</a>
+                    <a class="dropdown-item" href="/user">Usuário</a>
                 </div>
             </li>
             <li class="nav-item dropdown">

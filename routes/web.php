@@ -64,10 +64,12 @@ Route::middleware(['middleware' => 'auth'])->prefix('cadastro')->group(function(
 	Route::get('cliente', function () {
 	    return view('cliente.cadastro');
 	});
-	Route::get('fornecedor', function () {
-	    return view('fornecedor.cadastro');
-	});
 
+	//Supplier
+	Route::get('fornecedor', 'SupplierController@create');
+	Route::post('fornecedor', 'SupplierController@store');
+
+	//Storage
 	Route::get('estoque', 'StorageController@create');
 	Route::post('estoque', 'StorageController@store');
 });
