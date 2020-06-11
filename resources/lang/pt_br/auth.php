@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'As credencias inseridas não estão em nossa base de dados.',
+    'failed' => 'As credenciais inseridas não estão em nossa base de dados.',
     'throttle' => 'Muitas tentativas nesse usuario. Conta bloqueada por :seconds segundos.',
 
 ];

@@ -37,7 +37,7 @@
                       <div class="table-responsive">
                         <form action="/cadastro/estoque" method="POST">
                           @csrf
-                            <h5>Dados Pessoais</h5>
+                            <h5>Dados do Estoque</h5>
                             <div class="form-row">
                               <div class="col">
                                 <input type="text" class="form-control" placeholder="Nome Estoque/Nome Loja" id="name" name="name">
@@ -63,68 +63,27 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Name</th>
-                                    <th>Job Position</th>
-                                    <th>Since</th>
-                                    <th class="text-right">Salary</th>
-                                    <th class="text-right">Actions</th>
+                                    <th>Nome do Estoque</th>
+                                    <th>Local</th>
+                                    <th class="text-right">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
+                              @foreach ($storages as $key => $storage)
                                 <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Andrew Mike</td>
-                                    <td>Develop</td>
-                                    <td>2013</td>
-                                    <td class="text-right">&euro; 99,225</td>
+                                    <td class="text-center">{{$storage->id}}</td>
+                                    <td>{{$storage->name}}</td>
+                                    <td>{{$storage->local}}</td>
                                     <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" class="btn btn-info">
-                                            <i class="material-icons">person</i>
-                                        </button>
-                                        <button type="button" rel="tooltip" class="btn btn-success">
+                                        <button type="button" rel="tooltip" class="btn btn-success" title="Editar Estoque">
                                             <i class="material-icons">edit</i>
                                         </button>
-                                        <button type="button" rel="tooltip" class="btn btn-danger">
+                                        <button type="button" rel="tooltip" class="btn btn-danger" title="Deletar Estoque">
                                             <i class="material-icons">close</i>
                                         </button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="text-center">2</td>
-                                    <td>John Doe</td>
-                                    <td>Design</td>
-                                    <td>2012</td>
-                                    <td class="text-right">&euro; 89,241</td>
-                                    <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" class="btn btn-info btn-round">
-                                            <i class="material-icons">person</i>
-                                        </button>
-                                        <button type="button" rel="tooltip" class="btn btn-success btn-round">
-                                            <i class="material-icons">edit</i>
-                                        </button>
-                                        <button type="button" rel="tooltip" class="btn btn-danger btn-round">
-                                            <i class="material-icons">close</i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">3</td>
-                                    <td>Alex Mike</td>
-                                    <td>Design</td>
-                                    <td>2010</td>
-                                    <td class="text-right">&euro; 92,144</td>
-                                    <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                                            <i class="material-icons">person</i>
-                                        </button>
-                                        <button type="button" rel="tooltip" class="btn btn-success btn-simple">
-                                            <i class="material-icons">edit</i>
-                                        </button>
-                                        <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
-                                            <i class="material-icons">close</i>
-                                        </button>
-                                    </td>
-                                </tr>
+                              @endforeach
                             </tbody>
                           </table>
                         </div>

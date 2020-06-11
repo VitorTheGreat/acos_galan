@@ -29,7 +29,9 @@ class StorageController extends Controller
      */
     public function create()
     {
-        return view('estoque.cadastro');
+        $storages = Storage::all();
+
+        return view('estoque.cadastro', compact('storages'));
     }
 
     /**
