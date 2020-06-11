@@ -67,6 +67,9 @@ Route::middleware(['middleware' => 'auth'])->prefix('cadastro')->group(function(
 	Route::get('fornecedor', function () {
 	    return view('fornecedor.cadastro');
 	});
+
+	Route::get('estoque', 'StorageController@create');
+	Route::post('estoque', 'StorageController@store');
 });
 
 //Movimentação
