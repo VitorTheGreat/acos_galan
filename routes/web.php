@@ -58,12 +58,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 //Cadastros
 Route::middleware(['middleware' => 'auth'])->prefix('cadastro')->group(function(){
-	Route::get('produto', function () {
-	    return view('produto.cadastro');
-	});
 	Route::get('cliente', function () {
 	    return view('cliente.cadastro');
 	});
+
+	//Products
+	Route::get('produto', 'ProductController@create');
+	Route::post('produto', 'ProductController@store');
 
 	//Supplier
 	Route::get('fornecedor', 'SupplierController@create');
