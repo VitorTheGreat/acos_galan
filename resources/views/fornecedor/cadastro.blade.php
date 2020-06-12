@@ -38,37 +38,37 @@
                         <form method="POST" action="/cadastro/fornecedor">
                           @csrf
                             <div class="form-row">
-                              <div class="col">
+                              <div class="col form-group">
                                 <input type="text" class="form-control" placeholder="Razão Social" id="razao_social" name="razao_social">
                               </div>
-                              <div class="col">
+                              <div class="col form-group">
                                 <input type="text" class="form-control" placeholder="CNPJ" id="cnpj" name="cnpj">
                               </div>
                             </div>
                             <div class="form-row">
-                                <div class="col">
+                                <div class="col form-group">
                                     <input type="text" class="form-control" placeholder="E-mail" id="email" name="email">
                                   </div>
-                              <div class="col">
+                              <div class="col form-group">
                                 <input type="text" class="form-control" placeholder="Telefone" id="telefone" name="telefone">
                               </div>
-                              <div class="col">
+                              <div class="col form-group">
                                 <input type="text" class="form-control" placeholder="I.E." id="ie" name="ie">
                             </div>
                             </div>
                             <br>
                             <h5>Endereço</h5>
                             <div class="form-row">
-                                <div class="col">
+                                <div class="col form-group">
                                   <input type="text" class="form-control" placeholder="Endereço (ex: Rua)" id="endereco" name="endereco">
                                 </div>
-                                <div class="col">
+                                <div class="col form-group">
                                   <input type="text" class="form-control" placeholder="Bairro" id="bairro" name="bairro">
                                 </div>
-                                <div class="col">
+                                <div class="col form-group">
                                   <input type="text" class="form-control" placeholder="CEP" id="cep" name="cep">
                                 </div>
-                                <div class="col">
+                                <div class="col form-group">
                                     <input type="text" class="form-control" placeholder="Cidade" id="cidade" name="cidade">
                                 </div>
                             </div>

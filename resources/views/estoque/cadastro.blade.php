@@ -39,10 +39,10 @@
                           @csrf
                             <h5>Dados do Estoque</h5>
                             <div class="form-row">
-                              <div class="col">
+                              <div class="col form-group">
                                 <input type="text" class="form-control" placeholder="Nome Estoque/Nome Loja" id="name" name="name">
                               </div>
-                              <div class="col">
+                              <div class="col form-group">
                                 <input type="text" class="form-control" placeholder="Local" id="local" name="local">
                               </div>
                             </div>

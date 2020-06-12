@@ -38,53 +38,53 @@
                         <form>
                             <div class="form-row">
                               <div class="col">
-                                <input type="text" class="form-control" placeholder="Descrição">
+                                <input type="text" class="form-control" placeholder="Descrição" id="descricao" name-"descricao">
                               </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-2">
-                                    <input type="text" class="form-control" placeholder="Quantidade">
-                                  </div>
-                              <div class="col-1">
-                                <input type="text" class="form-control" placeholder="Unidade Venda">
-                              </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-1">
-                                    <input class="form-control" type="text" name="" id="" placeholder="Peso (kg)">
+                                <div class="col-2 form-group">
+                                    <input type="text" class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade">
                                 </div>
-                                <div class="col-1">
+                              <div class="col-1 form-group">
+                                <input type="text" class="form-control" placeholder="Unidade de Venda" id="unidade_venda" name="unidade_venda">
+                              </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 form-group">
+                                    <input class="form-control" type="text" name="" id="" placeholder="Peso (kg)" id="peso_kg" name="peso_kg">
+                                </div>
+                                <div class="col-1 form-group">
                                     <input class="form-control" type="text" name="" id="" placeholder="Preço">
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-2">
+                                  <div class="col-2 form-group">
                                     <input type="text" class="form-control" placeholder="Custo Bruto / Preço Compra">
                                   </div>
-                                  <div class="col-2">
+                                  <div class="col-2 form-group">
                                     <input type="text" class="form-control" placeholder="% IPI">
                                   </div>
-                                  <div class="col-2">
+                                  <div class="col-2 form-group">
                                     <input type="text" class="form-control" placeholder="% ICMS">
                                   </div>
-                                  <div class="col-2">
+                                  <div class="col-2 form-group">
                                     <input type="text" class="form-control" placeholder="Preço de Custo" disabled>
                                   </div>
-                                  <div class="col-2">
+                                  <div class="col-2 form-group">
                                     <input type="text" class="form-control" placeholder="% Lucro">
                                   </div>
-                                  <div class="col-2">
+                                  <div class="col-2 form-group">
                                     <input type="text" class="form-control" placeholder="Preço de Venda" disabled>
                                   </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-1">
+                                <div class="col-1 form-group">
                                   <input type="text" class="form-control" placeholder="QTD Estoque">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1 form-group">
                                     <input type="text" class="form-control" placeholder="NCM">
                                   </div>
-                                  <div class="col-1">
+                                  <div class="col-1 form-group">
                                     <input type="text" class="form-control" placeholder="CSOSN">
                                   </div>
                             </div>
