@@ -74,8 +74,8 @@ class ProductController extends Controller
 
         $controlStorage = Control_storage::create([
           'quantidade' => $dataControleStorage['quantidade'],
-          'quantiade_peso' => $dataControleStorage'quantidade_peso'],
-          'produto_id' => $product['id'];
+          'quantiade_peso' => $dataControleStorage['quantidade_peso'],
+          'produto_id' => $product['id']
         ]);
 
       } catch (\Exception $e) {
