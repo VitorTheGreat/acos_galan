@@ -19,19 +19,9 @@ class StorageController extends Controller
      */
     public function index()
     {
-        //
-    }
+      $storages = Storage::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $storages = Storage::all();
-
-        return view('estoque.cadastro', compact('storages'));
+      return view('estoque.actions', compact('storages'));
     }
 
     /**
@@ -47,31 +37,19 @@ class StorageController extends Controller
             'local' => 'required|min:3',
         ]);
 
+      try {
         $storage = Storage::create($data);
 
         return back()->with('status', 'Estoque Criado com Sucesso');
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+      } catch (\Exception $e) {
+        // dd($e);
+        // return back()->withError($e->getMessage());
+        if($e->errorInfo[1] == 1062){
+          return back()->withError("Este estoque ja foi cadastrado, por favor confira os dados");
+        }
+      }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -81,9 +59,16 @@ class StorageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Storage $storage)
     {
-        //
+        $data = request()->validate([
+            'name' => 'required|min:3',
+            'local' => 'required|min:3',
+        ]);
+
+        $storage->update($data);
+
+        return back()->with('status', 'Estoque Alterado com sucesso!');
     }
 
     /**
@@ -92,8 +77,12 @@ class StorageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Storage $storage)
     {
-        //
+
+        $storage->delete();
+
+        return back()->with('status', 'Estoque Deletado com Sucesso');
+
     }
 }

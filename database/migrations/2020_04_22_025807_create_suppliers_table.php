@@ -19,7 +19,7 @@ class CreateSuppliersTable extends Migration
             $table->string('email', 50)->unique();
             $table->string('cnpj', 18)->unique();
             $table->string('ie', 15)->unique();
-            $table->string('telefone', 13)->nullable();
+            $table->string('telefone', 15)->nullable();
             $table->unsignedBigInteger('states_id');
             $table->foreign('states_id')
                   ->references('id')->on('states')

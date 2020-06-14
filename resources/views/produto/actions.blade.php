@@ -24,6 +24,17 @@
     </div>
   @endif
 
+  @if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong> Error - </strong> {{session('error')}} </span>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  @endif
+
+
+
         <div class="row">
             <div class="col-md-12">
                 <h1>Cadastro Produto</h1>
@@ -46,7 +57,13 @@
                                     <input type="text" class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade">
                                 </div>
                               <div class="col-1 form-group">
-                                <input type="text" class="form-control" placeholder="Unidade de Venda" id="unidade_venda" name="unidade_venda">
+                                <select class="form-control" data-style="btn btn-link" id="exampleFormControlSelect1">
+                                    <option value="">Unidade de venda</option>
+                                    <option value="br">Barra (br)</option>
+                                    <option value="lt">Lata (lt)</option>
+                                    <option value="kg">Kilo (kg)</option>
+                                    <option value="mt">Metro (mt)</option>
+                                </select>
                               </div>
                             </div>
                             <div class="form-row">
@@ -59,7 +76,7 @@
                             </div>
                             <div class="form-row">
                                   <div class="col-2 form-group">
-                                    <input type="text" class="form-control" placeholder="Custo Bruto / Preço Compra">
+                                    <input type="text" class="form-control" placeholder="Custo Bruto / Preço Compra (unidade)">
                                   </div>
                                   <div class="col-2 form-group">
                                     <input type="text" class="form-control" placeholder="% IPI">
@@ -74,7 +91,7 @@
                                     <input type="text" class="form-control" placeholder="% Lucro">
                                   </div>
                                   <div class="col-2 form-group">
-                                    <input type="text" class="form-control" placeholder="Preço de Venda" disabled>
+                                    <input type="text" class="form-control" placeholder="Preço de Venda (unidade)" disabled>
                                   </div>
                             </div>
                             <div class="form-row">

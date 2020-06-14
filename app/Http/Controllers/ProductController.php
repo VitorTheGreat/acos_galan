@@ -17,21 +17,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-    }
+      $products = Product::all();
+      $suppliers = Supplier::all();
+      $storages = Storage::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $products = Product::all();
-        $suppliers = Supplier::all();
-        $storages = Storage::all();
-
-        return view('produto.cadastro', compact('products', 'suppliers', 'storages'));
+      return view('produto.actions', compact('products', 'suppliers', 'storages'));
     }
 
     /**
@@ -87,28 +77,6 @@ class ProductController extends Controller
 
 
       return back()->with('status', 'Produto Registrado com Sucesso');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

@@ -56,23 +56,36 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
-//Cadastros
-Route::middleware(['middleware' => 'auth'])->prefix('cadastro')->group(function(){
-	Route::get('cliente', function () {
-	    return view('cliente.cadastro');
+//Customer
+Route::middleware(['middleware' => 'auth'])->prefix('cliente')->group(function(){
+	// Route::get('/', 'CustomerController@index')->name('cliente');
+	Route::get('/', function () {
+			return view('cliente.cadastro');
 	});
+});
 
-	//Products
-	Route::get('produto', 'ProductController@create');
-	Route::post('produto', 'ProductController@store');
+//Product
+Route::middleware(['middleware' => 'auth'])->prefix('produto')->group(function(){
+	Route::get('/', 'ProductController@index')->name('produto');
+	Route::post('/', 'ProductController@store')->name('produto.store');
+	Route::patch('/{product}', 'ProductController@update')->name('produto.update');
+	Route::delete('/{product}', 'ProductController@destroy')->name('produto.destroy');
+});
 
-	//Supplier
-	Route::get('fornecedor', 'SupplierController@create');
-	Route::post('fornecedor', 'SupplierController@store');
+//Storage
+Route::middleware(['middleware' => 'auth'])->prefix('estoque')->group(function(){
+	Route::get('/', 'StorageController@index')->name('estoque');
+	Route::post('/', 'StorageController@store')->name('estoque.store');
+	Route::patch('/{storage}', 'StorageController@update')->name('estoque.update');
+	Route::delete('/{storage}', 'StorageController@destroy')->name('estoque.destroy');
+});
 
-	//Storage
-	Route::get('estoque', 'StorageController@create');
-	Route::post('estoque', 'StorageController@store');
+//Supplier
+Route::middleware(['middleware' => 'auth'])->prefix('fornecedor')->group(function(){
+	Route::get('/', 'SupplierController@index')->name('fornecedor');
+	Route::post('/', 'SupplierController@store')->name('fornecedor.store');
+	Route::patch('/{supplier}', 'SupplierController@update')->name('fornecedor.update');
+	Route::delete('/{supplier}', 'SupplierController@destroy')->name('fornecedor.destroy');
 });
 
 //Movimentação
