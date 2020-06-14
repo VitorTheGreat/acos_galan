@@ -2,12 +2,17 @@
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
     <div class="container-fluid">
         <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+              <a class="nav-link" href="/" aria-haspopup="true" aria-expanded="false">
+                  Home
+              </a>
+          </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                <a class="nav-link" href="#!" id="cadastroDropDown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Cadastro
                 </a>
-                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="cadastroDropDown">
                     <a class="dropdown-item" href="/cliente">Cliente</a>
                     <a class="dropdown-item" href="/produto">Produto</a>
                     <a class="dropdown-item" href="/fornecedor">Fornecedor</a>
@@ -16,11 +21,11 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                <a class="nav-link" href="http://example.com" id="movimentacaoDropDown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Movimentação
                 </a>
-                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="movimentacaoDropDown">
                     <a class="dropdown-item" href="/movimentacao/vendas">Vendas</a>
                     <a class="dropdown-item" href="/movimentacao/orcamento">Orçamentos</a>
                     <a class="dropdown-item" href="/movimentacao/trocas">Trocas de mercadoria</a>
