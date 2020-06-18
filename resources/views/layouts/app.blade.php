@@ -19,19 +19,24 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet"/>
     {{-- Custom CSS --}}
-{{--    <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>--}}
+   {{-- <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/> --}}
+   {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}" /> --}}
 </head>
 <body class="{{ $class ?? '' }}">
-@auth()
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-    @include('layouts.page_templates.auth')
-@endauth
+  <div id="app">
 
-@guest()
-    @include('layouts.page_templates.guest')
-@endguest
+  @auth()
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+      </form>
+      @include('layouts.page_templates.auth')
+  @endauth
+
+  @guest()
+      @include('layouts.page_templates.guest')
+  @endguest
+
+  </div>
 
 <!--   Core JS Files   -->
 <script src="{{ asset('material') }}/js/core/jquery.min.js"></script>
@@ -79,6 +84,8 @@
 <script src="{{ asset('material') }}/js/settings.js"></script>
 {{--Custom JS--}}
 <script src="{{ asset('js/styles.js') }}"></script>
+
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 @stack('js')
 </body>
 </html>

@@ -33,8 +33,6 @@
     </div>
   @endif
 
-
-
         <div class="row">
             <div class="col-md-12">
                 <h1>Cadastro Produto</h1>
@@ -46,25 +44,26 @@
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
+                        <div class="col form-group">
+                          <select class="form-control" data-style="btn btn-link" id="exampleFormControlSelect1">
+                              <option value="">Unidade de venda</option>
+                              <option value="br">Barra (br)</option>
+                              <option value="lt">Lata (lt)</option>
+                              <option value="kg">Kilo (kg)</option>
+                              <option value="mt">Metro (mt)</option>
+                              <option value="pc">Peça (pç)</option>
+                          </select>
+                        </div>
                         <form>
                             <div class="form-row">
                               <div class="col">
-                                <input type="text" class="form-control" placeholder="Descrição" id="descricao" name-"descricao">
+                                <input type="text" class="form-control" placeholder="Descrição" id="descricao" name="descricao">
                               </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-2 form-group">
                                     <input type="text" class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade">
                                 </div>
-                              <div class="col-1 form-group">
-                                <select class="form-control" data-style="btn btn-link" id="exampleFormControlSelect1">
-                                    <option value="">Unidade de venda</option>
-                                    <option value="br">Barra (br)</option>
-                                    <option value="lt">Lata (lt)</option>
-                                    <option value="kg">Kilo (kg)</option>
-                                    <option value="mt">Metro (mt)</option>
-                                </select>
-                              </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-1 form-group">
@@ -131,7 +130,6 @@
                   </div>
             </div>
         </div>
-
     </div>
 </div>
 
