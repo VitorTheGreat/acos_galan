@@ -69,8 +69,8 @@
                                 </div>
                             <div class="form-row">
                                   <div class="col-1 form-group">
-                                    <label for="peso_kg">Peso (kg)</label>
-                                      <input class="form-control" type="text" name="" id="" placeholder="Peso (kg)" id="peso_kg" name="peso_kg">
+                                    <label for="peso_kg">Peso (gr)</label>
+                                      <input class="form-control data-kilo" type="text" name="" id="" placeholder="Peso (gr)" id="peso_kg" name="peso_kg">
                                   </div>
                                   <div class="col-1 form-group">
                                     <label for="">Preço</label>

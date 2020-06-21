@@ -349,54 +349,42 @@ $(document).ready(function () {
         }
       });
     }
-  }; //masks
-  // function to make dynamic masks
+  }; //money mask
 
-  function inputHandler(masks, max, event) {
-    var c = event.target;
-    var v = c.value.replace(/\D/g, '');
-    var m = c.value.length > max ? 1 : 0;
-    vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default()(c).unMask();
-    vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default()(c).maskPattern(masks[m]);
-    c.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toPattern(v, masks[m]);
-  } //cellphone and telephone masks
-  // let telMask = ['(99) 9999-99999', '(99) 99999-9999'];
-  // let tel = document.querySelector('#tel');
-  // VMasker(tel).maskPattern(telMask[0]);
-  // tel.addEventListener('input', inputHandler.bind(undefined, telMask, 14), false);
-  //
-  //cpf and cnpj masks
-  // let docMask = ['999.999.999-999', '99.999.999/9999-99'];
-  // let doc = document.querySelector('#doc');
-  // VMasker(doc).maskPattern(docMask[0]);
-  // doc.addEventListener('input', inputHandler.bind(undefined, docMask, 14), false);
-  //percent mask
-
-
-  var percentMask = ['9%', '99%', '999%'];
-  var percent = document.querySelectorAll(".data-percent");
-  vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default()(percent).maskPattern(percentMask[0]);
-
-  for (var i = 0; i < percent.length; i++) {
-    percent[i].addEventListener('input', inputHandler.bind(undefined, percentMask, 14), false);
-    console.log('percent => ', percent[i]);
-  } // money mask
-
-
-  var data_money = document.querySelectorAll(".data-money");
-  vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default()(data_money).maskMoney({
-    // Decimal precision -> "90"
+  var moneyInput = document.querySelectorAll(".data-money");
+  vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default()(moneyInput).maskMoney({
     precision: 2,
-    // Decimal separator -> ",90"
     separator: ',',
-    // Number delimiter -> "12.345.678"
     delimiter: '.',
-    // Money unit -> "R$ 12.345.678,90"
-    unit: 'R$' // Force type only number instead decimal,
-    // masking decimals with ",00"
-    // Zero cents -> "R$ 1.234.567.890,00"
-    // zeroCents: true
+    unit: 'R$',
+    zeroCents: false
+  }); // percent mask
 
+  var percentInput = document.querySelectorAll(".data-percent");
+  vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default()(percentInput).maskMoney({
+    precision: 1,
+    suffixUnit: '%',
+    zeroCents: false
+  }); // kilogram masker
+
+  var kiloInput = document.querySelectorAll(".data-kilo");
+  vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default()(kiloInput).maskMoney({
+    precision: 3,
+    separator: ',',
+    delimiter: ',',
+    suffixUnit: 'gr',
+    zeroCents: false
+  });
+  $('body').on('click', '.btn-success', function () {
+    moneyInput.forEach(function (el, i) {
+      console.log('money => ', el.value, 'money corrected value => ', parseFloat(el.value.replace('R$', '').replace(',', '.')));
+    });
+    percentInput.forEach(function (el, i) {
+      console.log('percent => ', el.value, 'percent corrected value => ', parseFloat(el.value.replace('R$', '').replace(',', '.')));
+    });
+    kiloInput.forEach(function (el, i) {
+      console.log('kilo => ', el.value, 'kiloInput corrected value => ', parseFloat(el.value.replace('gr', '').replace(',', '.')));
+    });
   });
 });
 
