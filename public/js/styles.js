@@ -375,6 +375,15 @@ $(document).ready(function () {
     suffixUnit: 'gr',
     zeroCents: false
   });
+  var preço_kg = document.getElementById('preco_kg');
+  var peso = document.getElementById('peso');
+  var custo_bruto = document.getElementById('custo_bruto');
+  preço_kg.addEventListener("blur", function (event) {
+    var valor_peso = parseFloat(peso.value.replace('R$', '').replace(',', '.'));
+    var valor_preco = parseFloat(event.target.value.replace('R$', '').replace(',', '.'));
+    var custo_brutoTotal = valor_peso * valor_preco;
+    custo_bruto.value = "";
+  }, true);
   $('body').on('click', '.btn-success', function () {
     moneyInput.forEach(function (el, i) {
       console.log('money => ', el.value, 'money corrected value => ', parseFloat(el.value.replace('R$', '').replace(',', '.')));

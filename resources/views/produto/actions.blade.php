@@ -70,15 +70,15 @@
                             <div class="form-row">
                                   <div class="col-1 form-group">
                                     <label for="peso_kg">Peso (gr)</label>
-                                      <input class="form-control data-kilo" type="text" name="" id="" placeholder="Peso (gr)" id="peso_kg" name="peso_kg">
+                                      <input class="form-control data-kilo" type="text" placeholder="Peso (gr)" id="peso" name="peso">
                                   </div>
                                   <div class="col-1 form-group">
                                     <label for="">Preço</label>
-                                      <input class="form-control data-money" type="text" name="" id="" placeholder="Preço">
+                                      <input class="form-control data-money" type="text" name="preco_kg" id="preco_kg" placeholder="Preço (kg)">
                                   </div>
                                   <div class="col-2 form-group">
                                     <label for="">Custo bruto</label>
-                                    <input type="text" class="form-control data-money" placeholder="Custo Bruto / Preço Compra (unidade)">
+                                    <input type="text" class="form-control data-money" id="custo_bruto" name="custo_bruto" placeholder="Custo Bruto / Preço Compra (unidade)">
                                   </div>
                                   <div class="col-2 form-group">
                                     <label for="">% IPI</label>

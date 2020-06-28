@@ -51,7 +51,19 @@ VMasker(kiloInput).maskMoney({
   zeroCents: false
 });
 
+let preço_kg = document.getElementById('preco_kg');
+let peso = document.getElementById('peso');
+let custo_bruto = document.getElementById('custo_bruto');
 
+preço_kg.addEventListener("blur", function( event ) {
+
+  let valor_peso = parseFloat(peso.value.replace('R$', '').replace(',', '.'));
+  let valor_preco = parseFloat(event.target.value.replace('R$', '').replace(',', '.'));
+
+  let custo_brutoTotal = valor_peso * valor_preco;
+  custo_bruto.value = "";
+
+}, true);
 
 $('body').on('click', '.btn-success', function(){
 
@@ -66,7 +78,6 @@ $('body').on('click', '.btn-success', function(){
   kiloInput.forEach((el, i) => {
     console.log('kilo => ', el.value, 'kiloInput corrected value => ', parseFloat(el.value.replace('gr', '').replace(',', '.')));
   });
-
 
 });
 
