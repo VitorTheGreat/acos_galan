@@ -74,11 +74,25 @@
                                   </div>
                                   <div class="col-1 form-group">
                                     <label for="">Preço</label>
-                                      <input class="form-control data-money" type="text" name="preco_kg" id="preco_kg" placeholder="Preço (kg)">
+                                      <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            R$
+                                          </span>
+                                        </div>
+                                        <input class="form-control data-money" type="text" name="preco_kg" id="preco_kg" placeholder="Preço (kg)">
+                                      </div>
                                   </div>
-                                  <div class="col-2 form-group">
+                                  <div class="col-1 form-group">
                                     <label for="">Custo bruto</label>
-                                    <input type="text" class="form-control data-money" id="custo_bruto" name="custo_bruto" placeholder="Custo Bruto / Preço Compra (unidade)">
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                          R$
+                                        </span>
+                                      </div>
+                                      <input type="text" class="form-control data-money" id="custo_bruto" name="custo_bruto" placeholder="Custo Bruto / Preço Compra (unidade)">
+                                    </div>
                                   </div>
                                   <div class="col-2 form-group">
                                     <label for="">% IPI</label>
@@ -90,7 +104,14 @@
                                   </div>
                                   <div class="col-2 form-group">
                                     <label for="">Preço de Custo</label>
-                                    <input type="text" class="form-control data-money" placeholder="Preço de Custo" disabled>
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                          R$
+                                        </span>
+                                      </div>
+                                      <input type="text" class="form-control data-money" placeholder="Preço de Custo" disabled id="preco_custo" name="preco_custo">
+                                    </div>
                                   </div>
                                   <div class="col-2 form-group">
                                     <label for="">% Lucro</label>
@@ -98,13 +119,20 @@
                                   </div>
                                   <div class="col-2 form-group">
                                     <label for="">preço de Venda</label>
-                                    <input type="text" class="form-control data-money" placeholder="Preço de Venda (unidade)" disabled>
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                          R$
+                                        </span>
+                                      </div>
+                                      <input type="text" class="form-control data-money" placeholder="Preço de Venda (unidade)" disabled id="preco_venda" name="preco_venda">
+                                    </div>
                                   </div>
-                                  <div class="col-3 form-group">
+                                  <div class="col-2 form-group">
                                     <label for="">NCM</label>
                                     <input type="text" class="form-control" placeholder="NCM">
                                   </div>
-                                  <div class="col-3 form-group">
+                                  <div class="col-2 form-group">
                                     <label for="">CSOSN</label>
                                     <input type="text" class="form-control" placeholder="CSOSN">
                                   </div>
@@ -138,4 +166,8 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/product.js') }}"></script>
 @endsection

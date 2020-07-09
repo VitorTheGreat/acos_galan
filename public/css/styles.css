@@ -1,4 +1,9 @@
 .dropdown-menu.dropdown-menu-left-new {
-    left: 188px;
-    top: -2px;
+  left: 188px;
+  top: -2px;
 }
+
+.input-group .input-group-text {
+  padding: 0 6px 0 0 !important;
+}
+

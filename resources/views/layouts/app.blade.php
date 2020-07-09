@@ -19,7 +19,7 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet"/>
     {{-- Custom CSS --}}
-   {{-- <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/> --}}
+   <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
    {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}" /> --}}
 </head>
 <body class="{{ $class ?? '' }}">
@@ -86,6 +86,7 @@
 <script src="{{ asset('js/styles.js') }}"></script>
 {{-- Uncoment this line if you want to use VUE --}}
 {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+@yield('scripts')
 
 @stack('js')
 </body>
