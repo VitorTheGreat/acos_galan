@@ -354,40 +354,38 @@ $(document).ready(function () {
     precision: 3,
     separator: ',',
     delimiter: ',',
-    suffixUnit: 'gr',
+    suffixUnit: '',
     zeroCents: false
   });
-  var preço_kg = document.getElementById('preco_kg');
+  var preco_peso = document.getElementById('preco_peso');
   var peso = document.getElementById('peso');
-  var custo_bruto = document.getElementById('custo_bruto');
+  var preco_compra = document.getElementById('preco_compra');
   var preco_custo = document.getElementById('preco_custo');
   var preco_venda = document.getElementById('preco_venda');
   var lucro = document.getElementById('lucro');
   var icms = document.getElementById('icms');
   var ipi = document.getElementById('ipi'); //calculate the price of the weigth
 
-  preço_kg.addEventListener("blur", function (event) {
+  preco_peso.addEventListener("blur", function (event) {
     var valor_peso = parseFloat(peso.value.replace('R$', '').replace(',', '.'));
     var valor_preco = parseFloat(event.target.value.replace('R$', '').replace(',', '.'));
-    var custo_brutoTotal = valor_peso * valor_preco;
-    custo_bruto.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(custo_brutoTotal.toFixed(2));
+    var preco_compraTotal = valor_peso * valor_preco;
+    preco_compra.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_compraTotal.toFixed(2));
 
     if (valor_peso != 0 && valor_preco != 0) {
-      custo_bruto.setAttribute("disabled", "disabled");
       ipi.focus();
     } else {
-      custo_bruto.removeAttribute("disabled");
-      custo_bruto.focus();
+      preco_compra.focus();
     }
   }, true); //calculate the price of taxes
 
   icms.addEventListener("blur", function (event) {
     var ipi_c = parseFloat(ipi.value.replace('%', '').replace(',', '.'));
     var icms_c = parseFloat(icms.value.replace('%', '').replace(',', '.'));
-    var custo_bruto_c = parseFloat(custo_bruto.value.replace('R$', '').replace(',', '.'));
+    var preco_compra_c = parseFloat(preco_compra.value.replace('R$', '').replace(',', '.'));
     var total_percent = (ipi_c + icms_c) / 100;
-    var total_taxes = custo_bruto_c * total_percent;
-    var preco_custo_with_taxes = parseFloat(total_taxes.toFixed(2)) + parseFloat(custo_bruto_c);
+    var total_taxes = preco_compra_c * total_percent;
+    var preco_custo_with_taxes = parseFloat(total_taxes.toFixed(2)) + parseFloat(preco_compra_c);
     preco_custo.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_custo_with_taxes.toFixed(2));
   }, true); //calculate the price of the profit
 

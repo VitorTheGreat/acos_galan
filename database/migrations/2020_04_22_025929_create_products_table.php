@@ -15,6 +15,7 @@ class CreateProductsTable extends Migration
     {
       Schema::create('products', function (Blueprint $table) {
           $table->bigIncrements('id')->unique();
+          $table->string('unidade_venda', 10);
           $table->string('descricao', 150);
           $table->float('peso', 8, 2);
           $table->float('preco_peso', 8, 2);

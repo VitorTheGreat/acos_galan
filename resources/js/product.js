@@ -26,14 +26,14 @@ $(document).ready(() => {
     precision: 3,
     separator: ',',
     delimiter: ',',
-    suffixUnit: 'gr',
+    suffixUnit: '',
     zeroCents: false
   });
 
 
-  let preço_kg = document.getElementById('preco_kg');
+  let preco_peso = document.getElementById('preco_peso');
   let peso = document.getElementById('peso');
-  let custo_bruto = document.getElementById('custo_bruto');
+  let preco_compra = document.getElementById('preco_compra');
   let preco_custo = document.getElementById('preco_custo');
   let preco_venda = document.getElementById('preco_venda');
   let lucro = document.getElementById('lucro');
@@ -41,25 +41,19 @@ $(document).ready(() => {
   let ipi = document.getElementById('ipi');
 
   //calculate the price of the weigth
-  preço_kg.addEventListener("blur", (event) => {
+  preco_peso.addEventListener("blur", (event) => {
 
     let valor_peso = parseFloat(peso.value.replace('R$', '').replace(',', '.'));
     let valor_preco = parseFloat(event.target.value.replace('R$', '').replace(',', '.'));
 
-    let custo_brutoTotal = valor_peso * valor_preco;
-    custo_bruto.value = VMasker.toMoney(custo_brutoTotal.toFixed(2));
+    let preco_compraTotal = valor_peso * valor_preco;
+    preco_compra.value = VMasker.toMoney(preco_compraTotal.toFixed(2));
 
     if(valor_peso != 0 && valor_preco != 0) {
-
-      custo_bruto.setAttribute("disabled", "disabled");
       ipi.focus();
-
     }
     else {
-
-      custo_bruto.removeAttribute("disabled")
-      custo_bruto.focus();
-
+      preco_compra.focus();
     }
 
   }, true);
@@ -69,13 +63,13 @@ $(document).ready(() => {
 
     let ipi_c = parseFloat(ipi.value.replace('%', '').replace(',', '.'))
     let icms_c = parseFloat(icms.value.replace('%', '').replace(',', '.'))
-    let custo_bruto_c = parseFloat(custo_bruto.value.replace('R$', '').replace(',', '.'));
+    let preco_compra_c = parseFloat(preco_compra.value.replace('R$', '').replace(',', '.'));
 
     let total_percent = (ipi_c + icms_c) / 100;
 
-    let total_taxes =  custo_bruto_c * total_percent
+    let total_taxes =  preco_compra_c * total_percent
 
-    let preco_custo_with_taxes = parseFloat(total_taxes.toFixed(2)) + parseFloat(custo_bruto_c)
+    let preco_custo_with_taxes = parseFloat(total_taxes.toFixed(2)) + parseFloat(preco_compra_c)
 
     preco_custo.value = VMasker.toMoney(preco_custo_with_taxes.toFixed(2));
 

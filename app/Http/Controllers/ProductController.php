@@ -36,47 +36,48 @@ class ProductController extends Controller
       //We have to store the product
       //then we have to store the quantity
 
-      $dataProduct = request()->validate([
-          'descricao' => 'required|min:3',
-          'peso' => 'required|min:3',
-          'preco_peso' => 'required|min:3',
-          'preco_compra' => 'required|min:3',
-          'preco_custo' => 'required|min:3',
-          'preco_venda' => 'required|min:3',
-          'lucro' => 'required|min:3',
-          'ipi' => 'required|min:3',
-          'icms' => 'required|min:3',
-          'ncm' => 'required|min:3',
-          'csosn' => 'required|min:3',
-          'supplier_id' => 'required|min:3',
-          'storage_id' => 'required|min:3',
-      ]);
+      // $dataProduct = request()->validate([
+      //     'descricao' => 'required|min:3',
+      //     'unidade_venda' => 'required',
+      //     'peso' => 'required|min:3',
+      //     'preco_peso' => 'required',
+      //     'preco_compra' => 'required',
+      //     'preco_custo' => 'required',
+      //     'preco_venda' => 'required',
+      //     'lucro' => 'required',
+      //     'ipi' => 'required',
+      //     'icms' => 'required',
+      //     'ncm' => 'required|min:3',
+      //     'csosn' => 'required|min:3',
+      //     'supplier_id' => 'required',
+      //     'storage_id' => 'required',
+      // ]);
+      //
+      // $dataControleStorage = request()->validate([
+      //   'quantidade' => 'required',
+      //   'quantidade_peso' => 'required',
+      // ]);
 
-      $dataControleStorage = request()->validate([
-        'quantidade' => 'required',
-        'quantidade_peso' => 'required',
-      ]);
-
-
-      try {
-
-        $product = Product::create($dataProduct);
-
-        $controlStorage = Control_storage::create([
-          'quantidade' => $dataControleStorage['quantidade'],
-          'quantiade_peso' => $dataControleStorage['quantidade_peso'],
-          'produto_id' => $product['id']
-        ]);
-
-      } catch (\Exception $e) {
-
-        return ['msg_error' => $e->getMessage()];
-
-      }
+      dd($request);
+      // try {
+      //
+      //   $product = Product::create($dataProduct);
+      //
+      //   $controlStorage = Control_storage::create([
+      //     'quantidade' => $dataControleStorage['quantidade'],
+      //     'quantiade_peso' => $dataControleStorage['quantidade_peso'],
+      //     'produto_id' => $product['id']
+      //   ]);
+      //
+      // } catch (\Exception $e) {
+      //
+      //   return ['msg_error' => $e->getMessage()];
+      //
+      // }
 
 
 
-      return back()->with('status', 'Produto Registrado com Sucesso');
+      // return back()->with('status', 'Produto Registrado com Sucesso');
     }
 
     /**
