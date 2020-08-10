@@ -166,7 +166,7 @@
                 <div class="card">
                     <div class="card-header card-header-primary">
                         {{-- <h4 class="card-title ">Simple Table</h4>  --}}
-                        <p class="card-category"> Estoques Cadastrados</p>
+                        <p class="card-category">Produtos Cadastrados</p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -174,7 +174,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">#</th>
-                                        <th>Nome do Estoque</th>
+                                        <th>Nome</th>
                                         <th>Local</th>
                                         <th class="text-right">Ações</th>
                                     </tr>
