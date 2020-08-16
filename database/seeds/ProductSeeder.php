@@ -14,6 +14,7 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
           'descricao' => "Tubo 20x20x1,25 gv",
           'ean' => '12345678910123',
+          'qtd_fracionada' => 3.5,
           'preco_unitario' => 5.8,
           'preco_compra' => 20.3,
           'preco_custo' => 24.36,
@@ -28,7 +29,7 @@ class ProductSeeder extends Seeder
         ]);
 
         DB::table('control_storages')->insert([
-          'quantidade' => '3,5',
+          'quantidade' => 5,
           'unidade_venda' => 'br',
           'produto_id' => 1
         ]);

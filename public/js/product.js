@@ -331,6 +331,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vanilla_masker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vanilla-masker */ "./node_modules/vanilla-masker/lib/vanilla-masker.js");
 /* harmony import */ var vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vanilla_masker__WEBPACK_IMPORTED_MODULE_0__);
 
+
+var toFloat = function toFloat(value) {
+  return parseFloat(value.replace('R$', '').replace(',', '.'));
+};
+
 $(document).ready(function () {
   //money mask
   var moneyInput = document.querySelectorAll(".data-money");
@@ -356,7 +361,8 @@ $(document).ready(function () {
     delimiter: ',',
     suffixUnit: '',
     zeroCents: false
-  });
+  }); //vars - Elements IDs
+
   var preco_unitario = document.getElementById('preco_unitario');
   var quantidade = document.getElementById('quantidade');
   var preco_compra = document.getElementById('preco_compra');
@@ -364,37 +370,33 @@ $(document).ready(function () {
   var preco_venda = document.getElementById('preco_venda');
   var lucro = document.getElementById('lucro');
   var icms = document.getElementById('icms');
-  var ipi = document.getElementById('ipi'); //calculate the price of the weigth
+  var ipi = document.getElementById('ipi');
+  var qtd_fracionada = document.getElementById('qtd_fracionada'); //calculate the price of the weigth
 
   preco_unitario.addEventListener("blur", function (event) {
-    var valor_peso = parseFloat(quantidade.value.replace('R$', '').replace(',', '.'));
-    var valor_preco = parseFloat(event.target.value.replace('R$', '').replace(',', '.'));
-    var preco_compraTotal = valor_peso * valor_preco;
-    preco_compra.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_compraTotal.toFixed(2));
+    var preco_compraTotal = toFloat(quantidade.value) * toFloat(preco_unitario.value);
+    var preco_compraTotalFracionada = toFloat(qtd_fracionada.value) * toFloat(preco_unitario.value);
 
-    if (valor_peso != 0 && valor_preco != 0) {
-      ipi.focus();
+    if (preco_compraTotalFracionada != 0) {
+      preco_compra.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_compraTotalFracionada.toFixed(2));
     } else {
-      preco_compra.focus();
+      preco_compra.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_compraTotal.toFixed(2));
     }
+
+    ipi.focus();
   }, true); //calculate the price of taxes
 
   icms.addEventListener("blur", function (event) {
-    var ipi_c = parseFloat(ipi.value.replace('%', '').replace(',', '.'));
-    var icms_c = parseFloat(icms.value.replace('%', '').replace(',', '.'));
-    var preco_compra_c = parseFloat(preco_compra.value.replace('R$', '').replace(',', '.'));
-    var total_percent = (ipi_c + icms_c) / 100;
-    var total_taxes = preco_compra_c * total_percent;
-    var preco_custo_with_taxes = parseFloat(total_taxes.toFixed(2)) + parseFloat(preco_compra_c);
+    var total_percent = (toFloat(ipi.value) + toFloat(icms.value)) / 100;
+    var total_taxes = toFloat(preco_compra.value) * total_percent;
+    var preco_custo_with_taxes = parseFloat(total_taxes.toFixed(2)) + toFloat(preco_compra.value);
     preco_custo.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_custo_with_taxes.toFixed(2));
   }, true); //calculate the price of the profit
 
   lucro.addEventListener("blur", function (event) {
-    var preco_custo_c = parseFloat(preco_custo.value.replace(',', '.')).toFixed(2);
-    var lucro_c = parseFloat(lucro.value.replace('%', '').replace(',', '.'));
-    var percent = lucro_c / 100;
-    var preco_ventaTotal = percent * preco_custo_c;
-    var precoFinal = parseFloat(preco_custo_c) + parseFloat(preco_ventaTotal.toFixed(2));
+    var percent = toFloat(lucro.value) / 100;
+    var preco_ventaTotal = percent * toFloat(preco_custo.value);
+    var precoFinal = toFloat(preco_custo.value) + parseFloat(preco_ventaTotal.toFixed(2));
     preco_venda.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(precoFinal.toFixed(2));
   }, true);
 });

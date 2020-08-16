@@ -15,6 +15,7 @@ class Product extends Model
       'preco_custo' => 'float',
       'preco_venda' => 'float',
       'ipi' => 'float',
-      'icms' => 'float'
+      'icms' => 'float',
+      'compra_fracionada' => 'boolean'
     ];
 }

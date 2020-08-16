@@ -59,6 +59,7 @@ class ProductRequest extends FormRequest
           'supplier_id' => (int) $this->supplier_id,
           'storage_id' => (int) $this->storage_id,
           'quantidade' => floatval(str_replace(',', '.', $this->quantidade)),
+          'qtd_fracionada' => floatval(str_replace(',', '.', $this->qtd_fracionada)),
         ]);
     }
 }

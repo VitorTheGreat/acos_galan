@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
           $table->bigIncrements('id')->unique();
           $table->string('descricao', 150);
           $table->string('ean', 15);
+          $table->float('qtd_fracionada', 8, 2)->nullable();
           $table->float('preco_unitario', 8, 2);
           $table->float('preco_compra', 8, 2);
           $table->float('preco_custo', 8, 2);

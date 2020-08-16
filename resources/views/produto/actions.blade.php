@@ -57,6 +57,10 @@
                                       <input type="text" class="form-control" placeholder="EAN" id="ean" name="ean">
                                   </div>
                                   <div class="col-2 form-group">
+                                      <label for="">Quantidade</label>
+                                      <input type="text" class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade">
+                                  </div>
+                                  <div class="col-2 form-group">
                                       <select class="form-control" id="unidade_venda" name="unidade_venda">
                                           <option value="">Unidade de venda</option>
                                           <option value="br">Barra (br)</option>
@@ -69,10 +73,10 @@
                                 </div>
                                 <hr />
                                 <div class="form-row">
-                                    <div class="col-2 form-group">
-                                        <label for="">Quantidade</label>
-                                        <input type="text" class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade">
-                                    </div>
+                                  <div class="col-2 form-group">
+                                      <label for="">Quantidade Fracionada</label>
+                                      <input type="text" class="form-control data-kilo" placeholder="Kilo ou Metro" id="qtd_fracionada" name="qtd_fracionada">
+                                  </div>
                                     <div class="col-2 form-group">
                                         <label for="">Preço</label>
                                         <div class="input-group">
@@ -180,6 +184,7 @@
                                         <th class="text-center">#</th>
                                         <th>Descrição</th>
                                         <th>EAN</th>
+                                        <th>Quantidade Fracionada</th>
                                         <th>Preço Unitário</th>
                                         <th>Preço Compra</th>
                                         <th>IPI</th>
@@ -202,6 +207,7 @@
                                         <td class="text-center">{{$product->id}}</td>
                                         <td>{{$product->descricao}}</td>
                                         <td>{{$product->ean}}</td>
+                                        <td>{{$product->qtd_fracionada}}</td>
                                         <td>{{$product->preco_unitario}}</td>
                                         <td>{{$product->preco_compra}}</td>
                                         <td>{{$product->ipi}}</td>

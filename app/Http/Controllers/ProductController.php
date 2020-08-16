@@ -40,6 +40,7 @@ class ProductController extends Controller
       $dataProduct = $request->except(['quantidade', 'unidade_venda']);
       $dataControleStorage = $request->only(['quantidade', 'unidade_venda']);
 
+      // dd($dataProduct, $dataControleStorage);
 
       try {
 

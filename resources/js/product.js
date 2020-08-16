@@ -1,5 +1,9 @@
 import VMasker from 'vanilla-masker';
 
+const toFloat = (value) => {
+  return parseFloat(value.replace('R$', '').replace(',', '.'))
+}
+
 $(document).ready(() => {
 
   //money mask
@@ -30,7 +34,7 @@ $(document).ready(() => {
     zeroCents: false
   });
 
-
+  //vars - Elements IDs
   let preco_unitario = document.getElementById('preco_unitario');
   let quantidade = document.getElementById('quantidade');
   let preco_compra = document.getElementById('preco_compra');
@@ -39,52 +43,46 @@ $(document).ready(() => {
   let lucro = document.getElementById('lucro');
   let icms = document.getElementById('icms');
   let ipi = document.getElementById('ipi');
+  let qtd_fracionada = document.getElementById('qtd_fracionada');
 
   //calculate the price of the weigth
   preco_unitario.addEventListener("blur", (event) => {
 
-    let valor_peso = parseFloat(quantidade.value.replace('R$', '').replace(',', '.'));
-    let valor_preco = parseFloat(event.target.value.replace('R$', '').replace(',', '.'));
+    let preco_compraTotal = toFloat(quantidade.value) * toFloat(preco_unitario.value);
+    let preco_compraTotalFracionada = toFloat(qtd_fracionada.value) * toFloat(preco_unitario.value)
 
-    let preco_compraTotal = valor_peso * valor_preco;
-    preco_compra.value = VMasker.toMoney(preco_compraTotal.toFixed(2));
-
-    if(valor_peso != 0 && valor_preco != 0) {
-      ipi.focus();
+    if(preco_compraTotalFracionada != 0) {
+      preco_compra.value = VMasker.toMoney(preco_compraTotalFracionada.toFixed(2));
     }
     else {
-      preco_compra.focus();
+      preco_compra.value = VMasker.toMoney(preco_compraTotal.toFixed(2));
     }
+
+    ipi.focus();
 
   }, true);
 
   //calculate the price of taxes
   icms.addEventListener("blur", (event) =>  {
 
-    let ipi_c = parseFloat(ipi.value.replace('%', '').replace(',', '.'))
-    let icms_c = parseFloat(icms.value.replace('%', '').replace(',', '.'))
-    let preco_compra_c = parseFloat(preco_compra.value.replace('R$', '').replace(',', '.'));
+    let total_percent = (toFloat(ipi.value) + toFloat(icms.value)) / 100;
 
-    let total_percent = (ipi_c + icms_c) / 100;
+    let total_taxes =  toFloat(preco_compra.value) * total_percent
 
-    let total_taxes =  preco_compra_c * total_percent
-
-    let preco_custo_with_taxes = parseFloat(total_taxes.toFixed(2)) + parseFloat(preco_compra_c)
+    let preco_custo_with_taxes = parseFloat(total_taxes.toFixed(2)) + toFloat(preco_compra.value)
 
     preco_custo.value = VMasker.toMoney(preco_custo_with_taxes.toFixed(2));
 
   }, true);
 
   //calculate the price of the profit
-  lucro.addEventListener("blur", ( event ) => {
+  lucro.addEventListener("blur", (event) => {
 
-    let preco_custo_c = parseFloat(preco_custo.value.replace(',', '.')).toFixed(2);
-    let lucro_c = parseFloat(lucro.value.replace('%', '').replace(',', '.'));
-    let percent = lucro_c / 100;
+    let percent = toFloat(lucro.value) / 100;
 
-    let preco_ventaTotal = (percent * preco_custo_c)
+    let preco_ventaTotal = (percent * toFloat(preco_custo.value))
 
-    let precoFinal = parseFloat(preco_custo_c) + parseFloat(preco_ventaTotal.toFixed(2))
+    let precoFinal = toFloat(preco_custo.value) + parseFloat(preco_ventaTotal.toFixed(2))
 
     preco_venda.value = VMasker.toMoney(precoFinal.toFixed(2));
 
