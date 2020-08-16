@@ -58,11 +58,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 //Customer
 Route::middleware(['middleware' => 'auth'])->prefix('cliente')->group(function(){
-	// Route::get('/', 'CustomerController@index')->name('cliente');
-	Route::get('/', function () {
-			return view('cliente.cadastro');
-	});
+	Route::get('/', 'CustomerController@index')->name('customer');
+	Route::post('/', 'CustomerController@store')->name('customer.store');
+	Route::patch('/{customer}', 'CustomerController@update')->name('customer.update');
+	Route::delete('/{customer}', 'CustomerController@destroy')->name('customer.destroy');
 });
+
 
 //Product
 Route::middleware(['middleware' => 'auth'])->prefix('produto')->group(function(){

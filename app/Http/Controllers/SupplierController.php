@@ -47,13 +47,13 @@ class SupplierController extends Controller
         $storage = Supplier::create($data);
 
         return back()->with('status', 'Fornecedor Registrado com Sucesso');
-        
+
       } catch (\Exception $e) {
         // dd($e);
-        // return back()->withError($e->getMessage());
-        if($e->errorInfo[1] == 1062){
-          return back()->withError("Este fornecedor ja foi cadastrado, por favor confira os dados");
-        }
+        return back()->withError($e->getMessage());
+        // if($e->errorInfo[1] == 1062){
+        //   return back()->withError("Este fornecedor ja foi cadastrado, por favor confira os dados");
+        // }
       }
 
     }

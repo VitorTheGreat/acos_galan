@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
           UsersTableSeeder::class,
           StatesSeeder::class,
           SupplierSeeder::class,
-          StorageSeeder::class
+          StorageSeeder::class,
+          ProductSeeder::class,
+          CustomerSeeder::class
         ]);
     }
 }

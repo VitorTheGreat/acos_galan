@@ -19,15 +19,16 @@ class CreateCustomersTable extends Migration
             $table->string('email', 50)->unique();
             $table->string('cpf', 50)->unique();
             $table->string('rg', 50)->unique();
-            $table->string('telefone', 13)->nullable();
-            $table->string('celular', 14)->nullable();
+            $table->string('telefone', 17)->nullable();
+            $table->string('celular', 17)->nullable();
             $table->string('cep');
             $table->string('cidade');
+            $table->string('bairro');
             $table->unsignedBigInteger('states_id');
             $table->foreign('states_id')
                   ->references('id')->on('states')
                   ->constrained();
-            $table->string('endereço', 100);
+            $table->string('endereco', 100);
             $table->timestamps();
         });
     }

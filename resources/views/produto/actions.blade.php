@@ -185,7 +185,7 @@
                                         <th>IPI</th>
                                         <th>ICMS</th>
                                         <th>Preço Custo</th>
-                                        <th>Lucro (definido no primeiro Cadastro)</th>
+                                        <th>Lucro</th>
                                         <th>Preço Venda</th>
                                         <th>NCM</th>
                                         <th>CSOSN</th>
@@ -216,16 +216,16 @@
                                         <td>QUANTIDADE</td>
                                         <td>UNIDADE VENDA</td>
                                         <td class="td-actions text-right">
-                                            {{-- <form action="estoque/{{$storage->id}}" method="post"> --}}
-                                            <form>
-
-                                                <button type="button" rel="tooltip" class="btn btn-warning" title="Editar Estoque" data-toggle="modal" data-target="#product-{{$product->id}}">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="submit" rel="tooltip" class="btn btn-danger" title="Deletar Estoque">
-                                                    <i class="material-icons">delete_forever</i>
-                                                </button>
-                                            </form>
+                                          <form action="{{route('produto.destroy', ['product' => $product])}}"  method="post">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="button" rel="tooltip" class="btn btn-warning" title="Editar Produto" data-toggle="modal" data-target="#product-{{$product->id}}">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button type="submit" rel="tooltip" class="btn btn-danger" title="Deletar Produto">
+                                                <i class="material-icons">delete_forever</i>
+                                            </button>
+                                          </form>
                                         </td>
                                     </tr>
                                     @endforeach
