@@ -16,7 +16,7 @@ class CreateControlStoragesTable extends Migration
       Schema::create('control_storages', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->string('quantidade', 15);
-          $table->string('quantidade_peso', 50);
+          $table->string('unidade_venda', 10);
           $table->unsignedBigInteger('produto_id');
           $table->foreign('produto_id')
                 ->references('id')->on('products')

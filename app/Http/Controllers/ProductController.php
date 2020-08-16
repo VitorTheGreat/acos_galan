@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\Storage;
 use App\Models\Control_storage;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -30,51 +31,37 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
 
       //We have to store the product
       //then we have to store the quantity
 
-      // $dataProduct = request()->validate([
-      //     'descricao' => 'required|min:3',
-      //     'unidade_venda' => 'required',
-      //     'peso' => 'required|min:3',
-      //     'preco_peso' => 'required',
-      //     'preco_compra' => 'required',
-      //     'preco_custo' => 'required',
-      //     'preco_venda' => 'required',
-      //     'lucro' => 'required',
-      //     'ipi' => 'required',
-      //     'icms' => 'required',
-      //     'ncm' => 'required|min:3',
-      //     'csosn' => 'required|min:3',
-      //     'supplier_id' => 'required',
-      //     'storage_id' => 'required',
-      // ]);
-      //
-      // $dataControleStorage = request()->validate([
-      //   'quantidade' => 'required',
-      //   'quantidade_peso' => 'required',
-      // ]);
+      $dataProduct = $request->except(['quantidade', 'unidade_venda']);
+      $dataControleStorage = $request->only(['quantidade', 'unidade_venda']);
 
-      dd($request);
-      // try {
-      //
-      //   $product = Product::create($dataProduct);
-      //
-      //   $controlStorage = Control_storage::create([
-      //     'quantidade' => $dataControleStorage['quantidade'],
-      //     'quantiade_peso' => $dataControleStorage['quantidade_peso'],
-      //     'produto_id' => $product['id']
-      //   ]);
-      //
-      // } catch (\Exception $e) {
-      //
-      //   return ['msg_error' => $e->getMessage()];
-      //
-      // }
 
+      try {
+
+        $product = Product::create($dataProduct);
+
+        if($product) {
+            // dd($product->id);
+            $controlStorage = Control_storage::create([
+              'quantidade' => $dataControleStorage['quantidade'],
+              'unidade_venda' => $dataControleStorage['unidade_venda'],
+              'produto_id' => $product['id']
+            ]);
+
+            return back()->with('status', 'Produto Criado com Sucesso');
+        }
+
+
+      } catch (\Exception $e) {
+
+        return ['msg_error => ' => $e->getMessage()];
+
+      }
 
 
       // return back()->with('status', 'Produto Registrado com Sucesso');

@@ -129,7 +129,7 @@
                               <td>{{$supplier->cnpj}}</td>
                               <td>{{$supplier->ie}}</td>
                               <td>{{$supplier->telefone}}</td>
-                              <td>{{$supplier->endereco}} CEP:{{$supplier->cep}} - {{$supplier->bairro}} - {{$supplier->bairro}} - {{$supplier->cidade}}/{{$supplier->states_id}}</td>
+                              <td>{{$supplier->endereco}} CEP:{{$supplier->cep}} - {{$supplier->bairro}} - {{$supplier->cidade}}/{{$supplier->states_id}}</td>
                               <td class="td-actions text-right">
                                 <form action="{{route('fornecedor.destroy', ['supplier' => $supplier])}}"  method="post">
                                   @method('DELETE')

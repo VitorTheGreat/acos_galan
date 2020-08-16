@@ -345,7 +345,7 @@ $(document).ready(function () {
   var percentInput = document.querySelectorAll(".data-percent");
   vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default()(percentInput).maskMoney({
     precision: 2,
-    suffixUnit: '%',
+    suffixUnit: '',
     zeroCents: false
   }); // kilogram masker
 
@@ -357,8 +357,8 @@ $(document).ready(function () {
     suffixUnit: '',
     zeroCents: false
   });
-  var preco_peso = document.getElementById('preco_peso');
-  var peso = document.getElementById('peso');
+  var preco_unitario = document.getElementById('preco_unitario');
+  var quantidade = document.getElementById('quantidade');
   var preco_compra = document.getElementById('preco_compra');
   var preco_custo = document.getElementById('preco_custo');
   var preco_venda = document.getElementById('preco_venda');
@@ -366,8 +366,8 @@ $(document).ready(function () {
   var icms = document.getElementById('icms');
   var ipi = document.getElementById('ipi'); //calculate the price of the weigth
 
-  preco_peso.addEventListener("blur", function (event) {
-    var valor_peso = parseFloat(peso.value.replace('R$', '').replace(',', '.'));
+  preco_unitario.addEventListener("blur", function (event) {
+    var valor_peso = parseFloat(quantidade.value.replace('R$', '').replace(',', '.'));
     var valor_preco = parseFloat(event.target.value.replace('R$', '').replace(',', '.'));
     var preco_compraTotal = valor_peso * valor_preco;
     preco_compra.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_compraTotal.toFixed(2));

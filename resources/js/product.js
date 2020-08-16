@@ -16,7 +16,7 @@ $(document).ready(() => {
   let percentInput = document.querySelectorAll(".data-percent");
   VMasker(percentInput).maskMoney({
     precision: 2,
-    suffixUnit: '%',
+    suffixUnit: '',
     zeroCents: false
   });
 
@@ -31,8 +31,8 @@ $(document).ready(() => {
   });
 
 
-  let preco_peso = document.getElementById('preco_peso');
-  let peso = document.getElementById('peso');
+  let preco_unitario = document.getElementById('preco_unitario');
+  let quantidade = document.getElementById('quantidade');
   let preco_compra = document.getElementById('preco_compra');
   let preco_custo = document.getElementById('preco_custo');
   let preco_venda = document.getElementById('preco_venda');
@@ -41,9 +41,9 @@ $(document).ready(() => {
   let ipi = document.getElementById('ipi');
 
   //calculate the price of the weigth
-  preco_peso.addEventListener("blur", (event) => {
+  preco_unitario.addEventListener("blur", (event) => {
 
-    let valor_peso = parseFloat(peso.value.replace('R$', '').replace(',', '.'));
+    let valor_peso = parseFloat(quantidade.value.replace('R$', '').replace(',', '.'));
     let valor_preco = parseFloat(event.target.value.replace('R$', '').replace(',', '.'));
 
     let preco_compraTotal = valor_peso * valor_preco;
