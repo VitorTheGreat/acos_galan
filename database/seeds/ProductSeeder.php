@@ -25,13 +25,17 @@ class ProductSeeder extends Seeder
           'ncm' => '5456484',
           'csosn' => '54894654',
           'supplier_id' => 1,
-          'storage_id' => 1
+          'storage_id' => 1,
+          'created_at' => now(),
+          'updated_at' => now()
         ]);
 
         DB::table('control_storages')->insert([
           'quantidade' => 5,
           'unidade_venda' => 'br',
-          'produto_id' => 1
+          'produto_id' => 1,
+          'created_at' => now(),
+          'updated_at' => now()
         ]);
     }
 }

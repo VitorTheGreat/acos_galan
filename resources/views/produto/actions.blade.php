@@ -75,7 +75,7 @@
                                 <div class="form-row">
                                   <div class="col-2 form-group">
                                       <label for="">Quantidade Fracionada</label>
-                                      <input type="text" class="form-control data-kilo" placeholder="Kilo ou Metro" id="qtd_fracionada" name="qtd_fracionada">
+                                      <input type="text" class="form-control data-kilo" placeholder="Kilo ou Metro" value="0" id="qtd_fracionada" name="qtd_fracionada">
                                   </div>
                                     <div class="col-2 form-group">
                                         <label for="">Preço</label>
@@ -185,6 +185,8 @@
                                         <th>Descrição</th>
                                         <th>EAN</th>
                                         <th>Quantidade Fracionada</th>
+                                        <th>Quantidade</th>
+                                        <th>Unidade de Venda</th>
                                         <th>Preço Unitário</th>
                                         <th>Preço Compra</th>
                                         <th>IPI</th>
@@ -196,8 +198,6 @@
                                         <th>CSOSN</th>
                                         <th>Fornecedor</th>
                                         <th>Estoque</th>
-                                        <th>Quantidade</th>
-                                        <th>Unidade de Venda</th>
                                         <th class="text-right">Ações</th>
                                     </tr>
                                 </thead>
@@ -208,6 +208,8 @@
                                         <td>{{$product->descricao}}</td>
                                         <td>{{$product->ean}}</td>
                                         <td>{{$product->qtd_fracionada}}</td>
+                                        <td>QTD Estoque</td>
+                                        <td>un venda</td>
                                         <td>{{$product->preco_unitario}}</td>
                                         <td>{{$product->preco_compra}}</td>
                                         <td>{{$product->ipi}}</td>
@@ -219,8 +221,6 @@
                                         <td>{{$product->csosn}}</td>
                                         <td>{{$product->supplier_id}}</td>
                                         <td>{{$product->storage_id}}</td>
-                                        <td>QUANTIDADE</td>
-                                        <td>UNIDADE VENDA</td>
                                         <td class="td-actions text-right">
                                           <form action="{{route('produto.destroy', ['product' => $product])}}"  method="post">
                                             @method('DELETE')

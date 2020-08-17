@@ -22,7 +22,9 @@ class CustomerSeeder extends Seeder
           'cidade' => 'Ibiúna',
           'bairro' => 'Residencial Europa',
           'states_id' => 25,
-          'endereco' => 'Rua Iugoslavia, 12'
+          'endereco' => 'Rua Iugoslavia, 12',
+          'created_at' => now(),
+          'updated_at' => now()
         ]);
     }
 }
