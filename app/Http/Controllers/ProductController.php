@@ -8,6 +8,8 @@ use App\Models\Supplier;
 use App\Models\Storage;
 use App\Models\Control_storage;
 use App\Http\Requests\ProductRequest;
+//using for the db views
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -18,7 +20,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-      $products = Product::all();
+      // $products = Product::all();
+      // $products = DB::table('product_view')->select('*')->get();
+      $products = DB::select('SELECT * FROM product_view');
+
+      // dd($products);
+
       $suppliers = Supplier::all();
       $storages = Storage::all();
 
@@ -45,6 +52,16 @@ class ProductController extends Controller
       try {
 
         $product = Product::create($dataProduct);
+        // $product = Product::firstOrCreate(
+        //   [
+        //     'ean' => $dataProduct['ean'],
+        //     'ncm' => $dataProduct['ncm'],
+        //     'csosn' => $dataProduct['csosn']
+        //   ],
+        //   $dataProduct
+        // );
+
+        // dd($product);
 
         if($product) {
             // dd($product->id);
@@ -60,7 +77,10 @@ class ProductController extends Controller
 
       } catch (\Exception $e) {
 
-        return ['msg_error => ' => $e->getMessage()];
+        // return ['msg_error => ' => $e->getMessage()];
+        if($e->errorInfo[1] == 1062){
+          return back()->withError("EAN, NCM e CSOSN não podem ser repetidos, por favor confirme os dados");
+        }
 
       }
 

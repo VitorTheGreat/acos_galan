@@ -58,9 +58,20 @@ $(document).ready(() => {
       preco_compra.value = VMasker.toMoney(preco_compraTotal.toFixed(2));
     }
 
-    ipi.focus();
+    preco_unitario.value == '0,00' ? preco_compra.focus() : ipi.focus();
 
   }, true);
+
+  //preço compra
+  preco_compra.addEventListener('blur', (event) => {
+
+    let un = toFloat(preco_compra.value) / toFloat(quantidade.value);
+
+    if(preco_unitario.value == '0,00'){
+      preco_unitario.value = VMasker.toMoney(un.toFixed(2))
+    }
+
+  })
 
   //calculate the price of taxes
   icms.addEventListener("blur", (event) =>  {

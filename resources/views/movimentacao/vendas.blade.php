@@ -8,6 +8,7 @@
             <div class="col-md-12">
                 <h1>Vendas</h1>
                 <hr>
+                <button type="button" class="btn btn-info">Abrir Venda</button>
                 <div class="card">
                     <div class="card-header card-header-primary">
                       {{--  <h4 class="card-title ">Simple Table</h4>  --}}

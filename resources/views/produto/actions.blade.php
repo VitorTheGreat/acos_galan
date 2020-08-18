@@ -48,17 +48,17 @@
                                 <div class="form-row">
                                     <div class="col form-group">
                                         <label for="descricao">Descrição</label>
-                                        <input type="text" class="form-control" placeholder="Descrição" id="descricao" name="descricao">
+                                        <input type="text" class="form-control" placeholder="Descrição" id="descricao" name="descricao" value="{{old('descricao')}}">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                   <div class="col-2 form-group">
                                       <label for="ean">EAN</label>
-                                      <input type="text" class="form-control" placeholder="EAN" id="ean" name="ean">
+                                      <input type="text" class="form-control" placeholder="EAN" id="ean" name="ean" value="{{old('ean')}}">
                                   </div>
                                   <div class="col-2 form-group">
                                       <label for="">Quantidade</label>
-                                      <input type="text" class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade">
+                                      <input type="text" class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade" value="{{old('quantidade')}}">
                                   </div>
                                   <div class="col-2 form-group">
                                       <select class="form-control" id="unidade_venda" name="unidade_venda">
@@ -75,7 +75,7 @@
                                 <div class="form-row">
                                   <div class="col-2 form-group">
                                       <label for="">Quantidade Fracionada</label>
-                                      <input type="text" class="form-control data-kilo" placeholder="Kilo ou Metro" value="0" id="qtd_fracionada" name="qtd_fracionada">
+                                      <input type="text" class="form-control data-kilo" placeholder="Kilo ou Metro" id="qtd_fracionada" name="qtd_fracionada" value="{{old('qtd_fracionada')}}">
                                   </div>
                                     <div class="col-2 form-group">
                                         <label for="">Preço</label>
@@ -85,7 +85,7 @@
                                                     R$
                                                 </span>
                                             </div>
-                                            <input class="form-control data-money" type="text" name="preco_unitario" id="preco_unitario" placeholder="Preço unitário">
+                                            <input class="form-control data-money" type="text" name="preco_unitario" id="preco_unitario" placeholder="Preço unitário" value="{{old('preco_unitario')}}">
                                         </div>
                                     </div>
                                     <div class="col-2 form-group">
@@ -96,18 +96,18 @@
                                                     R$
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control data-money" id="preco_compra" name="preco_compra" placeholder="Preço Compra (unidade)">
+                                            <input type="text" class="form-control data-money" id="preco_compra" name="preco_compra" placeholder="Preço Compra (unidade)" value="{{old('preco_compra')}}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-2 form-group">
                                         <label for="">% IPI</label>
-                                        <input type="text" class="form-control data-percent" placeholder="% IPI" id="ipi" name="ipi">
+                                        <input type="text" class="form-control data-percent" placeholder="% IPI" id="ipi" name="ipi" value="{{old('ipi')}}">
                                     </div>
                                     <div class="col-2 form-group">
                                         <label for="">% ICMS</label>
-                                        <input type="text" class="form-control data-percent" placeholder="% ICMS" id="icms" name="icms">
+                                        <input type="text" class="form-control data-percent" placeholder="% ICMS" id="icms" name="icms" value="{{old('icms')}}">
                                     </div>
                                     <div class="col-2 form-group">
                                         <label for="">Preço de Custo (com taxas)</label>
@@ -117,12 +117,12 @@
                                                     R$
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control data-money" placeholder="Preço de Custo (com taxas)" id="preco_custo" name="preco_custo">
+                                            <input type="text" class="form-control data-money" placeholder="Preço de Custo (com taxas)" id="preco_custo" name="preco_custo" value="{{old('preco_custo')}}">
                                         </div>
                                     </div>
                                     <div class="col-2 form-group">
                                         <label for="">% Lucro</label>
-                                        <input type="text" class="form-control data-percent" placeholder="% Lucro" id="lucro" name="lucro">
+                                        <input type="text" class="form-control data-percent" placeholder="% Lucro" id="lucro" name="lucro" value="{{old('lucro')}}">
                                     </div>
                                     <div class="col-2 form-group">
                                         <label for="">Preço de Venda</label>
@@ -132,7 +132,7 @@
                                                     R$
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control data-money" placeholder="Preço de Venda (unidade)" id="preco_venda" name="preco_venda">
+                                            <input type="text" class="form-control data-money" placeholder="Preço de Venda (unidade)" id="preco_venda" name="preco_venda" value="{{old('preco_venda')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -140,11 +140,11 @@
                                 <div class="form-row">
                                   <div class="col-2 form-group">
                                       <label for="">NCM</label>
-                                      <input type="text" class="form-control" placeholder="NCM" id="ncm" name="ncm">
+                                      <input type="text" class="form-control" placeholder="NCM" id="ncm" name="ncm" value="{{old('ncm')}}">
                                   </div>
                                   <div class="col-2 form-group">
                                       <label for="">CSOSN</label>
-                                      <input type="text" class="form-control" placeholder="CSOSN" id="csosn" name="csosn">
+                                      <input type="text" class="form-control" placeholder="CSOSN" id="csosn" name="csosn" value="{{old('csosn')}}">
                                   </div>
                                 </div>
                                 <div class="form-row">
@@ -208,8 +208,8 @@
                                         <td>{{$product->descricao}}</td>
                                         <td>{{$product->ean}}</td>
                                         <td>{{$product->qtd_fracionada}}</td>
-                                        <td>QTD Estoque</td>
-                                        <td>un venda</td>
+                                        <td>{{$product->quantidade}}</td>
+                                        <td>{{$product->unidade_venda}}</td>
                                         <td>{{$product->preco_unitario}}</td>
                                         <td>{{$product->preco_compra}}</td>
                                         <td>{{$product->ipi}}</td>
@@ -219,10 +219,10 @@
                                         <td>{{$product->preco_venda}}</td>
                                         <td>{{$product->ncm}}</td>
                                         <td>{{$product->csosn}}</td>
-                                        <td>{{$product->supplier_id}}</td>
-                                        <td>{{$product->storage_id}}</td>
+                                        <td>{{$product->fornecedor}}</td>
+                                        <td>{{$product->estoque}}</td>
                                         <td class="td-actions text-right">
-                                          <form action="{{route('produto.destroy', ['product' => $product])}}"  method="post">
+                                          <form action="{{route('produto.destroy', ['product' => $product->id])}}"  method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button type="button" rel="tooltip" class="btn btn-warning" title="Editar Produto" data-toggle="modal" data-target="#product-{{$product->id}}">
@@ -250,7 +250,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Alterar Produto:<br /> {{$product->razao_social}}</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Alterar Produto:<br /> {{$product->descricao}}</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

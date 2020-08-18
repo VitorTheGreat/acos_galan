@@ -383,8 +383,16 @@ $(document).ready(function () {
       preco_compra.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_compraTotal.toFixed(2));
     }
 
-    ipi.focus();
-  }, true); //calculate the price of taxes
+    preco_unitario.value == '0,00' ? preco_compra.focus() : ipi.focus();
+  }, true); //preço compra
+
+  preco_compra.addEventListener('blur', function (event) {
+    var un = toFloat(preco_compra.value) / toFloat(quantidade.value);
+
+    if (preco_unitario.value == '0,00') {
+      preco_unitario.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(un.toFixed(2));
+    }
+  }); //calculate the price of taxes
 
   icms.addEventListener("blur", function (event) {
     var total_percent = (toFloat(ipi.value) + toFloat(icms.value)) / 100;
