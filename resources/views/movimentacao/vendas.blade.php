@@ -8,7 +8,28 @@
             <div class="col-md-12">
                 <h1>Vendas</h1>
                 <hr>
-                <button type="button" class="btn btn-info">Abrir Venda</button>
+                <div class="row">
+                  <div class="col-2">
+                    <button type="button" class="btn btn-info">Abrir Venda</button>
+                  </div>
+                  <div class="col-4">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <span class="material-icons">
+                          money_off
+                          </span>
+                        </span>
+                      </div>
+                          <select class="form-control" data-style="btn btn-link" id="tabela" name="tabela">
+                              <option value="preco_normal">Preço Normal</option>
+                              <option value="preco_normal">Preço Normal</option>
+                              <option value="preco_normal">Preço Normal</option>
+                          </select>
+                        
+                    </div>
+                  </div>
+                </div>
                 <div class="card">
                     <div class="card-header card-header-primary">
                       {{--  <h4 class="card-title ">Simple Table</h4>  --}}
@@ -17,12 +38,12 @@
                     <div class="card-body">
                       <div class="table-responsive">
                         <form>
-                          <h5>Vendedor</h5>
+                          {{-- <h5>Vendedor</h5>
                             <div class="form-row">
                               <div class="col">
                                 <input type="text" class="form-control" value="" placeholder="Vendedor" name="">
                               </div>
-                            </div>
+                            </div> --}}
                             <br>
                             <h5>Dados Cliente</h5>
                             <div class="form-row">
