@@ -96,6 +96,7 @@ Route::middleware(['middleware' => 'auth'])->prefix('fornecedor')->group(functio
 //Movimentação
 Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(function(){
 	Route::get('/vendas', 'SellingController@index')->name('vendas');
+	Route::post('/vendas', 'SellingController@openSelling')->name('vendas.abrir');
 	Route::post('/vendas/atualiza', 'SellingController@store')->name('vendas.store');
 	Route::patch('/{selling}', 'SellingController@update')->name('vendas.update');
 	Route::delete('/{selling}', 'SellingController@destroy')->name('vendas.destroy');

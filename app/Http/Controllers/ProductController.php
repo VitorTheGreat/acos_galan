@@ -8,6 +8,7 @@ use App\Models\Supplier;
 use App\Models\Storage;
 use App\Models\Control_storage;
 use App\Http\Requests\ProductRequest;
+
 //using for the db views
 use Illuminate\Support\Facades\DB;
 

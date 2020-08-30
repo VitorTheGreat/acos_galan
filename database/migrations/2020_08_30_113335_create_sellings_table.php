@@ -21,13 +21,18 @@ class CreateSellingsTable extends Migration
             $table->float('preco_total_desconto', 8, 2)->nullable();
             $table->float('total', 8, 2)->nullable();
             $table->float('troco', 8, 2)->nullable();
-            $table->string('metodo_pagamento', 8, 2)->nullable();
+            $table->string('nome_cliente', 45)->nullable();
+            $table->string('endereço_cliente', 45)->nullable();
+            $table->string('telefone_cliente', 45)->nullable();
+            $table->string('documento_cliente', 45)->nullable();
+            $table->string('metodo_pagamento', 45)->nullable();
+            $table->string('status_venda', 45);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                   ->references('id')->on('users')
                   ->constrained();
-            $table->unsignedBigInteger('id_cliente');
-            $table->foreign('id_cliente')
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')
                   ->references('id')->on('customers')
                   ->constrained();
             $table->timestamps();
