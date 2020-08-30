@@ -95,9 +95,11 @@ Route::middleware(['middleware' => 'auth'])->prefix('fornecedor')->group(functio
 
 //Movimentação
 Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(function(){
-	Route::get('vendas', function(){
-		return view('movimentacao.vendas');
-	});
+	Route::get('/vendas', 'SellingController@index')->name('vendas');
+	Route::post('/vendas/atualiza', 'SellingController@store')->name('vendas.store');
+	Route::patch('/{selling}', 'SellingController@update')->name('vendas.update');
+	Route::delete('/{selling}', 'SellingController@destroy')->name('vendas.destroy');
+
 	Route::get('orcamento', function() {
 		return view('movimentacao.orcamento');
 	});

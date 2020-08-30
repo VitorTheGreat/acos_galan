@@ -23,10 +23,11 @@
                       </div>
                           <select class="form-control" data-style="btn btn-link" id="tabela" name="tabela">
                               <option value="preco_normal">Preço Normal</option>
-                              <option value="preco_normal">Preço Normal</option>
-                              <option value="preco_normal">Preço Normal</option>
+                              <option value="7.5">7,5 %</option>
+                              <option value="5">5 %</option>
+                              <option value="2.5">2.5 %</option>
                           </select>
-                        
+
                     </div>
                   </div>
                 </div>

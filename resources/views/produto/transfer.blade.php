@@ -61,10 +61,10 @@
                                         <form>
                                             <div class="form-row align-justify">
                                                 <div class="col-5">
-                                                    <label for="prod_qtd">Quantidade</label>
-                                                    <input type="text" class="form-control" placeholder="Quantidade" id="prod_qtd">
                                                     <label for="prod_estoque">Estoque</label>
                                                     <input type="text" class="form-control" placeholder="Estoque" id="prod_estoque">
+                                                    <label for="prod_qtd">Quantidade</label>
+                                                    <input type="text" class="form-control" placeholder="Quantidade" id="prod_qtd">
                                                 </div>
                                                 <button type="button" name="button" class="btn btn-info">
                                                     <span class="material-icons">
