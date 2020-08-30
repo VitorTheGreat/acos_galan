@@ -125,6 +125,9 @@ class ProductController extends Controller
      */
     public function transfer(Product $product) {
 
+      // $product_within_storages = DB::select('SELECT * FROM product_quantity_by_storage_view'); // view with total sum of total products
+
+      return view('produto.transfer');
 
     }
 

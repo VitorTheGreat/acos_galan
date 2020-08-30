@@ -7,3 +7,10 @@
   padding: 0 6px 0 0 !important;
 }
 
+.align-justify {
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+          justify-content: space-evenly;
+}
+

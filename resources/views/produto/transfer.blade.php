@@ -39,49 +39,44 @@
                 <hr />
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        {{-- <h4 class="card-title ">Simple Table</h4>  --}}
                         <h4 class="card-title"> Relações de produto por estoque</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('produto.search')}}" method="get">
-                            @csrf
-                            <div class="form-row">
-                                <div class="form-group col">
-                                    <h4 for="descricao">Insira o nome do produto</h4>
-                                    <input type="text" class="form-control" id="search" placeholder="Descrição Produto">
-                                </div>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <h4 for="descricao">Insira o nome do produto</h4>
+                                <input type="text" class="form-control" id="search" placeholder="Descrição Produto">
                             </div>
-                        </form>
+                        </div>
                         <div class="row">
                             <div class="col">
                                 <div class="card">
                                     <div class="card-body">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Product desc.</th>
-                                                    <th>Quantidade</th>
-                                                    <th>Unidade Venda</th>
-                                                    <th>Estoque</th>
-                                                    <th>Transferir</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($product_within_storages as $key_storage => $prod_storage)
-                                                <tr>
-                                                    <td>{{$prod_storage->descricao}}</td>
-                                                    <td>{{$prod_storage->quantidade}}</td>
-                                                    <td>{{$prod_storage->unidade_venda}}</td>
-                                                    <td>{{$prod_storage->estoque}}</td>
-                                                    <td>
-                                                        <button type="submit" rel="tooltip" class="btn btn-info" title="Transferir Produto">
-                                                            <i class="material-icons">swap_horiz</i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                        <div class="card-header">
+                                            <div class="row">
+                                                <h4>Produto escolhido: <strong>PROD </strong> </h4>
+                                                <h4>Estoque escolhido: <strong>ESTQ</strong> </h4>
+                                            </div>
+                                        </div>
+                                        <form>
+                                            <div class="form-row align-justify">
+                                                <div class="col-5">
+                                                    <label for="prod_qtd">Quantidade</label>
+                                                    <input type="text" class="form-control" placeholder="Quantidade" id="prod_qtd">
+                                                    <label for="prod_estoque">Estoque</label>
+                                                    <input type="text" class="form-control" placeholder="Estoque" id="prod_estoque">
+                                                </div>
+                                                <button type="button" name="button" class="btn btn-info">
+                                                    <span class="material-icons">
+                                                        swap_horiz
+                                                    </span>
+                                                </button>
+                                                <div class="col-5">
+                                                    <label for="estoque">Estoque</label>
+                                                    <input type="email" class="form-control" id="estoque" placeholder="Estoque">
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -97,31 +92,6 @@
     @endsection
 
     @section('scripts')
-    <script type="text/javascript">
-        //testing autocomplete
 
-        const src = "{{ route('produto.search') }}";
-
-        $("#search").autocomplete({
-            source: function(request, response) {
-                $.ajax({
-                    url: src,
-                    data: {
-                        term: request.term
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        // var resp = $.map(data, function(obj) {
-                        //     console.log('search obj => ', obj);
-                        //     return obj;
-                        // });
-                        console.log('res => ', data)
-                        response(data);
-                    }
-                });
-            },
-            minLength: 3
-        });
-    </script>
     <script src="{{ asset('js/product.js') }}"></script>
     @endsection
