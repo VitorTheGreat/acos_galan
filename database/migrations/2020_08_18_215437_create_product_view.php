@@ -13,11 +13,11 @@ class CreateProductView extends Migration
      */
     public function up()
     {
-      DB::statement("CREATE VIEW product_view AS
-        SELECT cs.quantidade, cs.unidade_venda, p.*, sp.razao_social as fornecedor, st.name as estoque FROM control_storages AS cs
-        INNER JOIN products AS p ON p.id = cs.produto_id
-        INNER JOIN suppliers AS sp ON sp.id = p.supplier_id
-        INNER JOIN storages AS st ON st.id = p.storage_id");
+
+        DB::statement("CREATE VIEW product_view AS
+          SELECT p.*, sp.razao_social as fornecedor FROM products AS p
+          INNER JOIN suppliers AS sp ON sp.id = p.supplier_id");
+
     }
 
     /**
@@ -27,6 +27,6 @@ class CreateProductView extends Migration
      */
     public function down()
     {
-      DB::statement("DROP VIEW IF EXISTS product_view");
+      DB::statement("DROP VIEW product_view");
     }
 }

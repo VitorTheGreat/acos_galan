@@ -71,6 +71,10 @@ Route::middleware(['middleware' => 'auth'])->prefix('produto')->group(function()
 	Route::post('/', 'ProductController@store')->name('produto.store');
 	Route::patch('/{product}', 'ProductController@update')->name('produto.update');
 	Route::delete('/{product}', 'ProductController@destroy')->name('produto.destroy');
+	Route::get('/search', 'ProductController@autocompleteSearch')->name('produto.search');
+
+	//transfer product from storage page
+	Route::get('/transferencia', 'ProductController@transfer')->name('produto.transfer');
 });
 
 //Storage

@@ -34,6 +34,15 @@
                     <a class="dropdown-item" href="/movimentacao/saida-caixa">Saídas do Caixa</a>
                 </div>
             </li>
+            {{-- <li class="nav-item dropdown">
+                <a class="nav-link" href="http://example.com" id="movimentacaoDropDown" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Relações
+                </a>
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="movimentacaoDropDown">
+                    <a class="dropdown-item" href="/movimentacao/vendas">Produtos</a>
+                </div>
+            </li> --}}
         </ul>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
                 aria-expanded="false" aria-label="Toggle navigation">

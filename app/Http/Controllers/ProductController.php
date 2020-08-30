@@ -22,14 +22,16 @@ class ProductController extends Controller
     {
       // $products = Product::all();
       // $products = DB::table('product_view')->select('*')->get();
-      $products = DB::select('SELECT * FROM product_view');
+      // $products = DB::select('SELECT * FROM product_view'); // only product
+      $products = DB::select('SELECT * FROM product_total_quantity_view'); // view with total sum of total products
+      $product_within_storages = DB::select('SELECT * FROM product_quantity_by_storage_view'); // view with total sum of total products
 
       // dd($products);
 
       $suppliers = Supplier::all();
       $storages = Storage::all();
 
-      return view('produto.actions', compact('products', 'suppliers', 'storages'));
+      return view('produto.actions', compact('products', 'suppliers', 'storages', 'product_within_storages'));
     }
 
     /**
@@ -44,8 +46,8 @@ class ProductController extends Controller
       //We have to store the product
       //then we have to store the quantity
 
-      $dataProduct = $request->except(['quantidade', 'unidade_venda']);
-      $dataControleStorage = $request->only(['quantidade', 'unidade_venda']);
+      $dataProduct = $request->except(['quantidade', 'unidade_venda', 'storage_id']);
+      $dataControleStorage = $request->only(['quantidade', 'unidade_venda', 'storage_id']);
 
       // dd($dataProduct, $dataControleStorage);
 
@@ -68,6 +70,7 @@ class ProductController extends Controller
             $controlStorage = Control_storage::create([
               'quantidade' => $dataControleStorage['quantidade'],
               'unidade_venda' => $dataControleStorage['unidade_venda'],
+              'storage_id' => $dataControleStorage['storage_id'],
               'produto_id' => $product['id']
             ]);
 
@@ -111,5 +114,33 @@ class ProductController extends Controller
       $product->delete();
 
       return back()->with('status', 'Produto deletado com Sucesso');
+    }
+
+
+    /**
+     *  transfer page
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function transfer(Product $product) {
+
+
+    }
+
+    /**
+     *  Autocomplete Search
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function autocompleteSearch(Request $request) {
+
+      $search = $request->get('term');
+
+      $result = DB::table('product_quantity_by_storage_view')->select('*')->where('descricao', 'LIKE', '%'.$search.'%')->get();
+
+      return response()->json($result);
+
     }
 }

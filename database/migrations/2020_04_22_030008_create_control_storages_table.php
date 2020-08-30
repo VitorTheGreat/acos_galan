@@ -21,6 +21,10 @@ class CreateControlStoragesTable extends Migration
           $table->foreign('produto_id')
                 ->references('id')->on('products')
                 ->constrained();
+          $table->unsignedBigInteger('storage_id');
+          $table->foreign('storage_id')
+                ->references('id')->on('storages')
+                ->constrained();
           $table->timestamps();
       });
     }
