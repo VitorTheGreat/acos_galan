@@ -9,6 +9,9 @@ use App\Models\Selling;
 use App\Models\Customer;
 use App\Models\Product;
 
+//using for the db views
+use Illuminate\Support\Facades\DB;
+
 class SellingController extends Controller
 {
     /**
@@ -20,7 +23,8 @@ class SellingController extends Controller
     {
 
         $customers = Customer::all();
-        $products = Product::all();
+        // $products = Product::all();
+        $products = DB::select('SELECT * FROM selling_product_info_view WHERE estoque_id = ' . auth()->user()->storage_id);
 
         $selling = Selling::where('status_venda','venda_aberta')
                             ->where('user_id', auth()->user()->id)

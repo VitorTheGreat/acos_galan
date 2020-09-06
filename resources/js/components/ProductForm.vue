@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-12">
-
+    <p>produtinho</p>
   </div>
 </template>
 

@@ -27,6 +27,7 @@ class CreateProductTotalQuantityView extends Migration
      */
     public function down()
     {
-        DB::statement("DROP VIEW product_total_quantity_view");
+        // DB::statement("DROP VIEW product_total_quantity_view");
+        Schema::dropIfExists('product_total_quantity_view');
     }
 }

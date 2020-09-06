@@ -27,6 +27,7 @@ class CreateProductView extends Migration
      */
     public function down()
     {
-      DB::statement("DROP VIEW product_view");
+      // DB::statement("DROP VIEW product_view");
+      Schema::dropIfExists('product_view');
     }
 }

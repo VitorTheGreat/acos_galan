@@ -34,13 +34,14 @@
                 <div class="card">
                     <div class="card-header card-header-primary">
                         {{-- <h4 class="card-title ">Simple Table</h4>  --}}
-                        <h4 class="card-category">Usuario: <strong>{{auth()->user()->name}}</strong> - Venda Nº: <strong>{{$selling->id}}</strong> </h4>
+                        <h4 class="card-category">Usuario: <strong>{{auth()->user()->name}}</strong> - Loja <strong>{{auth()->user()->storage_id}}</strong> - Venda Nº: <strong>{{$selling->id}}</strong> </h4>
                     </div>
                     <div class="card-body">
                         <div class="col-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
+                                      Tabela:
                                         <span class="material-icons">
                                             money_off
                                         </span>
@@ -78,13 +79,12 @@
 
                                 <h5>Produto(s)</h5>
                                 <div class="form-row">
-
                                     <div class="col-4">
                                         <div class="form-group">
                                             <input type="text" autofocus list="descricao_prod" class="form-control" placeholder="Descrição ou EAN">
-                                            <datalist class="form-control" id="descricao_prod">
+                                            <datalist class="" id="descricao_prod">
                                                 @foreach ($products as $key => $product)
-                                                <option value="{{$product->id}}">{{$product->descricao}}</option>
+                                                <option value="{{$product->product_id}}">{{$product->descricao}}</option>
                                                 @endforeach
                                             </datalist>
                                         </div>

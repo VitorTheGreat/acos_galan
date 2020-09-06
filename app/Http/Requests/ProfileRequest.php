@@ -28,6 +28,18 @@ class ProfileRequest extends FormRequest
         return [
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
+            'storage_id' => 'required'
         ];
+    }
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+          'storage_id' => (int)$this->storage_id,
+        ]);
     }
 }

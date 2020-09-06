@@ -23,6 +23,10 @@ class CreateUsersTable extends Migration
             $table->foreign('role_id')
                   ->references('id')->on('roles')
                   ->constrained();
+            $table->unsignedBigInteger('storage_id');
+            $table->foreign('storage_id')
+                  ->references('id')->on('storages')
+                  ->constrained();
             $table->rememberToken();
             $table->timestamps();
         });

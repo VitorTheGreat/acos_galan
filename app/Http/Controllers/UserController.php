@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Models\Storage;
+use App\Models\Role;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -26,7 +28,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $storages = Storage::all();
+        $roles = Role::all();
+
+        return view('users.create', compact('storages', 'roles'));
     }
 
     /**

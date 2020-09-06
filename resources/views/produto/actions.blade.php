@@ -299,21 +299,16 @@
                         </thead>
                         <tbody>
                             @foreach ($product_within_storages as $key_storage => $prod_storage)
-                            <tr>
-                                <td>{{$prod_storage->quantidade}}</td>
-                                <td>{{$prod_storage->unidade_venda}}</td>
-                                <td>{{$prod_storage->estoque}}</td>
-                            </tr>
+                              @if ($product->id == $prod_storage->product_id)
+                                <tr>
+                                    <td>{{$prod_storage->quantidade}}</td>
+                                    <td>{{$prod_storage->unidade_venda}}</td>
+                                    <td>{{$prod_storage->estoque}}</td>
+                                </tr>
+                              @endif
                             @endforeach
                         </tbody>
                     </table>
-
-                    <form action="{{route('produto.update', ['supplier' => $product])}}" method="POST">
-                        @method('PATCH')
-                        @csrf
-                        <div>{{$product->id}}</div>
-                        <button type="submit" class="btn btn-info">alterar</button>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

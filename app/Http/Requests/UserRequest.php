@@ -29,6 +29,12 @@ class UserRequest extends FormRequest
             'name' => [
                 'required', 'min:3'
             ],
+            'role_id' => [
+                'required'
+            ],
+            'storage_id' => [
+                'required'
+            ],
             'email' => [
                 'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
             ],
@@ -36,5 +42,17 @@ class UserRequest extends FormRequest
                 $this->route()->user ? 'nullable' : 'required', 'confirmed', 'min:6'
             ]
         ];
+    }
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+          'role_id' => (int) $this->role_id,
+          'storage_id' => (int) $this->storage_id,
+        ]);
     }
 }

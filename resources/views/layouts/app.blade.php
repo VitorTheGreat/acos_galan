@@ -83,7 +83,7 @@
     {{-- <script src="{{ asset('material') }}/demo/demo.js"></script> --}}
     {{-- <script src="{{ asset('material') }}/js/settings.js"></script> --}}
     {{--Custom JS--}}
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+    {{-- <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script> --}}
     <script src="{{ asset('js/styles.js') }}"></script>
     {{-- Uncoment this line if you want to use VUE --}}
     {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
