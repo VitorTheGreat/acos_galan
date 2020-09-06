@@ -81,10 +81,10 @@
                                 <div class="form-row">
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <input type="text" autofocus list="descricao_prod" class="form-control" placeholder="Descrição ou EAN">
-                                            <datalist class="" id="descricao_prod">
+                                            <input type="text" autofocus list="prod" class="form-control" placeholder="Descrição ou EAN">
+                                            <datalist class="" id="prod">
                                                 @foreach ($products as $key => $product)
-                                                <option value="{{$product->product_id}}">{{$product->descricao}}</option>
+                                                <option value="{{$product->product_id}}">{{$product->descricao}} - {{$product->preco_venda}}</option>
                                                 @endforeach
                                             </datalist>
                                         </div>
@@ -94,7 +94,7 @@
                                         <input type="text" class="form-control" placeholder="QTD">
                                     </div>
                                     <div class="col-3">
-                                        <input type="text" class="form-control" placeholder="Preço Unidade">
+                                        <input type="text" class="form-control" placeholder="Preço Unitário">
                                     </div>
                                     <div class="col-2">
                                         <input type="text" class="form-control" placeholder="Sub Total" disabled>
