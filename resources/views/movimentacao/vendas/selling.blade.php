@@ -41,7 +41,7 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                      Tabela:
+                                        Tabela:
                                         <span class="material-icons">
                                             money_off
                                         </span>
@@ -56,59 +56,75 @@
                             </div>
                         </div>
                         <br />
-                        <div class="table-responsive">
-                            <form>
-                                @if ($selling->customer_id === 1)
-                                <h5>Dados Cliente</h5>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <input type="text" class="form-control" placeholder="Nome">
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" class="form-control" placeholder="Endereço">
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" class="form-control" placeholder="Telefone">
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" class="form-control" placeholder="Documento (RG ou CPF)">
-                                    </div>
+                        <form>
+                            @if ($selling->customer_id === 1)
+                            <h5>Dados Cliente</h5>
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Nome">
                                 </div>
-                                @endif
-                                <br>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Endereço">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Telefone">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Documento (RG ou CPF)">
+                                </div>
+                            </div>
+                            @endif
+                            <br>
 
-                                <h5>Produto(s)</h5>
-                                <div class="form-row">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <input type="text" autofocus list="prod" class="form-control" placeholder="Descrição ou EAN">
-                                            <datalist class="" id="prod">
-                                                @foreach ($products as $key => $product)
-                                                <option value="{{$product->product_id}}">{{$product->descricao}} - {{$product->preco_venda}}</option>
-                                                @endforeach
-                                            </datalist>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Produto(s)</h4>
                                         </div>
+                                        <div class="card-body">
+                                            <div class="form-row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <input type="text" autofocus list="prod" class="form-control" placeholder="Descrição ou EAN">
+                                                        <datalist class="" id="prod">
+                                                            @foreach ($products as $key => $product)
+                                                            <option value="{{$product->product_id}}">{{$product->descricao}} - {{$product->preco_venda}}</option>
+                                                            @endforeach
+                                                        </datalist>
+                                                    </div>
 
-                                    </div>
-                                    <div class="col-3">
-                                        <input type="text" class="form-control" placeholder="QTD">
-                                    </div>
-                                    <div class="col-3">
-                                        <input type="text" class="form-control" placeholder="Preço Unitário">
-                                    </div>
-                                    <div class="col-2">
-                                        <input type="text" class="form-control" placeholder="Sub Total" disabled>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-success">Inserir Produto</button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <span class="col-10"></span>
-                                    <div class="col-2">
-                                        <input type="text" class="form-control" placeholder="Total" disabled>
+
+
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Produtos Inseridos</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Cras justo odio</li>
+                                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                                <li class="list-group-item">Vestibulum at eros</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-success">Inserir Produto</button>
-                            </form>
-                        </div>
+                            </div>
+
+                            <div class="form-row">
+                                <span class="col-9"></span>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" placeholder="Total" disabled>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 @endif
