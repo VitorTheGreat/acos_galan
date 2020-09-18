@@ -10,7 +10,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link" href="#!" id="cadastroDropDown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Cadastro
+                    Ações
                 </a>
                 <div class="dropdown-menu dropdown-menu-left" aria-labelledby="cadastroDropDown">
                     <a class="dropdown-item" href="/cliente">Cliente</a>

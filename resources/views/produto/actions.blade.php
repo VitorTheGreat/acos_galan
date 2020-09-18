@@ -35,7 +35,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h1>Cadastro de Produto</h1>
+                <h1>Produto</h1>
                 <hr />
                 {{-- <a href="#" class="btn btn-info">Incluir/Distribuir estoque</a> --}}
                 <div class="card">
