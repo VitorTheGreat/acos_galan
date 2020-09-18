@@ -14,3 +14,11 @@
           justify-content: space-evenly;
 }
 
+.no-wrap {
+  flex-wrap: nowrap;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+}
+

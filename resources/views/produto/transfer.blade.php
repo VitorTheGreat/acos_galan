@@ -42,12 +42,6 @@
                         <h4 class="card-title"> Relações de produto por estoque</h4>
                     </div>
                     <div class="card-body">
-                        <div class="form-row">
-                            <div class="form-group col">
-                                <h4 for="descricao">Insira o nome do produto</h4>
-                                <input type="text" class="form-control" id="search" placeholder="Descrição Produto">
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col">
                                 <div class="card">
@@ -61,12 +55,17 @@
                                         <form>
                                             <div class="form-row align-justify">
                                                 <div class="col-5">
-                                                    <label for="prod_estoque">Estoque</label>
+                                                    <input type="text" autofocus list="prod" class="form-control" placeholder="Descrição do Produto">
+                                                    <datalist class="" id="prod">
+                                                        @foreach ($product_storages as $key => $product)
+                                                        <option value="{{$product->product_id}}">{{$product->descricao}} - {{$product->estoque}} - {{$product->quantidade}}</option>
+                                                        @endforeach
+                                                    </datalist>
                                                     <input type="text" class="form-control" placeholder="Estoque" id="prod_estoque">
-                                                    <label for="prod_qtd">Quantidade</label>
                                                     <input type="text" class="form-control" placeholder="Quantidade" id="prod_qtd">
                                                 </div>
                                                 <button type="button" name="button" class="btn btn-info">
+                                                    Abrir Ordem<br />
                                                     <span class="material-icons">
                                                         swap_horiz
                                                     </span>

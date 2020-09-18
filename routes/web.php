@@ -74,7 +74,12 @@ Route::middleware(['middleware' => 'auth'])->prefix('produto')->group(function()
 	Route::get('/search', 'ProductController@autocompleteSearch')->name('produto.search');
 
 	//transfer product from storage page
-	Route::get('/transferencia', 'ProductController@transfer')->name('produto.transfer');
+	// Route::get('/transferencia', 'ProductController@transfer')->name('produto.transfer');
+});
+
+//Transferences
+Route::middleware(['middleware' => 'auth'])->prefix('transfer')->group(function(){
+	Route::post('/openTransferOrder', 'TransferController@openTransferOrder')->name('transfer.open');
 });
 
 //Storage

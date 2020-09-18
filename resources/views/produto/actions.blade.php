@@ -37,7 +37,7 @@
             <div class="col-md-12">
                 <h1>Cadastro de Produto</h1>
                 <hr />
-                <a href="/produto/transferencia" class="btn btn-info">Area de Transferência</a>
+                {{-- <a href="#" class="btn btn-info">Incluir/Distribuir estoque</a> --}}
                 <div class="card">
                     <div class="card-header card-header-primary">
                         {{-- <h4 class="card-title ">Simple Table</h4>  --}}
@@ -224,6 +224,9 @@
                                             <form action="{{route('produto.destroy', ['product' => $product->id])}}" method="post">
                                                 @method('DELETE')
                                                 @csrf
+                                                <button type="button" rel="tooltip" class="btn btn-primary" title="Transferir" data-toggle="modal" data-target="#product-{{$product->id}}-transfer">
+                                                    <i class="material-icons">swap_horiz</i>
+                                                </button>
                                                 <button type="button" rel="tooltip" class="btn btn-info" title="Ver Estoques" data-toggle="modal" data-target="#product-{{$product->id}}-storage">
                                                     <i class="material-icons">storage</i>
                                                 </button>
@@ -288,7 +291,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{-- <form action="/cadastro/estoque/{{$storage->id}}" method="POST"> --}}
                     <table class="table">
                         <thead>
                             <tr>
@@ -299,13 +301,13 @@
                         </thead>
                         <tbody>
                             @foreach ($product_within_storages as $key_storage => $prod_storage)
-                              @if ($product->id == $prod_storage->product_id)
-                                <tr>
-                                    <td>{{$prod_storage->quantidade}}</td>
-                                    <td>{{$prod_storage->unidade_venda}}</td>
-                                    <td>{{$prod_storage->estoque}}</td>
-                                </tr>
-                              @endif
+                            @if ($product->id == $prod_storage->product_id)
+                            <tr>
+                                <td>{{$prod_storage->quantidade}}</td>
+                                <td>{{$prod_storage->unidade_venda}}</td>
+                                <td>{{$prod_storage->estoque}}</td>
+                            </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>
@@ -318,6 +320,64 @@
         </div>
     </div>
     @endforeach
+
+    {{-- Modal Transfer --}}
+    @foreach ($products as $key => $product)
+    <div class="modal fade" id="product-{{$product->id}}-transfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Transferir Produto: <br /> <strong>{{$product->descricao}}</strong></h4>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            @foreach ($product_within_storages as $key_storage => $prod_storage)
+                            @if ($product->id == $prod_storage->product_id)
+                            <br />
+                            <form action="{{route('transfer.open')}}" method="POST">
+                                @csrf
+                                <h5><strong>Estoque a enviar:</strong> {{$prod_storage->estoque}} - Estoque disponivel: {{$prod_storage->quantidade}}</h5>
+                                <input type="text" id="responsavel_retira" class="form-control" placeholder="Responsavel a Retirar" name="responsavel_retira" required>
+                                <div class="form-row no-wrap">
+                                    <div class="col-4">
+                                        <input type="text" id="prod_estoque" name="estoque_fornece" value="{{$prod_storage->storage_id}}" hidden>
+                                        <input type="text" id="prod_id" name="prod_id" value="{{$prod_storage->product_id}}" hidden>
+                                        <input type="text" id="status_transferencia" name="status_transferencia" value="ordem_aberta" hidden>
+                                        <input type="number" class="form-control" placeholder="Quantidade" id="qtd_prod" name="qtd_prod" max="{{$prod_storage->quantidade}}" value="1" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-info">
+                                        Abrir Ordem
+                                    </button>
+                                    <div class="col-4">
+                                        <select class="form-control" data-style="btn btn-link" id="estoque_recebe" name="estoque_recebe">
+                                            @foreach ($storages as $key => $storage)
+                                            @if ($storage->id != $prod_storage->storage_id)
+                                            <option value="{{$storage->id}}">{{$storage->name}}</option>
+                                            @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                            @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+
 </div>
 
 @endsection

@@ -31,7 +31,7 @@ class ProductSeeder extends Seeder
 
         DB::table('control_storages')->insert([
           [
-            'quantidade' => 5,
+            'quantidade' => 7,
             'unidade_venda' => 'br',
             'produto_id' => 1,
             'storage_id' => 1,

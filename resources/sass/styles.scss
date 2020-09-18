@@ -1,17 +1,23 @@
-.dropdown-menu{
-  &.dropdown-menu-left-new {
-      left: 188px;
-      top: -2px;
-  }
+.dropdown-menu {
+    &.dropdown-menu-left-new {
+        left: 188px;
+        top: -2px;
+    }
 }
 
 .input-group {
-  .input-group-text {
-    padding: 0 6px 0 0 !important;
-  }
+    .input-group-text {
+        padding: 0 6px 0 0 !important;
+    }
 }
 
 .align-justify {
-  align-items: center;
-  justify-content: space-evenly;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.no-wrap {
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
 }
