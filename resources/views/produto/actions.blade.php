@@ -348,7 +348,7 @@
                                         <input type="text" id="prod_estoque" name="estoque_fornece" value="{{$prod_storage->storage_id}}" hidden>
                                         <input type="text" id="prod_id" name="prod_id" value="{{$prod_storage->product_id}}" hidden>
                                         <input type="text" id="status_transferencia" name="status_transferencia" value="ordem_aberta" hidden>
-                                        <input type="number" class="form-control" placeholder="Quantidade" id="qtd_prod" name="qtd_prod" max="{{$prod_storage->quantidade}}" value="1" required>
+                                        <input type="number" class="form-control" placeholder="Quantidade" id="qtd_prod" name="qtd_prod" max="{{$prod_storage->quantidade}}" min="1" value="1" required>
                                     </div>
                                     <button type="submit" class="btn btn-info">
                                         Abrir Ordem

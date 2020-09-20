@@ -23,6 +23,7 @@ class CreateTransferTable extends Migration
                   ->constrained();
             $table->float('qtd_prod', 8, 2);
             $table->string('responsavel_retira')->nullable();
+            $table->string('responsavel_entrega')->nullable();
             $table->string('status_transferencia')->nullable();
             $table->timestamps();
         });

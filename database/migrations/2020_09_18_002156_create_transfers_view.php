@@ -14,7 +14,7 @@ class CreateTransfersView extends Migration
   public function up()
   {
     DB::statement("CREATE VIEW transfers_view AS
-                    SELECT t.estoque_fornece, st.name AS estoque_a_fornecer, t.estoque_recebe, st2.name AS estoque_a_receber, p.descricao, t.qtd_prod AS quantidade, t.responsavel_retira, t.status_transferencia
+                    SELECT t.id, t.updated_at, t.estoque_fornece, st.name AS estoque_a_fornecer, t.estoque_recebe, st2.name AS estoque_a_receber, p.descricao, t.qtd_prod AS quantidade, t.responsavel_retira, t.responsavel_entrega, t.status_transferencia
                     FROM transfers AS t
                     INNER JOIN products AS p ON p.id = t.prod_id
                     INNER JOIN storages AS st ON st.id = t.estoque_fornece
@@ -29,7 +29,7 @@ class CreateTransfersView extends Migration
    */
   public function down()
   {
-    // DB::statement("DROP VIEW selling_product_info_view");
-      Schema::dropIfExists('transfers_view');
+    DB::statement("DROP VIEW transfers_view");
+      // Schema::dropIfExists('transfers_view');
   }
 }

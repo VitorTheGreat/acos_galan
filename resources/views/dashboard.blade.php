@@ -9,6 +9,34 @@
 
   <div class="content">
     <div class="container-fluid">
+        @if (session('status'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Sucesso!</strong> {{session('status')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+
+        @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @foreach ($errors->all() as $error)
+            <strong> Error - </strong> {{$error}} </span> <br />
+            @endforeach
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+
+        @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong> Error - </strong> {{session('error')}} </span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
       <h1 class="text-center">Bem-vindo ao Aços Galan System</h1>
       <hr />
       <div class="row">
@@ -26,16 +54,36 @@
                   <th>Quantidade</th>
                   <th>Responsavel pela Retirada</th>
                   <th>Status da Ordem</th>
+                  <th>#</th>
                 </thead>
                 <tbody>
                   @foreach ($transfers as $key => $transfer)
                     <tr>
                       <td>{{$transfer->estoque_a_fornecer}}</td>
-                      <td>{{$transfer->estoque_a_receber}}</td>
+                      <td>{{$transfer->estoque_a_receber}}</td> 
                       <td>{{$transfer->descricao}}</td>
                       <td>{{$transfer->quantidade}}</td>
                       <td>{{$transfer->responsavel_retira}}</td>
                       <td>{{$transfer->status_transferencia}}</td>
+                      <td class="td-actions">
+                        @if ($transfer->status_transferencia == 'ordem_aberta')
+                            <form action="{{route('transfer.close', ['transfer' => $transfer->id])}}" method="post">
+                            @method('PATCH')
+                                @csrf
+                                <input type="text" name="responsavel_entrega" placeholder="Responsavel pela Entrega" required>
+                                <button type="submit" rel="tooltip" class="btn btn-success" title="Fechar Ordem">
+                                    <i class="material-icons">done</i>
+                                </button>
+                            </form>
+                        @elseif($transfer->status_transferencia == 'ordem_fechada')
+                        <form action="{{route('transfer.pdf', ['transfer' => $transfer->id])}}" method="get">
+                            @csrf
+                            <button type="submit" rel="tooltip" class="btn btn-warning" title="Imprimir Ordem">
+                                <i class="material-icons">print</i>
+                            </button>
+                        </form>
+                        @endif
+                    </td>
                     </tr>
                   @endforeach
 

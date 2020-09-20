@@ -73,13 +73,13 @@ Route::middleware(['middleware' => 'auth'])->prefix('produto')->group(function()
 	Route::delete('/{product}', 'ProductController@destroy')->name('produto.destroy');
 	Route::get('/search', 'ProductController@autocompleteSearch')->name('produto.search');
 
-	//transfer product from storage page
-	// Route::get('/transferencia', 'ProductController@transfer')->name('produto.transfer');
 });
 
 //Transferences
 Route::middleware(['middleware' => 'auth'])->prefix('transfer')->group(function(){
 	Route::post('/openTransferOrder', 'TransferController@openTransferOrder')->name('transfer.open');
+	Route::patch('/{transfer}', 'TransferController@closeTransferOrder')->name('transfer.close');
+	Route::get('/transferPDF/{transfer}', 'PDFController@transferOrderClosedPdf')->name('transfer.pdf');
 });
 
 //Storage
@@ -122,3 +122,7 @@ Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(funct
 		return view('movimentacao.saidaCaixa');
 	});
 });
+
+
+// PDF GENERATOR ROUTE
+Route::get('generate-pdf','PDFController@generatePDF');
