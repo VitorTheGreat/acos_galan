@@ -363,50 +363,81 @@ $(document).ready(function () {
     zeroCents: false
   }); //vars - Elements IDs
 
-  var preco_unitario = document.getElementById('preco_unitario');
-  var quantidade = document.getElementById('quantidade');
-  var preco_compra = document.getElementById('preco_compra');
-  var preco_custo = document.getElementById('preco_custo');
-  var preco_venda = document.getElementById('preco_venda');
-  var lucro = document.getElementById('lucro');
-  var icms = document.getElementById('icms');
-  var ipi = document.getElementById('ipi');
-  var qtd_fracionada = document.getElementById('qtd_fracionada'); //calculate the price of the weigth
-
-  preco_unitario.addEventListener("blur", function (event) {
-    var preco_compraTotal = toFloat(quantidade.value) * toFloat(preco_unitario.value);
-    var preco_compraTotalFracionada = toFloat(qtd_fracionada.value) * toFloat(preco_unitario.value);
-
-    if (preco_compraTotalFracionada != 0) {
-      preco_compra.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_compraTotalFracionada.toFixed(2));
-    } else {
-      preco_compra.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_compraTotal.toFixed(2));
+  var preco_unitario;
+  var quantidade;
+  var preco_compra;
+  var preco_custo;
+  var preco_venda;
+  var lucro;
+  var icms;
+  var ipi;
+  var qtd_fracionada;
+  $('#preco_unitario, #preco_unitario_edit').bind('keyup', function (event) {
+    if (event.currentTarget.id == 'preco_unitario') {
+      preco_unitario = document.getElementById('preco_unitario');
+      quantidade = document.getElementById('quantidade');
+      preco_compra = document.getElementById('preco_compra');
+      preco_custo = document.getElementById('preco_custo');
+      preco_venda = document.getElementById('preco_venda');
+      lucro = document.getElementById('lucro');
+      icms = document.getElementById('icms');
+      ipi = document.getElementById('ipi');
+      qtd_fracionada = document.getElementById('qtd_fracionada');
+      calcs();
     }
 
-    preco_unitario.value == '0,00' ? preco_compra.focus() : ipi.focus();
-  }, true); //preço compra
-
-  preco_compra.addEventListener('blur', function (event) {
-    var un = toFloat(preco_compra.value) / toFloat(quantidade.value);
-
-    if (preco_unitario.value == '0,00') {
-      preco_unitario.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(un.toFixed(2));
+    if (event.currentTarget.id == 'preco_unitario_edit') {
+      preco_unitario = document.getElementById('preco_unitario_edit');
+      quantidade = document.getElementById('quantidade_edit');
+      preco_compra = document.getElementById('preco_compra_edit');
+      preco_custo = document.getElementById('preco_custo_edit');
+      preco_venda = document.getElementById('preco_venda_edit');
+      lucro = document.getElementById('lucro_edit');
+      icms = document.getElementById('icms_edit');
+      ipi = document.getElementById('ipi_edit');
+      qtd_fracionada = document.getElementById('qtd_fracionada_edit');
+      calcs();
     }
-  }); //calculate the price of taxes
+  });
 
-  icms.addEventListener("blur", function (event) {
-    var total_percent = (toFloat(ipi.value) + toFloat(icms.value)) / 100;
-    var total_taxes = toFloat(preco_compra.value) * total_percent;
-    var preco_custo_with_taxes = parseFloat(total_taxes.toFixed(2)) + toFloat(preco_compra.value);
-    preco_custo.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_custo_with_taxes.toFixed(2));
-  }, true); //calculate the price of the profit
+  var calcs = function calcs() {
+    //calculate the price of the weigth
+    preco_unitario.addEventListener("blur", function (event) {
+      var preco_compraTotal = toFloat(quantidade.value) * toFloat(preco_unitario.value);
+      var preco_compraTotalFracionada = toFloat(qtd_fracionada.value) * toFloat(preco_unitario.value);
 
-  lucro.addEventListener("blur", function (event) {
-    var percent = toFloat(lucro.value) / 100;
-    var preco_ventaTotal = percent * toFloat(preco_custo.value);
-    var precoFinal = toFloat(preco_custo.value) + parseFloat(preco_ventaTotal.toFixed(2));
-    preco_venda.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(precoFinal.toFixed(2));
-  }, true);
+      if (preco_compraTotalFracionada != 0) {
+        preco_compra.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_compraTotalFracionada.toFixed(2));
+      } else {
+        preco_compra.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_compraTotal.toFixed(2));
+      }
+
+      preco_unitario.value == '0,00' ? preco_compra.focus() : ipi.focus();
+    }, true); //preço compra
+
+    preco_compra.addEventListener('blur', function (event) {
+      var un = toFloat(preco_compra.value) / toFloat(quantidade.value);
+
+      if (preco_unitario.value == '0,00') {
+        preco_unitario.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(un.toFixed(2));
+      }
+    }); //calculate the price of taxes
+
+    icms.addEventListener("blur", function (event) {
+      var total_percent = (toFloat(ipi.value) + toFloat(icms.value)) / 100;
+      var total_taxes = toFloat(preco_compra.value) * total_percent;
+      var preco_custo_with_taxes = parseFloat(total_taxes.toFixed(2)) + toFloat(preco_compra.value);
+      preco_custo.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_custo_with_taxes.toFixed(2));
+    }, true); //calculate the price of the profit
+
+    lucro.addEventListener("blur", function (event) {
+      var percent = toFloat(lucro.value) / 100;
+      var preco_ventaTotal = percent * toFloat(preco_custo.value);
+      var precoFinal = toFloat(preco_custo.value) + parseFloat(preco_ventaTotal.toFixed(2));
+      preco_venda.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(precoFinal.toFixed(2));
+      console.log(preco_venda.value, precoFinal);
+    }, true);
+  };
 });
 
 /***/ }),
@@ -418,7 +449,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/vitorh/Documents/projects/acos_galan/resources/js/product.js */"./resources/js/product.js");
+module.exports = __webpack_require__(/*! /home/vitorh/Documentos/acos_galan/resources/js/product.js */"./resources/js/product.js");
 
 
 /***/ })
