@@ -55,17 +55,17 @@ class ProductRequest extends FormRequest
         $formatter = new NumberFormatter($region, NumberFormatter::DECIMAL);
         
         $this->merge([
-            'preco_unitario' => floatval(str_replace(',', '.', $this->preco_unitario)),
-            'preco_compra' => floatval(str_replace(',', '.', $this->preco_compra)),
-            'preco_custo' => floatval(str_replace(',', '.', $this->preco_custo)),
-            'preco_venda' => $formatter->parse($this->preco_venda),
-            'ipi' => floatval(str_replace(',', '.', $this->ipi)),
-            'icms' => floatval(str_replace(',', '.', $this->icms)),
-            'lucro' => floatval(str_replace(',', '.', $this->lucro)),
+            'preco_unitario' => round($formatter->parse($this->preco_unitario), 2),
+            'preco_compra' => round($formatter->parse($this->preco_compra), 2),
+            'preco_custo' => round($formatter->parse($this->preco_custo), 2),
+            'preco_venda' => round($formatter->parse($this->preco_venda), 2),
+            'ipi' => round($formatter->parse($this->ipi), 2),
+            'icms' => round($formatter->parse($this->icms), 2),
+            'lucro' => round($formatter->parse($this->lucro), 2),
             'supplier_id' => (int) $this->supplier_id,
             'storage_id' => (int) $this->storage_id,
-            'quantidade' => floatval(str_replace(',', '.', $this->quantidade)),
-            'qtd_fracionada' => floatval(str_replace(',', '.', $this->qtd_fracionada)),
+            'quantidade' => round($formatter->parse($this->quantidade), 2),
+            'qtd_fracionada' => round($formatter->parse($this->qtd_fracionada), 2),
         ]);
     }
 }
