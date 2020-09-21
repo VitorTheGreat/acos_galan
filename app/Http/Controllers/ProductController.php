@@ -87,7 +87,7 @@ class ProductController extends Controller
     
     $dataProduct = $request->except(['quantidade', 'unidade_venda', 'storage_id']);
     
-    dd($product, $dataProduct);
+    // dd($product, $dataProduct);
 
     $product->update($dataProduct);
 
