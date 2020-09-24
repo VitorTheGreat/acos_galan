@@ -82,7 +82,7 @@
                                             <h4 class="card-title">Produto(s)</h4>
                                         </div>
                                         <div class="card-body">
-                                            <form action="{{route('sellingItem.store', ['item' => $product->product_id])}}" method="post">
+                                            <form action="{{route('sellingItem.store', ['item' => 1])}}" method="post">
                                                 @method('POST')
                                                 @csrf
                                                 <div class="form-row">
