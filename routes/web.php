@@ -56,29 +56,58 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
-//Cadastros
-Route::middleware(['middleware' => 'auth'])->prefix('cadastro')->group(function(){
-	Route::get('produto', function () {
-	    return view('produto.cadastro');
-	});
-	Route::get('cliente', function () {
-	    return view('cliente.cadastro');
-	});
+//Customer
+Route::middleware(['middleware' => 'auth'])->prefix('cliente')->group(function(){
+	Route::get('/', 'CustomerController@index')->name('customer');
+	Route::post('/', 'CustomerController@store')->name('customer.store');
+	Route::patch('/{customer}', 'CustomerController@update')->name('customer.update');
+	Route::delete('/{customer}', 'CustomerController@destroy')->name('customer.destroy');
+});
 
-	//Supplier
-	Route::get('fornecedor', 'SupplierController@create');
-	Route::post('fornecedor', 'SupplierController@store');
 
-	//Storage
-	Route::get('estoque', 'StorageController@create');
-	Route::post('estoque', 'StorageController@store');
+//Product
+Route::middleware(['middleware' => 'auth'])->prefix('produto')->group(function(){
+	Route::get('/', 'ProductController@index')->name('produto');
+	Route::post('/', 'ProductController@store')->name('produto.store');
+	Route::patch('/{product}', 'ProductController@update')->name('produto.update');
+	Route::delete('/{product}', 'ProductController@destroy')->name('produto.destroy');
+	Route::get('/search', 'ProductController@autocompleteSearch')->name('produto.search');
+	Route::patch('/', 'ControleStorageController@update')->name('produto.storage');
+});
+
+//Transferences
+Route::middleware(['middleware' => 'auth'])->prefix('transfer')->group(function(){
+	Route::post('/openTransferOrder', 'TransferController@openTransferOrder')->name('transfer.open');
+	Route::patch('/{transfer}', 'TransferController@closeTransferOrder')->name('transfer.close');
+	Route::get('/transferPDF/{transfer}', 'PDFController@transferOrderClosedPdf')->name('transfer.pdf');
+});
+
+//Storage
+Route::middleware(['middleware' => 'auth'])->prefix('estoque')->group(function(){
+	Route::get('/', 'StorageController@index')->name('estoque');
+	Route::post('/', 'StorageController@store')->name('estoque.store');
+	Route::patch('/{storage}', 'StorageController@update')->name('estoque.update');
+	Route::delete('/{storage}', 'StorageController@destroy')->name('estoque.destroy');
+});
+
+//Supplier
+Route::middleware(['middleware' => 'auth'])->prefix('fornecedor')->group(function(){
+	Route::get('/', 'SupplierController@index')->name('fornecedor');
+	Route::post('/', 'SupplierController@store')->name('fornecedor.store');
+	Route::patch('/{supplier}', 'SupplierController@update')->name('fornecedor.update');
+	Route::delete('/{supplier}', 'SupplierController@destroy')->name('fornecedor.destroy');
 });
 
 //Movimentação
 Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(function(){
-	Route::get('vendas', function(){
-		return view('movimentacao.vendas');
-	});
+	Route::get('/vendas', 'SellingController@index')->name('vendas');
+	Route::post('/vendas', 'SellingController@openSelling')->name('vendas.abrir');
+	Route::post('/vendas/atualiza', 'SellingController@store')->name('vendas.store');
+	Route::patch('/{selling}', 'SellingController@update')->name('vendas.update');
+	Route::delete('/{selling}', 'SellingController@destroy')->name('vendas.destroy');
+
+	Route::post('/sellingItem/{item}', 'SellingItemController@storeSellingItem')->name('sellingItem.store');
+
 	Route::get('orcamento', function() {
 		return view('movimentacao.orcamento');
 	});
@@ -95,3 +124,7 @@ Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(funct
 		return view('movimentacao.saidaCaixa');
 	});
 });
+
+
+// PDF GENERATOR ROUTE
+Route::get('generate-pdf','PDFController@generatePDF');

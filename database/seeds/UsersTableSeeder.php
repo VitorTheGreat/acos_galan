@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('programador'),
             'role_id' => 1,
+            'storage_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);

@@ -15,20 +15,10 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
-    }
+      $states = State::all();
+      $suppliers = Supplier::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $states = State::all();
-        $suppliers = Supplier::all();
-
-        return view('fornecedor.cadastro', compact('states', 'suppliers'));
+      return view('fornecedor.actions', compact('states', 'suppliers'));
     }
 
     /**
@@ -52,31 +42,20 @@ class SupplierController extends Controller
           'cep' => 'required|min:3',
       ]);
 
-      $storage = Supplier::create($data);
+      try {
 
-      return back()->with('status', 'Fornecedor Registrado com Sucesso');
-    }
+        $storage = Supplier::create($data);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        return back()->with('status', 'Fornecedor Registrado com Sucesso');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+      } catch (\Exception $e) {
+        // dd($e);
+        return back()->withError($e->getMessage());
+        // if($e->errorInfo[1] == 1062){
+        //   return back()->withError("Este fornecedor ja foi cadastrado, por favor confira os dados");
+        // }
+      }
+
     }
 
     /**
@@ -86,9 +65,24 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Supplier $supplier)
     {
-        //
+      $data = request()->validate([
+          'razao_social' => 'required|min:3',
+          'email' => 'required|min:3',
+          'cnpj' => 'required|min:3',
+          'ie' => 'required|min:3',
+          'telefone' => 'required|min:3',
+          'states_id' => 'required',
+          'endereco' => 'required|min:3',
+          'bairro' => 'required|min:3',
+          'cidade' => 'required|min:3',
+          'cep' => 'required|min:3',
+      ]);
+
+      $supplier->update($data);
+
+      return back()->with('status', 'Fornecedor alterado com sucesso!');
     }
 
     /**
@@ -97,8 +91,10 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Supplier $supplier)
     {
-        //
+      $supplier->delete();
+
+      return back()->with('status', 'Fornecedor deletado com Sucesso');
     }
 }

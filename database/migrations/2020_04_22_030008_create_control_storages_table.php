@@ -15,11 +15,15 @@ class CreateControlStoragesTable extends Migration
     {
       Schema::create('control_storages', function (Blueprint $table) {
           $table->bigIncrements('id');
-          $table->string('quantidade', 15);
-          $table->string('quantidade_peso', 50);
+          $table->float('quantidade', 8, 2);
+          $table->string('unidade_venda', 10);
           $table->unsignedBigInteger('produto_id');
           $table->foreign('produto_id')
                 ->references('id')->on('products')
+                ->constrained();
+          $table->unsignedBigInteger('storage_id');
+          $table->foreign('storage_id')
+                ->references('id')->on('storages')
                 ->constrained();
           $table->timestamps();
       });

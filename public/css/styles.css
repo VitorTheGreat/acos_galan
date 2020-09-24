@@ -1,4 +1,24 @@
 .dropdown-menu.dropdown-menu-left-new {
-    left: 188px;
-    top: -2px;
+  left: 188px;
+  top: -2px;
 }
+
+.input-group .input-group-text {
+  padding: 0 6px 0 0 !important;
+}
+
+.align-justify {
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+}
+

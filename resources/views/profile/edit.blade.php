@@ -49,6 +49,22 @@
                     </div>
                   </div>
                 </div>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Loja/Estoque') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                        <input type="text" autofocus list="storages_id" class="form-control{{ $errors->has('storage_id') ? ' is-invalid' : '' }}" name="storage_id" id="input-storage_id" type="text" placeholder="{{ __('Loja/Estoque') }}" value="{{ old('storage_id') }}" required>
+                        <datalist class="" id="storages_id">
+                            @foreach ($storages as $key => $storage)
+                            <option value="{{$storage->id}}">{{$storage->name}}</option>
+                            @endforeach
+                        </datalist>
+                        @if ($errors->has('storage_id'))
+                          <span id="storage_id-error" class="error text-danger" for="input-storage_id">{{ $errors->first('storage_id') }}</span>
+                        @endif
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="card-footer ml-auto mr-auto">
                 <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>

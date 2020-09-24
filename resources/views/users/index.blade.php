@@ -40,6 +40,12 @@
                       <th>
                         {{ __('Criado em:') }}
                       </th>
+                      <th>
+                        {{ __('Loja/Estoque') }}
+                      </th>
+                      <th>
+                        {{ __('Cargo/Função') }}
+                      </th>
                       <th class="text-right">
                         {{ __('Opções') }}
                       </th>
@@ -55,6 +61,12 @@
                           </td>
                           <td>
                             {{ $user->created_at->format('Y-m-d') }}
+                          </td>
+                          <td>
+                            {{ $user->storage_id }}
+                          </td>
+                          <td>
+                            {{ $user->role_id }}
                           </td>
                           <td class="td-actions text-right">
                             @if ($user->id != auth()->id())

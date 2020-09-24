@@ -2,25 +2,30 @@
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
     <div class="container-fluid">
         <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+              <a class="nav-link" href="/" aria-haspopup="true" aria-expanded="false">
+                  Home
+              </a>
+          </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                <a class="nav-link" href="#!" id="cadastroDropDown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Cadastro
+                    Ações
                 </a>
-                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/cadastro/cliente">Cliente</a>
-                    <a class="dropdown-item" href="/cadastro/produto">Produto</a>
-                    <a class="dropdown-item" href="/cadastro/fornecedor">Fornecedor</a>
-                    <a class="dropdown-item" href="/cadastro/estoque">Estoque</a>
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="cadastroDropDown">
+                    <a class="dropdown-item" href="/cliente">Cliente</a>
+                    <a class="dropdown-item" href="/produto">Produto</a>
+                    <a class="dropdown-item" href="/fornecedor">Fornecedor</a>
+                    <a class="dropdown-item" href="/estoque">Estoque</a>
                     <a class="dropdown-item" href="/user">Usuário</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                <a class="nav-link" href="http://example.com" id="movimentacaoDropDown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Movimentação
                 </a>
-                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="movimentacaoDropDown">
                     <a class="dropdown-item" href="/movimentacao/vendas">Vendas</a>
                     <a class="dropdown-item" href="/movimentacao/orcamento">Orçamentos</a>
                     <a class="dropdown-item" href="/movimentacao/trocas">Trocas de mercadoria</a>
@@ -29,6 +34,15 @@
                     <a class="dropdown-item" href="/movimentacao/saida-caixa">Saídas do Caixa</a>
                 </div>
             </li>
+            {{-- <li class="nav-item dropdown">
+                <a class="nav-link" href="http://example.com" id="movimentacaoDropDown" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Relações
+                </a>
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="movimentacaoDropDown">
+                    <a class="dropdown-item" href="/movimentacao/vendas">Produtos</a>
+                </div>
+            </li> --}}
         </ul>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +52,7 @@
             <span class="navbar-toggler-icon icon-bar"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end">
-            <form class="navbar-form">
+            {{-- <form class="navbar-form">
                 <div class="input-group no-border">
                     <input type="text" value="" class="form-control" placeholder="Pesquise um produto...">
                     <button type="submit" class="btn btn-white btn-round btn-just-icon">
@@ -46,7 +60,7 @@
                         <div class="ripple-container"></div>
                     </button>
                 </div>
-            </form>
+            </form> --}}
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown"
@@ -57,9 +71,9 @@
                         </p>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                        <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a>
-                        <a class="dropdown-item" href="#">{{ __('Settings') }}</a>
-                        <div class="dropdown-divider"></div>
+                        {{-- <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a> --}}
+                        {{-- <a class="dropdown-item" href="#">{{ __('Settings') }}</a> --}}
+                        {{-- <div class="dropdown-divider"></div> --}}
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Log out') }}</a>
                     </div>
