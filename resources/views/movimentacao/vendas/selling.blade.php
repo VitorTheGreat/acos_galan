@@ -56,7 +56,6 @@
                             </div>
                         </div>
                         <br />
-                        <form>
                             @if ($selling->customer_id === 1)
                             <h5>Dados Cliente</h5>
                             <div class="form-row">
@@ -83,20 +82,24 @@
                                             <h4 class="card-title">Produto(s)</h4>
                                         </div>
                                         <div class="card-body">
-                                            <div class="form-row">
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <input type="text" autofocus list="prod" class="form-control" placeholder="Descrição ou EAN">
-                                                        <datalist class="" id="prod">
-                                                            @foreach ($products as $key => $product)
-                                                            <option value="{{$product->product_id}}">{{$product->descricao}} - {{$product->preco_venda}}</option>
-                                                            @endforeach
-                                                        </datalist>
-                                                    </div>
+                                            <form action="{{route('sellingItem.store', ['item' => $product->product_id])}}" method="post">
+                                                @method('POST')
+                                                @csrf
+                                                <div class="form-row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <input type="text" autofocus list="prod" class="form-control" placeholder="Descrição ou EAN">
+                                                            <datalist class="" id="prod">
+                                                                @foreach ($products as $key => $product)
+                                                                <option value="{{$product->product_id}}">{{$product->descricao}} - {{$product->preco_venda}}</option>
+                                                                @endforeach
+                                                            </datalist>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <button type="submit" class="btn btn-success">Inserir Produto</button>
+                                                <button type="submit" class="btn btn-success">Inserir Produto</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -124,7 +127,6 @@
                                     <input type="text" class="form-control" placeholder="Total" disabled>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
                 @endif

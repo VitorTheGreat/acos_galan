@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Control_storage;
 use Illuminate\Http\Request;
 
 class ControleStorageController extends Controller
@@ -66,9 +67,23 @@ class ControleStorageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        
+        $request->validate([
+            'quantidade' => 'required',
+            'storage_id' => 'required',
+            'product_id' => 'required',
+        ]);
+
+        // dd($request->all());
+        
+        Control_storage::where('storage_id', (int) $request->storage_id)
+                        ->where('produto_id', (int)$request->product_id)
+                        ->increment('quantidade', (float)$request->quantidade);
+
+
+        return back()->with('status', 'Estoque Alterado com sucesso!');
     }
 
     /**

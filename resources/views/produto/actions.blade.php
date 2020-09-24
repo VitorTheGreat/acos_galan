@@ -233,9 +233,9 @@
                                                 <button type="button" rel="tooltip" class="btn btn-warning" title="Editar Produto" data-toggle="modal" data-target="#product-{{$product->id}}">
                                                     <i class="material-icons">edit</i>
                                                 </button>
-                                                <button type="submit" rel="tooltip" class="btn btn-danger" title="Deletar Produto">
+                                                {{-- <button type="submit" rel="tooltip" class="btn btn-danger" title="Deletar Produto">
                                                     <i class="material-icons">delete_forever</i>
-                                                </button>
+                                                </button> --}}
                                             </form>
                                         </td>
                                     </tr>
@@ -366,9 +366,10 @@
                                     </select>
                                 </div>
                             </div>
-                        <button type="submit" class="btn btn-warning">alterar</button>
+                        <button type="submit" class="btn btn-warning">alterar Informações do produto</button>
                     </form>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
@@ -381,7 +382,7 @@
     {{-- Modal Storages --}}
     @foreach ($products_view as $key => $product)
     <div class="modal fade" id="product-{{$product->id}}-storage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLabel">Estoques com o produto: <br /> <strong>{{$product->descricao}}</strong></h4>
@@ -397,17 +398,45 @@
                                 <th>Quantidade</th>
                                 <th>Unidade Venda</th>
                                 <th>Estoque</th>
+                                <th>#</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($product_within_storages as $key_storage => $prod_storage)
-                            @if ($product->id == $prod_storage->product_id)
-                            <tr>
-                                <td>{{$prod_storage->quantidade}}</td>
-                                <td>{{$prod_storage->unidade_venda}}</td>
-                                <td>{{$prod_storage->estoque}}</td>
-                            </tr>
-                            @endif
+                                @if ($product->id == $prod_storage->product_id)
+                                <tr>
+                                    <td>{{$prod_storage->quantidade}}</td>
+                                    <td>{{$prod_storage->unidade_venda}}</td>
+                                    <td>{{$prod_storage->estoque}}</td>
+                                    <td class="td-actions">
+                                            <button title="Aumentar Estoque"  class="btn btn-info" type="button" data-toggle="collapse" data-target="#prod_storage-{{$prod_storage->product_id.$prod_storage->storage_id}}" aria-expanded="false" aria-controls="collapseExample">
+                                                    <i class="material-icons">add_box</i>
+                                            </button>
+                                    </td>
+                                    <div class="collapse" id="prod_storage-{{$prod_storage->product_id.$prod_storage->storage_id}}">
+                                        <div class="card card-body">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Aumentar quantidade do produto: <strong>{{$product->descricao}}</strong> no estoque: <strong>{{$prod_storage->estoque}}</strong></h4>
+                                            </div>
+                                            <form action="{{route('produto.storage')}}"" method="post">
+                                                @method('PATCH')
+                                                    @csrf
+                                                    {{-- {{$prod_storage->product_id . ' - ' . $prod_storage->storage_id}} --}}
+                                                    <input hidden name="product_id" value="{{$prod_storage->product_id}}" />
+                                                    <input hidden name="storage_id" value="{{$prod_storage->storage_id}}" />
+                                                    <div class="col-6 form-group">
+                                                            <label for="">Quantidade a aumentar</label>
+                                                        <input type="number" class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade" min="0" value="0">
+                                                    </div>
+
+                                                    <button class="btn btn-warning" type="submit">
+                                                           Aumentar <i class="material-icons">add_box</i>
+                                                    </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

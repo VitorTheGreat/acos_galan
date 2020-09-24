@@ -72,7 +72,7 @@ Route::middleware(['middleware' => 'auth'])->prefix('produto')->group(function()
 	Route::patch('/{product}', 'ProductController@update')->name('produto.update');
 	Route::delete('/{product}', 'ProductController@destroy')->name('produto.destroy');
 	Route::get('/search', 'ProductController@autocompleteSearch')->name('produto.search');
-
+	Route::patch('/', 'ControleStorageController@update')->name('produto.storage');
 });
 
 //Transferences
@@ -105,6 +105,8 @@ Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(funct
 	Route::post('/vendas/atualiza', 'SellingController@store')->name('vendas.store');
 	Route::patch('/{selling}', 'SellingController@update')->name('vendas.update');
 	Route::delete('/{selling}', 'SellingController@destroy')->name('vendas.destroy');
+
+	Route::post('/sellingItem/{item}', 'SellingItemController@storeSellingItem')->name('sellingItem.store');
 
 	Route::get('orcamento', function() {
 		return view('movimentacao.orcamento');
