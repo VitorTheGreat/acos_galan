@@ -43,14 +43,49 @@ class SellingItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeSellingItem(Request $request, $item)
+    public function storeSellingItem(Request $request, $id)
     {
 
-        session()->put('items', array_merge(session()->get("items",['id' => $item])));
+        // session()->forget('cart');
 
-        $se = session()->get('items');
+        dd(session()->get('cart'));
 
-        dd($request, $item, $se);
+        // $cart = session()->get('cart');
+
+        // if (!$cart) {
+
+        //     $cart = [
+        //         $id => [
+        //             "name" => 4,
+        //             "quantity" => 1,
+        //             "price" => 2,
+        //             "photo" => 5
+        //         ]
+        //     ];
+
+        //     session()->put('cart', $cart);
+
+        //     return back()->with('status', 'Produto inserido com sucesso = !$cart');
+        // }
+
+        // if (isset($cart[$id])) {
+        //     $cart[$id]['quantity']++;
+
+        //     session()->put('cart', $cart);
+
+        //     return back()->with('status', 'Produto inserido com sucesso = isset($cart[$id]');
+        // }
+
+        // $cart[$id] = [
+        //     "name" => 4,
+        //     "quantity" => 1,
+        //     "price" => 2,
+        //     "photo" => 5
+        // ];
+
+        // session()->put('cart', $cart);
+
+        // return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
     /**

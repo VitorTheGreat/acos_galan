@@ -31,9 +31,9 @@ class SupplierController extends Controller
     {
       $data = request()->validate([
           'razao_social' => 'required|min:3',
-          'email' => 'required|min:3',
+          // 'email' => 'required|min:3',
           'cnpj' => 'required|min:3',
-          'ie' => 'required|min:3',
+          // 'ie' => 'required|min:3',
           'telefone' => 'required|min:3',
           'states_id' => 'required',
           'endereco' => 'required|min:3',

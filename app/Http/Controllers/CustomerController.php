@@ -42,11 +42,11 @@ class CustomerController extends Controller
 
       $data = request()->validate([
           'nome' => 'required',
-          'email' => 'required',
-          'cpf' => 'required',
-          'rg' => 'required',
-          'telefone' => 'required',
-          'celular' => 'required',
+          // 'email' => 'required',
+          // 'cpf' => 'required',
+          // 'rg' => 'required',
+          // 'telefone' => 'required',
+          // 'celular' => 'required',
           'cep' => 'required',
           'cidade' => 'required',
           'bairro' => 'required',

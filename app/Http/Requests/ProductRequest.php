@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'descricao' => 'required',
-            'ean' => 'required',
+            // 'ean' => 'required',
             'preco_unitario' => 'required',
             'preco_compra' => 'required',
             'preco_custo' => 'required',
@@ -34,8 +34,8 @@ class ProductRequest extends FormRequest
             'lucro' => 'required',
             'ipi' => 'required',
             'icms' => 'required',
-            'ncm' => 'required',
-            'csosn' => 'required',
+            // 'ncm' => 'required',
+            // 'csosn' => 'required',
             'supplier_id' => 'required',
             'storage_id' => 'required',
             'quantidade' => 'required',

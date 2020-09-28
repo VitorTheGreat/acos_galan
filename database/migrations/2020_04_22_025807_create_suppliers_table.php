@@ -16,9 +16,9 @@ class CreateSuppliersTable extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->bigIncrements('id')->unique();
             $table->string('razao_social', 250)->unique();
-            $table->string('email', 50)->unique();
+            $table->string('email', 50)->unique()->nullable();
             $table->string('cnpj', 18)->unique();
-            $table->string('ie', 15)->unique();
+            $table->string('ie', 15)->unique()->nullable();
             $table->string('telefone', 15)->nullable();
             $table->unsignedBigInteger('states_id');
             $table->foreign('states_id')

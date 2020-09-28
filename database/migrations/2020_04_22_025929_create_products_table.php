@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
       Schema::create('products', function (Blueprint $table) {
           $table->bigIncrements('id')->unique();
           $table->string('descricao', 150);
-          $table->string('ean', 15)->unique();
+          $table->string('ean', 15)->nullable();
           $table->float('qtd_fracionada', 8, 2)->nullable();
           $table->float('preco_unitario', 8, 2);
           $table->float('preco_compra', 8, 2);
@@ -25,8 +25,8 @@ class CreateProductsTable extends Migration
           $table->float('lucro', 8, 2);
           $table->float('ipi', 8, 2);
           $table->float('icms', 8, 2);
-          $table->string('ncm', 45)->unique();
-          $table->string('csosn', 45)->unique();
+          $table->string('ncm', 45)->nullable();
+          $table->string('csosn', 45)->nullable();
           $table->unsignedBigInteger('supplier_id');
           $table->foreign('supplier_id')
                 ->references('id')->on('suppliers')

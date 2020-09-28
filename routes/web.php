@@ -106,7 +106,7 @@ Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(funct
 	Route::patch('/{selling}', 'SellingController@update')->name('vendas.update');
 	Route::delete('/{selling}', 'SellingController@destroy')->name('vendas.destroy');
 
-	Route::post('/sellingItem/{item}', 'SellingItemController@storeSellingItem')->name('sellingItem.store');
+	Route::post('/sellingItem/{id}', 'SellingItemController@storeSellingItem')->name('sellingItem.store');
 
 	Route::get('orcamento', function() {
 		return view('movimentacao.orcamento');

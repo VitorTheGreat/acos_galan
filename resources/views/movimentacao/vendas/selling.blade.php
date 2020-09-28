@@ -4,6 +4,35 @@
 <div class="content">
     <div class="container-fluid">
 
+            @if (session('status'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Sucesso!</strong> {{session('status')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+    
+            @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @foreach ($errors->all() as $error)
+                <strong> Error - </strong> {{$error}} </span> <br />
+                @endforeach
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+    
+            @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong> Error - </strong> {{session('error')}} </span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+
         <div class="row">
             <div class="col-md-12">
                 <h1>Vender</h1>
@@ -82,7 +111,7 @@
                                             <h4 class="card-title">Produto(s)</h4>
                                         </div>
                                         <div class="card-body">
-                                            <form action="{{route('sellingItem.store', ['item' => 1])}}" method="post">
+                                            <form action="{{route('sellingItem.store', ['id' => 1])}}" method="post">
                                                 @method('POST')
                                                 @csrf
                                                 <div class="form-row">
