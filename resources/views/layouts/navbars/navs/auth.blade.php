@@ -7,19 +7,21 @@
                   Home
               </a>
           </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="#!" id="cadastroDropDown" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Ações
-                </a>
-                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="cadastroDropDown">
-                    <a class="dropdown-item" href="/cliente">Cliente</a>
-                    <a class="dropdown-item" href="/produto">Produto</a>
-                    <a class="dropdown-item" href="/fornecedor">Fornecedor</a>
-                    <a class="dropdown-item" href="/estoque">Estoque</a>
-                    <a class="dropdown-item" href="/user">Usuário</a>
-                </div>
-            </li>
+            @if (auth()->user()->role_id == 1)
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#!" id="cadastroDropDown" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                        Ações
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="cadastroDropDown">
+                        <a class="dropdown-item" href="/cliente">Cliente</a>
+                        <a class="dropdown-item" href="/produto">Produto</a>
+                        <a class="dropdown-item" href="/fornecedor">Fornecedor</a>
+                        <a class="dropdown-item" href="/estoque">Estoque</a>
+                        <a class="dropdown-item" href="/user">Usuário</a>
+                    </div>
+                </li>
+            @endif
             <li class="nav-item dropdown">
                 <a class="nav-link" href="http://example.com" id="movimentacaoDropDown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
@@ -28,10 +30,10 @@
                 <div class="dropdown-menu dropdown-menu-left" aria-labelledby="movimentacaoDropDown">
                     <a class="dropdown-item" href="/movimentacao/vendas">Vendas</a>
                     <a class="dropdown-item" href="/movimentacao/orcamento">Orçamentos</a>
-                    <a class="dropdown-item" href="/movimentacao/trocas">Trocas de mercadoria</a>
-                    <a class="dropdown-item" href="/movimentacao/compras">Compras</a>
-                    <a class="dropdown-item" href="/movimentacao/pedidos-compra">Pedidos de Compra</a>
-                    <a class="dropdown-item" href="/movimentacao/saida-caixa">Saídas do Caixa</a>
+                    {{-- <a class="dropdown-item" href="/movimentacao/trocas">Trocas de mercadoria</a> --}}
+                    {{-- <a class="dropdown-item" href="/movimentacao/compras">Compras</a> --}}
+                    {{-- <a class="dropdown-item" href="/movimentacao/pedidos-compra">Pedidos de Compra</a> --}}
+                    {{-- <a class="dropdown-item" href="/movimentacao/saida-caixa">Saídas do Caixa</a> --}}
                 </div>
             </li>
             {{-- <li class="nav-item dropdown">
@@ -62,6 +64,7 @@
                 </div>
             </form> --}}
             <ul class="navbar-nav">
+                <li><p>Cargo: {{auth()->user()->role_id}} - Nome: {{auth()->user()->name}} - Estoque: {{auth()->user()->storage_id}}</p></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">

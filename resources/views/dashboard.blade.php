@@ -1,14 +1,10 @@
 @extends('layouts.app', ['activePage' => 'dashboard', 'titlePage' => __('Dashboard')])
 
 @section('content')
-  {{-- <div class="content">
-    <div class="container-fluid">
-        <h1 class="text-center">Aços Galan</h1>
-    </div>
-  </div> --}}
 
   <div class="content">
     <div class="container-fluid">
+
         @if (session('status'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Sucesso!</strong> {{session('status')}}
@@ -37,6 +33,7 @@
             </button>
         </div>
         @endif
+
       <h1 class="text-center">Bem-vindo ao Aços Galan System</h1>
       <hr />
       <div class="row">
@@ -58,8 +55,9 @@
                 </thead>
                 <tbody>
                   @foreach ($transfers as $key => $transfer)
-                    <tr>
-                      <td>{{$transfer->estoque_a_fornecer}}</td>
+                  @if (auth()->user()->storage_id == $transfer->estoque_fornece || auth()->user()->role_id == 1)
+                  <tr>
+                      <td>{{$transfer->estoque_a_fornecer}} (Esta loja)</td>
                       <td>{{$transfer->estoque_a_receber}}</td> 
                       <td>{{$transfer->descricao}}</td>
                       <td>{{$transfer->quantidade}}</td>
@@ -85,6 +83,7 @@
                         @endif
                     </td>
                     </tr>
+                  @endif
                   @endforeach
 
                 </tbody>
@@ -93,7 +92,10 @@
           </div>
         </div>
       </div>
-      <div class="row">
+
+
+    @if (auth()->user()->role_id == 1)
+    <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
             <div class="card-header card-header-warning card-header-icon">
@@ -162,6 +164,7 @@
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-md-4">
           <div class="card card-chart">
@@ -213,6 +216,7 @@
           </div>
         </div>
       </div>
+    @endif
     </div>
   </div>
 @endsection
