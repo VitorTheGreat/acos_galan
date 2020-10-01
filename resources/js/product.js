@@ -89,6 +89,8 @@ $(document).ready(() => {
                 preco_compra.value = VMasker.toMoney(preco_compraTotal.toFixed(2));
             }
 
+            console.log(preco_compra.value)
+
             preco_unitario.value == '0,00' ? preco_compra.focus() : ipi.focus();
 
         }, true);

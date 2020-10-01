@@ -70,7 +70,7 @@ class ProductController extends Controller
 
       // return ['msg_error => ' => $e->getMessage()];
       if ($e->errorInfo[1] == 1062) {
-        return back()->withError("EAN, NCM e CSOSN não podem ser repetidos, por favor confirme os dados");
+        return back()->withError("Produto ja cadastrado, confira os dados");
       }
     }
   }

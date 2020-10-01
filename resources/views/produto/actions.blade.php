@@ -266,7 +266,6 @@
                         @csrf
                         {{-- gambs para passar no request, ver depois isso --}}
                         <input hidden name="storage_id" value="1"/>
-                        <input hidden name="quantidade" id="quantidade_edit" value="0"/>
                         <input hidden name="unidade_venda" value="1"/>
                         <div class="form-row">
                                 <div class="col form-group">
@@ -281,6 +280,27 @@
                                 </div>
                             </div>
                             <hr />
+                            <div class="form-row">
+                                <div class="col-10">
+                                        <div class="card">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item text-danger">
+                                                        <p>
+                                                            Atenção, o campo quantidade não altera a quantidade é apenas para re-calcular os preços
+                                                            Para alterar a quantidade, va para a seção de ESTOQUES do produto!
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                </div>
+
+                            </div>
+                            <div class="form-row">
+                                    <div class="col-2 form-group">
+                                        <label for="">Quantidade</label>
+                                        <input type="text" class="form-control" placeholder="Quantidade" id="quantidade_edit" name="quantidade" value="0">
+                                    </div>
+                                </div>
                             <div class="form-row">
                                 <div class="col-4 form-group">
                                     <label for="">Quantidade Fracionada</label>
@@ -418,7 +438,7 @@
                                             <div class="card-header">
                                                 <h4 class="card-title">Aumentar quantidade do produto: <strong>{{$product->descricao}}</strong> no estoque: <strong>{{$prod_storage->estoque}}</strong></h4>
                                             </div>
-                                            <form action="{{route('produto.storage')}}"" method="post">
+                                            <form action="{{route('produto.storage')}}" method="post">
                                                 @method('PATCH')
                                                     @csrf
                                                     {{-- {{$prod_storage->product_id . ' - ' . $prod_storage->storage_id}} --}}
@@ -441,6 +461,49 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="modal-body">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">Outros Estoques</h4>
+                        </div>
+                        <div class="card card-body">
+                            <div class="card-header">
+                                <h4 class="card-title">Atualizar quantidade do produto: <strong>{{$product->descricao}}</strong></h4>
+                                <div class="card">
+                                    <ul class="list-group list-group-flush">
+                                        <p class="text-danger">
+                                            Atenção, nesse campo você ira alterar a quantidade total do produto em estoque ou adicionar quantidade a um novo estoque.
+                                            Tome cuidado ao alterar o estoque para não inserir dados errados, confira antes:
+                                            <ol>
+                                                <li>Se o estoque escolhido é realmente o correto a ser alterado</li>
+                                                <li>Tenha certeza se você quer alterar a quantidade total do estoque escolhido</li>
+                                                <li>Para inserir mais quantidade ao estoque, use os campos acima para o estoque desejado</li>
+                                            </ol>
+                                        </p>
+                                    </ul>
+                                </div>
+                            </div>
+                            <form action="{{route('produtoteste', ['id' => $product->id])}}" method="post">
+                                    @method('PATCH')
+                                    @csrf
+                                    <input hidden name="product_id" value="{{$product->id}}" />
+                                    <div class="form-row">
+                                            <div class="col-6 form-group">
+                                                <select class="form-control" data-style="btn btn-link" id="storage_id" name="storage_id">
+                                                    @foreach ($storages as $key => $storage)
+                                                    <option value="{{$storage->id}}">{{$storage->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-6 form-group">
+                                                    <input type="number" class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade" min="0" value="0">
+                                            </div>
+                                        </div>
+                                    <button class="btn btn-info" type="submit">
+                                            Atualizar <i class="material-icons">add_box</i>
+                                    </button>
+                            </form>
+                        </div>                                     
+                    </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}

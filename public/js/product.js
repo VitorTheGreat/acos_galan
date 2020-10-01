@@ -412,6 +412,7 @@ $(document).ready(function () {
         preco_compra.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_compraTotal.toFixed(2));
       }
 
+      console.log(preco_compra.value);
       preco_unitario.value == '0,00' ? preco_compra.focus() : ipi.focus();
     }, true); //preço compra
 

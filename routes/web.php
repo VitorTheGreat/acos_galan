@@ -73,6 +73,7 @@ Route::middleware(['middleware' => 'auth'])->prefix('produto')->group(function()
 	Route::delete('/{product}', 'ProductController@destroy')->name('produto.destroy');
 	Route::get('/search', 'ProductController@autocompleteSearch')->name('produto.search');
 	Route::patch('/', 'ControleStorageController@update')->name('produto.storage');
+	Route::patch('/quantity/{id}', 'ControleStorageController@correctQuantity')->name('produtoteste');
 });
 
 //Transferences
