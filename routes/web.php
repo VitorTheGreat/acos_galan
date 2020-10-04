@@ -68,6 +68,7 @@ Route::middleware(['middleware' => 'auth'])->prefix('cliente')->group(function()
 //Product
 Route::middleware(['middleware' => 'auth'])->prefix('produto')->group(function(){
 	Route::get('/', 'ProductController@index')->name('produto');
+	Route::get('/{productId}', 'ProductController@show')->name('produto.show');
 	Route::post('/', 'ProductController@store')->name('produto.store');
 	Route::patch('/{product}', 'ProductController@update')->name('produto.update');
 	Route::delete('/{product}', 'ProductController@destroy')->name('produto.destroy');

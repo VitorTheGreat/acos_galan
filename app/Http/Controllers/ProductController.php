@@ -99,6 +99,24 @@ class ProductController extends Controller
   }
 
   /**
+   * Show the form for editing the profile.
+   *
+   * @return \Illuminate\View\View
+   */
+  public function show($productId)
+  {
+
+    // $product = Product::find($productId);
+    $product = DB::table('product_total_quantity_view')->where('id', $productId)->first();
+
+    $suppliers = Supplier::all();
+    $storages = Storage::all();
+    $product_within_storages = DB::select('SELECT * FROM product_quantity_by_storage_view'); // view with total sum of total products
+
+    return view('produto.show', compact('product', 'suppliers', 'storages', 'product_within_storages'));
+  }
+
+  /**
    * Remove the specified resource from storage.
    *
    * @param  int  $id
