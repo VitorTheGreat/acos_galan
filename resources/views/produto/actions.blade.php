@@ -178,6 +178,21 @@
                         <p class="card-category">Produtos Cadastrados</p>
                     </div>
                     <div class="card-body">
+                        
+                        <div class="form-row col-12"> 
+                            <form action={{route('produto')}} method="get">
+                                @csrf
+                                <input placeholder="Pesquisa por Descrição" name="search_query" type="text"/>
+                                <button type="submit" class="btn btn-primary"/> Pesquisar </button>
+                            </form>
+                            <form action={{route('produto')}} method="get">
+                                    @csrf
+                                    <input hidden name="search_query" type="text" value=""/>
+                                    <button type="submit" class="btn btn-info"/> Mostrar todos </button>
+                            </form>
+                        </div>
+    
+
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -243,6 +258,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{ $products_view->links() }}
                     </div>
                 </div>
             </div>

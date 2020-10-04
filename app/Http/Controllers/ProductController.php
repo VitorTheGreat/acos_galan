@@ -21,15 +21,19 @@ class ProductController extends Controller
    */
   public function index()
   {
+    $search_query = request()->search_query;
+    // $products_view = DB::select('SELECT * FROM product_total_quantity_view'); // view with total sum of total products
+
     $products_table = Product::all();
-
-    $products_view = DB::select('SELECT * FROM product_total_quantity_view'); // view with total sum of total products
-    $product_within_storages = DB::select('SELECT * FROM product_quantity_by_storage_view'); // view with total sum of total products
-
-    // dd($products_view);
-
     $suppliers = Supplier::all();
     $storages = Storage::all();
+    $product_within_storages = DB::select('SELECT * FROM product_quantity_by_storage_view'); // view with total sum of total products
+
+    if ($search_query == '') {
+      $products_view = DB::table('product_total_quantity_view')->paginate(10);
+    } else {
+      $products_view = DB::table('product_total_quantity_view')->where('descricao', 'LIKE', '%' . $search_query . '%')->paginate(10);
+    }
 
     return view('produto.actions', compact('products_view', 'products_table', 'suppliers', 'storages', 'product_within_storages'));
   }
@@ -84,15 +88,14 @@ class ProductController extends Controller
    */
   public function update(Product $product, ProductRequest $request)
   {
-    
+
     $dataProduct = $request->except(['quantidade', 'unidade_venda', 'storage_id']);
-    
+
     // dd($product, $dataProduct);
 
     $product->update($dataProduct);
 
     return back()->with('status', 'Produto Alterado com sucesso!');
-
   }
 
   /**
