@@ -24,7 +24,6 @@ class ProductController extends Controller
     $search_query = request()->search_query;
     // $products_view = DB::select('SELECT * FROM product_total_quantity_view'); // view with total sum of total products
 
-    $products_table = Product::all();
     $suppliers = Supplier::all();
     $storages = Storage::all();
     $product_within_storages = DB::select('SELECT * FROM product_quantity_by_storage_view'); // view with total sum of total products
@@ -35,7 +34,7 @@ class ProductController extends Controller
       $products_view = DB::table('product_total_quantity_view')->where('descricao', 'LIKE', '%' . $search_query . '%')->paginate(10);
     }
 
-    return view('produto.actions', compact('products_view', 'products_table', 'suppliers', 'storages', 'product_within_storages'));
+    return view('produto.actions', compact('products_view', 'suppliers', 'storages', 'product_within_storages'));
   }
 
   /**

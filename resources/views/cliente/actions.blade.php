@@ -107,6 +107,18 @@
                         <p class="card-category"> Clientes Cadastrados</p>
                       </div>
                       <div class="card-body">
+                          <div class="form-row col-12"> 
+                              <form action={{route('customer')}} method="get">
+                                  @csrf
+                                  <input placeholder="Pesquisa por Nome" name="search_query" type="text"/>
+                                  <button type="submit" class="btn btn-primary"/> Pesquisar </button>
+                              </form>
+                              <form action={{route('customer')}} method="get">
+                                      @csrf
+                                      <input hidden name="search_query" type="text" value=""/>
+                                      <button type="submit" class="btn btn-info"/> Mostrar todos </button>
+                              </form>
+                          </div>
                         <div class="table-responsive">
                           <table class="table">
                             <thead>
@@ -134,16 +146,9 @@
                                     <td>{{$customer->celular}}</td>
                                     <td>{{$customer->endereco}} CEP:{{$customer->cep}} - {{$customer->bairro}} - {{$customer->cidade}}/{{$customer->states_id}}</td>
                                     <td class="td-actions text-right">
-                                      <form action="{{route('customer.destroy', ['customer' => $customer])}}"  method="post">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="button" rel="tooltip" class="btn btn-warning" title="Editar Estoque" data-toggle="modal" data-target="#$customer-{{$customer->id}}">
-                                            <i class="material-icons">edit</i>
-                                        </button>
-                                        <button type="submit" rel="tooltip" class="btn btn-danger" title="Deletar Cliente">
-                                            <i class="material-icons">delete_forever</i>
-                                        </button>
-                                      </form>
+                                        <a class="btn btn-info" title="Ver" href="/cliente/{{$customer->id}}">
+                                          <i class="material-icons">receipt</i>
+                                      </a>
                                     </td>
                                 </tr>
                               @endforeach
@@ -151,6 +156,7 @@
                           </table>
                         </div>
                       </div>
+                      {{$customers->links()}}
                     </div>
             </div>
         </div>

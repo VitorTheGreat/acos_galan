@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
 //Customer
 Route::middleware(['middleware' => 'auth'])->prefix('cliente')->group(function(){
 	Route::get('/', 'CustomerController@index')->name('customer');
+	Route::get('/{customerId}', 'CustomerController@show')->name('customer.show');
 	Route::post('/', 'CustomerController@store')->name('customer.store');
 	Route::patch('/{customer}', 'CustomerController@update')->name('customer.update');
 	Route::delete('/{customer}', 'CustomerController@destroy')->name('customer.destroy');
