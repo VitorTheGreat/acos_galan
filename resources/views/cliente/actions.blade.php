@@ -95,7 +95,7 @@
                                     </select>
                                   </div>
                             </div>
-                            <button type="submit" class="btn btn-success">Success</button>
+                            <button type="submit" class="btn btn-success">Cadastrar</button>
                           </form>
                       </div>
                     </div>
