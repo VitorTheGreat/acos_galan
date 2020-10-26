@@ -36,6 +36,16 @@
                     {{-- <a class="dropdown-item" href="/movimentacao/saida-caixa">Saídas do Caixa</a> --}}
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="movimentacaoDropDown" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Relatórios
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="movimentacaoDropDown">
+                        <a class="dropdown-item" href="#">Relatório de Vendas</a>
+                        <a class="dropdown-item" href="#">Relatórios de Orçamentos</a>
+                    </div>
+                </li>
             {{-- <li class="nav-item dropdown">
                 <a class="nav-link" href="http://example.com" id="movimentacaoDropDown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">

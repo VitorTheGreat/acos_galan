@@ -140,11 +140,67 @@
                                             <h4 class="card-title">Produtos Inseridos</h4>
                                         </div>
                                         <div class="card-body">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">Cras justo odio</li>
-                                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                                <li class="list-group-item">Vestibulum at eros</li>
-                                            </ul>
+                                                <div class="table-responsive">
+                                                        <table class="table table-shopping">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Produto</th>
+                                                                    <th class="text-right">Preço Unitário</th>
+                                                                    <th class="text-right">Qtd</th>
+                                                                    <th class="text-right">Preço Total</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="td-name">
+                                                                        <br><small>Tubo 1X1,20r</small>
+                                                                    </td>
+                                                                    <td class="td-number">
+                                                                        <small>R$ </small><input value="5,00" type="text" style="width: 90px;"/>
+                                                                    </td>
+                                                                    <td class="td-number">
+                                                                        <input value="1" type="text" style="width: 30px;"/>
+                                                                        <div class="td-actions">
+                                                                            <button class="btn btn-info"> <span class="material-icons">remove</span> </button>
+                                                                            <button class="btn btn-info"> <span class="material-icons">add</span> </button>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="td-number">
+                                                                        <small>R$ </small>5
+                                                                    </td>
+                                                                    <td class="td-actions">
+                                                                        <button type="button" rel="tooltip" data-placement="left" class="btn btn-simple">
+                                                                            <i class="material-icons">close</i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                        <td class="td-name">
+                                                                            <br><small>Tubo 1X1,20r</small>
+                                                                        </td>
+                                                                        <td class="td-number">
+                                                                            <small>R$ </small><input value="5,00" type="text" style="width: 90px;"/>
+                                                                        </td>
+                                                                        <td class="td-number">
+                                                                            <input value="1" type="text" style="width: 30px;"/>
+                                                                            <div class="td-actions">
+                                                                                <button class="btn btn-info"> <span class="material-icons">remove</span> </button>
+                                                                                <button class="btn btn-info"> <span class="material-icons">add</span> </button>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="td-number">
+                                                                            <small>R$ </small>5
+                                                                        </td>
+                                                                        <td class="td-actions">
+                                                                            <button type="button" rel="tooltip" data-placement="left" class="btn btn-simple">
+                                                                                <i class="material-icons">close</i>
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                            </tbody>
+                                                        </table>
+                                                      </div>
                                         </div>
                                     </div>
                                 </div>
@@ -153,9 +209,12 @@
                             <div class="form-row">
                                 <span class="col-9"></span>
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="Total" disabled>
+                                    <span>R$</span> <input type="text" class="form-control" placeholder="Total" disabled value="10,00">
                                 </div>
                             </div>
+                            <button class="btn btn-success"> Concluir Venda </button>
+                            <button class="btn btn-info"> Salvar Orçamento </button>
+                            <button class="btn btn-danger"> Cancelar Venda </button>
                     </div>
                 </div>
                 @endif

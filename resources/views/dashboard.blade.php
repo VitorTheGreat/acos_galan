@@ -95,7 +95,7 @@
 
 
     @if (auth()->user()->role_id == 1)
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
             <div class="card-header card-header-warning card-header-icon">
@@ -163,33 +163,17 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
 
+      <h3>Relatórios de Vendas</h3>
       <div class="row">
-        <div class="col-md-4">
-          <div class="card card-chart">
-            <div class="card-header card-header-success">
-              <div class="ct-chart" id="dailySalesChart"></div>
-            </div>
-            <div class="card-body">
-              <h4 class="card-title">Daily Sales</h4>
-              <p class="card-category">
-                <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">access_time</i> updated 4 minutes ago
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="col-md-4">
           <div class="card card-chart">
             <div class="card-header card-header-warning">
               <div class="ct-chart" id="websiteViewsChart"></div>
             </div>
             <div class="card-body">
-              <h4 class="card-title">Email Subscriptions</h4>
+              <h4 class="card-title">Vendas Semanal - <strong> 26/10/2020 a 30/10/2020</strong></h4>
               <p class="card-category">Last Campaign Performance</p>
             </div>
             <div class="card-footer">
@@ -205,7 +189,43 @@
               <div class="ct-chart" id="completedTasksChart"></div>
             </div>
             <div class="card-body">
-              <h4 class="card-title">Completed Tasks</h4>
+              <h4 class="card-title">Vendas Mensal - <strong> OUT - 2020</strong></h4>
+              <p class="card-category">Last Campaign Performance</p>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">access_time</i> campaign sent 2 days ago
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Relatórios de Orçamentos</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card card-chart">
+            <div class="card-header card-header-warning">
+              <div class="ct-chart" id="websiteViewsChart2"></div>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">Orçamentos Semanal - <strong> 26/10/2020 a 30/10/2020</strong></h4>
+              <p class="card-category">Last Campaign Performance</p>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">access_time</i> campaign sent 2 days ago
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-chart">
+            <div class="card-header card-header-danger">
+              <div class="ct-chart" id="completedTasksChart2"></div>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">Orçamentos Mensal - <strong> OUT - 2020</strong></h4>
               <p class="card-category">Last Campaign Performance</p>
             </div>
             <div class="card-footer">
