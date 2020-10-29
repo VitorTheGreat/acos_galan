@@ -108,7 +108,11 @@ Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(funct
 	Route::patch('/{selling}', 'SellingController@update')->name('vendas.update');
 	Route::delete('/{selling}', 'SellingController@destroy')->name('vendas.destroy');
 
-	Route::post('/sellingItem/{id}', 'SellingItemController@storeSellingItem')->name('sellingItem.store');
+	
+	Route::post('/sellingItem/{sellings_id}', 'CartController@storeSellingItem')->name('sellingItem.store');
+	Route::delete('/sellingItem/remove/{id}', 'CartController@removeSellingItem')->name('sellingItem.remove');
+	
+	Route::get('/sold', 'SellingController@sold')->name('vendas.sold');
 
 	Route::get('orcamento', function() {
 		return view('movimentacao.orcamento');

@@ -63,6 +63,10 @@ class SellingController extends Controller
 
     }
 
+    public function sold() {
+        return view('movimentacao.vendas.sold');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
