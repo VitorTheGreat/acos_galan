@@ -43,12 +43,13 @@ class SellingController extends Controller
     public function openSelling(SellingRequest $request) {
 
       $user_id = auth()->user()->id;
+      $storage_id = auth()->user()->storage_id;
       $customer_id = $request->customer_id;
-
-      $openSellingData = ['user_id' => $user_id, 'customer_id' => $customer_id, 'status_venda' => 'venda_aberta'];
-
-      // dd($user_id, $customer_id, $openSellingData);
-
+      $date = str_replace(['-', ':', ' '], '', date('d-m-Y H:i:s'));
+      $sellingId = $user_id.$storage_id.$date;
+      
+      $openSellingData = ['id' => $sellingId, 'user_id' => $user_id, 'customer_id' => $customer_id, 'status_venda' => 'venda_aberta'];
+      
       try {
 
         $openSelling = Selling::create($openSellingData);
@@ -63,8 +64,30 @@ class SellingController extends Controller
 
     }
 
-    public function sold() {
-        return view('movimentacao.vendas.sold');
+    public function closeSelling(Request $request) {
+        $cart = session()->get('cart', []);
+
+        $customerData = $request->only(['nome_cliente', 'endereco_cliente', 'telefone_cliente', 'documento_cliente']);
+
+        $subTotal_venda = 0;
+        
+        foreach ($cart as $key => $item) {
+            $subTotal_venda += $item['sub_total_produto'];
+        }
+        
+        $sub_total = (float) number_format((float)$subTotal_venda, 2, '.', '');
+
+        // dd($cart, $customerData);
+
+        return view('movimentacao.vendas.closeSelling', compact('cart', 'sub_total', 'customerData'));
+    }
+
+    public function sold(Request $request) {
+        $cart = session()->get('cart', []);
+
+        dd($request->all(), $cart);
+
+        // return view('movimentacao.vendas.sold');
     }
 
     /**

@@ -17,6 +17,7 @@ class CreateSellingItemsTable extends Migration
             $table->bigIncrements('id');
             $table->float('quantidade', 8, 2);
             $table->float('sub_total_produto', 8, 2);
+            $table->float('tabela', 8, 2);
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')
                   ->references('id')->on('products')

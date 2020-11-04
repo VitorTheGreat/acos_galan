@@ -83,7 +83,7 @@ class CartController extends Controller
         //
     }
 
-     /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -92,11 +92,27 @@ class CartController extends Controller
     public function storeSellingItem(Request $request, $sellings_id)
     {
 
-        $product = Product::find($request->product_id);
+        $t = $request->only(['tabela']);
 
-        // dd($product, $sellings_id);
+        session()->put('tabela', (float) $t['tabela']);
 
         $cart = session()->get('cart', []);
+
+        if (!isset($request->product_id)) {
+            foreach ($cart as $key => $item) {
+                $cart[$key]['tabela'] = (float) $t['tabela'];
+                $cart[$key]['preco_venda'] = ($cart[$key]['preco_base'] * ((float) $t['tabela'] / 100)) + $cart[$key]['preco_base'];
+                $cart[$key]['sub_total_produto'] = (float) $cart[$key]['quantidade'] * $cart[$key]['preco_venda'];
+
+                session()->put('cart', $cart);
+            }
+
+            return back()->with('status', 'Tabela Atualizada');
+        }
+
+        $product = Product::find($request->product_id);
+
+        $preco_venda = ($product->preco_venda * ((float) $t['tabela'] / 100)) + $product->preco_venda;
 
         // dd('cart', $cart);
 
@@ -104,33 +120,43 @@ class CartController extends Controller
 
             $cart = [
                 (int) $product->id => [
+                    'tabela' => (float) $t['tabela'],
                     'product_name' => $product->descricao,
-                    'preco_venda' => $product->preco_venda,
+                    'preco_base' => $product->preco_venda,
+                    'preco_venda' => $preco_venda,
                     'product_id' => (int) $product->id,
-                    'quantidade' => 1,
-                    'sub_total_produto' => $product->preco_venda,
+                    'quantidade' => (float) $request->quantidade,
+                    'sub_total_produto' => (float) $request->quantidade * $preco_venda,
                     'sellings_id' => (int) $sellings_id
-                    ]
-                ];
-                
-                session()->put('cart', $cart);
-                
-                // dd('if !cart depois do put', $cart);
+                ]
+            ];
+
+            session()->put('cart', $cart);
+
+            // dd('if !cart depois do put', $cart);
 
             return back()->with('status', 'Produto Adicionado.');
         }
 
-        if(isset($cart[$product->id])) {
+        if (isset($cart[$product->id])) {
             // dd('if isse cart', $cart);
-            return redirect()->back()->with('status', 'Produto ja esta no carrinho');
+
+            $cart[$product->id]['quantidade'] = (float) $request->quantidade;
+            $cart[$product->id]['sub_total_produto'] = (float) $request->quantidade * $preco_venda;
+
+            session()->put('cart', $cart);
+
+            return redirect()->back();
         }
 
-        $cart[(int) $product->id] =[
+        $cart[(int) $product->id] = [
+            'tabela' => (float) $t['tabela'],
             'product_name' => $product->descricao,
-            'preco_venda' => $product->preco_venda,
+            'preco_base' => $product->preco_venda,
+            'preco_venda' => $preco_venda,
             'product_id' => (int) $product->id,
-            'quantidade' => 1,
-            'sub_total_produto' => $product->preco_venda,
+            'quantidade' => (float) $request->quantidade,
+            'sub_total_produto' => (float) $request->quantidade * $preco_venda,
             'sellings_id' => (int) $sellings_id
         ];
 
@@ -141,13 +167,14 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Produto adicionado.');
     }
 
-    public function removeSellingItem($id) {
-        if($id) {
+    public function removeSellingItem($id)
+    {
+        if ($id) {
 
             $cart = session()->get('cart');
 
-            if(isset($cart[$id])) {
-                
+            if (isset($cart[$id])) {
+
                 unset($cart[$id]);
 
                 session()->put('cart', $cart);

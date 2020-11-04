@@ -66,45 +66,8 @@
                         <h4 class="card-category">Usuario: <strong>{{auth()->user()->name}}</strong> - Loja <strong>{{auth()->user()->storage_id}}</strong> - Venda Nº: <strong>{{$selling->id}}</strong> </h4>
                     </div>
                     <div class="card-body">
-                        <div class="col-4">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        Tabela:
-                                        <span class="material-icons">
-                                            money_off
-                                        </span>
-                                    </span>
-                                </div>
-                                <select class="form-control" data-style="btn btn-link" id="tabela" name="tabela">
-                                    <option value="0">Preço Normal</option>
-                                    <option value="7.5">7,5 %</option>
-                                    <option value="5">5 %</option>
-                                    <option value="2.5">2.5 %</option>
-                                </select>
-                            </div>
-                        </div>
-                        <br />
-                            @if ($selling->customer_id === 1)
-                            <h5>Dados Cliente</h5>
-                            <div class="form-row">
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="Nome">
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="Endereço">
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="Telefone">
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="Documento (RG ou CPF)">
-                                </div>
-                            </div>
-                            @endif
-                            <br>
-
                             <div class="row">
+
                                 <div class="col-md-6">
                                     <div class="card">
                                         <div class="card-header">
@@ -114,27 +77,56 @@
                                             <form action="{{route('sellingItem.store', ['sellings_id' => $selling->id])}}" method="post">
                                                 @method('POST')
                                                 @csrf
+                                                <div class="col-6 row">
+                                                    <small class="text-danger">Lembre-se de aplicar a tabela antes de fechar a venda</small>
+                                                        <div class="col-6 input-group">
+                                                                <div class="input-group-prepend">
+                                                                        <span class="input-group-text">
+                                                                            Tabela:
+                                                                            <span class="material-icons">
+                                                                                money_off
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                <select class="form-control" data-style="btn btn-link" id="tabela" name="tabela">
+                                                                    <option value="{{session('tabela')}}" selected>{{session('tabela')}} %</option>
+                                                                    <option value="" disabled>  </option>
+                                                                    <option value="0">0 %</option>
+                                                                    <option value="7.5">7,5 %</option>
+                                                                    <option value="5">5 %</option>
+                                                                    <option value="2.5">2.5 %</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <button type="submit" class="btn btn-info" id="btn_aplly_table">Aplicar Tabela</button>
+                                                            </div>
+                                               
+                                                </div>
                                                 <div class="form-row">
-                                                    <div class="col-12">
+                                                    <div class="col-9">
                                                         <div class="form-group">
-                                                            <input type="text" autofocus list="prod" class="form-control" placeholder="Descrição ou EAN" name="product_id">
+                                                            <input type="text" autofocus list="prod" class="form-control" placeholder="Descrição ou EAN" name="product_id" id="prod_input_insert">
                                                             <datalist class="" id="prod">
                                                                 @foreach ($products as $key => $product)
-                                                                <option value="{{$product->product_id}}">{{$product->descricao}} - {{$product->preco_venda}}</option>
+                                                                    <option value="{{$product->product_id}}">{{$product->descricao}} - R$ <b>{{$product->preco_venda}}</b> - Qtd: <b>{{$product->quantidade}}</b></option>
                                                                 @endforeach
                                                             </datalist>
                                                         </div>
-
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <input type="number" class="form-control" placeholder="Quantidade" name="quantidade" min="0.1" step="0.01">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-success">Inserir Produto</button>
+                                                <button type="submit" class="btn btn-success" id="btn_insert_prod">Inserir Produto</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
 
 
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title">Produtos Inseridos</h4>
@@ -145,9 +137,9 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>Produto</th>
-                                                                    <th class="text-right">Preço Unitário</th>
+                                                                    <th class="text-right">Preço Unitário <span class="percentage"></span></th>
                                                                     <th class="text-right">Qtd</th>
-                                                                    <th class="text-right">Preço Total <strong><span class="percentage"></span></strong></th>
+                                                                    <th class="text-right">Preço Total <strong></strong></th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
@@ -156,10 +148,10 @@
                                                                     @foreach (session('cart') as $product_id => $item)
                                                                         <tr data-id="{{$product_id}}">
                                                                             <td class="td-name">
-                                                                                <br><small>{{$item['product_name']}}</small>
+                                                                                <strong><br>{{$item['product_name']}}</strong>
                                                                             </td>
                                                                             <td class="td-number">
-                                                                            <small>R$ </small><input type="number" data-real-price="{{$item['preco_venda']}}" min="1" value="{{$item['preco_venda']}}" name="preco_venda" type="text" style="width: 90px;"/>
+                                                                                <small>R$ </small><input type="number" data-real-price="{{$item['preco_base']}}" min="1" value="{{$item['preco_venda']}}" name="preco_venda" type="text" style="width: 90px;" disabled/>
                                                                             </td>
                                                                             <td class="td-number">
                                                                             <input value="{{$item['quantidade']}}" type="number" min="1" type="text" name="quantidade" style="width: 50px;"/>
@@ -202,9 +194,34 @@
                                     <span>R$</span> <input style="font-size: 50px; height: 80px;" type="text" class="form-control" placeholder="Total" disabled name="total_venda">
                                 </div>
                             </div>
-                        <a href="{{route('vendas.sold')}}" class="btn btn-success"> Concluir Venda </a>
-                            <button class="btn btn-info"> Salvar Orçamento </button>
-                            <button class="btn btn-danger"> Cancelar Venda </button>
+                            <form action="{{route('vendas.closeSelling')}}" method="POST">
+                                    @method('POST')
+                                    @csrf
+                                    @if ($selling->customer_id === 1)
+                                    <h5>Dados Cliente</h5>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Nome" name="nome_cliente">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Endereço" name="endereco_cliente">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Telefone" name="telefone_cliente">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Documento (RG ou CPF)" name="documento_cliente">
+                                        </div>
+                                    </div>
+                                    @endif
+                                    <br/>
+                                
+                                    <button type="submit" class="btn btn-success"> Fechar Venda </button>
+                                    <button class="btn btn-info"> Salvar Orçamento </button>
+                                    <button class="btn btn-danger"> Cancelar Venda </button>
+                            </form>
+
+                            
                     </div>
                 </div>
                 @endif

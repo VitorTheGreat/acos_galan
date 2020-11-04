@@ -112,7 +112,8 @@ Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(funct
 	Route::post('/sellingItem/{sellings_id}', 'CartController@storeSellingItem')->name('sellingItem.store');
 	Route::delete('/sellingItem/remove/{id}', 'CartController@removeSellingItem')->name('sellingItem.remove');
 	
-	Route::get('/sold', 'SellingController@sold')->name('vendas.sold');
+	Route::post('/sold', 'SellingController@sold')->name('vendas.sold');
+	Route::post('/closeSelling', 'SellingController@closeSelling')->name('vendas.closeSelling');
 
 	Route::get('orcamento', function() {
 		return view('movimentacao.orcamento');
