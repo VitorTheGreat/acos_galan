@@ -123,6 +123,8 @@ class CartController extends Controller
                     'tabela' => (float) $t['tabela'],
                     'product_name' => $product->descricao,
                     'preco_base' => $product->preco_venda,
+                    'kg_mt' => $product->qtd_fracionada,
+                    'preco_kg_mt' => $product->preco_unitario,
                     'preco_venda' => $preco_venda,
                     'product_id' => (int) $product->id,
                     'quantidade' => (float) $request->quantidade,
@@ -154,10 +156,13 @@ class CartController extends Controller
             'tabela' => (float) $t['tabela'],
             'product_name' => $product->descricao,
             'preco_base' => $product->preco_venda,
+            'kg_mt' => $product->qtd_fracionada,
+            'preco_kg_mt' => $product->preco_unitario,
             'preco_venda' => $preco_venda,
             'product_id' => (int) $product->id,
             'quantidade' => (float) $request->quantidade,
             'sub_total_produto' => (float) $request->quantidade * $preco_venda,
+            'storage_id' => auth()->user()->storage_id,
             'sellings_id' => (int) $sellings_id
         ];
 

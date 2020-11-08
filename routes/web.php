@@ -106,7 +106,7 @@ Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(funct
 	Route::post('/vendas', 'SellingController@openSelling')->name('vendas.abrir');
 	Route::post('/vendas/atualiza', 'SellingController@store')->name('vendas.store');
 	Route::patch('/{selling}', 'SellingController@update')->name('vendas.update');
-	Route::delete('/{selling}', 'SellingController@destroy')->name('vendas.destroy');
+	Route::delete('/cancelSelling/{selling}', 'SellingController@destroy')->name('vendas.destroy');
 
 	
 	Route::post('/sellingItem/{sellings_id}', 'CartController@storeSellingItem')->name('sellingItem.store');

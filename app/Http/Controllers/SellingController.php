@@ -69,10 +69,15 @@ class SellingController extends Controller
     public function closeSelling(Request $request) {
         $cart = session()->get('cart', []);
         
-        $customerData = $request->only(['nome', 'endereco', 'telefone', 'cpf', 'rg', 'email', 'celular', 'bairro', 'cep', 'cidade', 'states_id']);
+        $customerId = $request->only(['customer_id']);
         
-        // dd($customerData);
-        
+        if($customerId) {
+            $customerData = Customer::find((int) $customerId['customer_id']);
+        }
+        else {
+            $customerData = $request->only(['nome', 'endereco', 'telefone', 'cpf', 'rg', 'email', 'celular', 'bairro', 'cep', 'cidade', 'states_id']);
+        }
+
         $subTotal_venda = 0;
         
         foreach ($cart as $key => $item) {
@@ -80,8 +85,6 @@ class SellingController extends Controller
         }
         
         $sub_total = (float) number_format((float)$subTotal_venda, 2, '.', '');
-
-        // dd($cart, $customerData);
 
         return view('movimentacao.vendas.closeSelling', compact('cart', 'sub_total', 'customerData'));
     }
@@ -92,28 +95,33 @@ class SellingController extends Controller
         $customerData = $request->only(['nome', 'endereco', 'telefone', 'cpf', 'rg', 'email', 'celular', 'bairro', 'cep', 'cidade', 'states_id']);
         $paidValues = $request->only(['metodo_pagamento', 'desconto', 'valor_pago', 'sub_total_real', 'sub_total', 'troco']);
 
-        // dd($cart, $customerData, $paidValues);
+        $customer = Customer::where('cpf', $customerData['cpf'])->get()->first();
+
+        // dd($cart, $customerData, $paidValues, $customer);
 
         try {
             
-            $customer = Customer::create($customerData);
+            if(!$customer) {
+                Customer::create($customerData);
+            }
 
             foreach ($cart as $key => $item) {
-                $sellingItem = SellingItem::create([
+                SellingItem::create([
                     'quantidade' => $item['quantidade'],
                     'sub_total_produto' => $item['sub_total_produto'],
+                    'preco_base' => $item['preco_base'],
+                    'preco_venda_final' => $item['preco_venda'],
                     'tabela' => $item['tabela'],
                     'product_id' => $item['product_id'],
                     'storage_id' => $item['storage_id'],
                     'sellings_id' => $item['sellings_id']
                 ]);
 
-                $productUpdate = Control_storage::where('id', $item['product_id'])
-                                                    ->where('storage_id', $item['storage_id'])
-                                                    ->decrement('quantidade', $item['quantidade']);
+                Control_storage::where('produto_id', $item['product_id'])->where('storage_id', $item['storage_id'])->decrement('quantidade', $item['quantidade']);
+
             }
 
-            $selling = Selling::where('id', $cart[1]['sellings_id'])
+            Selling::where('id', $cart[1]['sellings_id'])
                                 ->update([
                                     'metodo_pagamento' => $paidValues['metodo_pagamento'],
                                     'valor_pago' => $paidValues['valor_pago'],
@@ -201,6 +209,17 @@ class SellingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        session()->forget('cart');
+
+        try {
+            $deletedSelling = Selling::where('id', $id)->delete();
+
+            return back()->with('status', 'Venda Cancelada');
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+
     }
 }

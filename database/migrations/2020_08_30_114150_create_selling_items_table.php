@@ -16,6 +16,8 @@ class CreateSellingItemsTable extends Migration
         Schema::create('selling_items', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->float('quantidade', 8, 2);
+            $table->float('preco_base', 8, 2);
+            $table->float('preco_venda_final', 8, 2);
             $table->float('sub_total_produto', 8, 2);
             $table->float('tabela', 8, 2);
             $table->unsignedBigInteger('storage_id');

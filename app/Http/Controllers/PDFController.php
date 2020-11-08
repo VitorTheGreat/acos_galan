@@ -36,7 +36,7 @@ class PDFController extends Controller
 
     public function vendaConcluidaPdf($id) {
 
-        $venda = Selling::find($id);
+        $venda = DB::table('selling_view')->select('*')->where('id', '=', $id)->get();
 
         $pdf = PDF::loadView('movimentacao.vendas.sold', compact('venda'));
 

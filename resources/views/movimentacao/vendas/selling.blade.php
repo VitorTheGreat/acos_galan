@@ -115,7 +115,7 @@
                                                     </div>
                                                     <div class="col-3">
                                                         <div class="form-group">
-                                                            <input type="number" class="form-control" placeholder="Quantidade" name="quantidade" min="0.1" step="0.01">
+                                                            <input type="number" class="form-control" placeholder="Quantidade" name="quantidade" min="0.1" value="1" step="0.01">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -138,6 +138,8 @@
                                                                 <tr>
                                                                     <th>Produto</th>
                                                                     <th class="text-right">Preço Unitário <span class="percentage"></span></th>
+                                                                    <th class="text-right">KG/MT </th>
+                                                                    <th class="text-right">Preço (kg/mt) </th>
                                                                     <th class="text-right">Qtd</th>
                                                                     <th class="text-right">Preço Total <strong></strong></th>
                                                                     <th></th>
@@ -152,6 +154,12 @@
                                                                             </td>
                                                                             <td class="td-number">
                                                                                 <small>R$ </small><input type="number" data-real-price="{{$item['preco_base']}}" min="1" value="{{$item['preco_venda']}}" name="preco_venda" type="text" style="width: 90px;" disabled/>
+                                                                            </td>
+                                                                            <td class="td-number">
+                                                                                {{$item['kg_mt']}} 
+                                                                            </td>
+                                                                            <td class="td-number">
+                                                                                R$ {{$item['preco_kg_mt']}}
                                                                             </td>
                                                                             <td class="td-number">
                                                                             <input value="{{$item['quantidade']}}" type="number" min="1" type="text" name="quantidade" style="width: 50px;"/>
@@ -198,64 +206,72 @@
                                     @method('POST')
                                     @csrf
                                     @if ($selling->customer_id === 1)
-                                    <h5>Dados Cliente</h5>
-                                    <h5>Dados Pessoais</h5>
-                                    <div class="form-row">
-                                      <div class="col">
-                                        <input type="text" class="form-control" placeholder="Nome" name="nome" id="nome">
-                                      </div>
-                                      <div class="col">
-                                        <input type="text" class="form-control" placeholder="CPF" name="cpf" id="cpf">
-                                      </div>
-                                      <div class="col">
-                                        <input type="text" class="form-control" placeholder="RG" name="rg" id="rg">
-                                      </div>
-                                    </div>
-                                    <div class="form-row">
+                                        <h5>Dados Cliente</h5>
+                                        <h5>Dados Pessoais</h5>
+                                        <div class="form-row">
                                         <div class="col">
-                                            <input type="text" class="form-control" placeholder="E-mail" name="email" id="email">
-                                          </div>
-                                      <div class="col">
-                                        <input type="text" class="form-control" placeholder="Telefone" name="telefone" id="telefone">
-                                      </div>
-                                      <div class="col">
-                                        <input type="text" class="form-control" placeholder="Celular" name="celular" id="celular">
-                                      </div>
-                                    </div>
-                                    <br>
-                                    <h5>Endereço</h5>
-                                    <div class="form-row">
-                                        <div class="col">
-                                          <input type="text" class="form-control" placeholder="Endereço (ex: Rua)" name="endereco" id="endereco" required>
+                                            <input type="text" class="form-control" placeholder="Nome" name="nome" id="nome">
                                         </div>
                                         <div class="col">
-                                          <input type="text" class="form-control" placeholder="Bairro" name="bairro" id="bairro" required>
+                                            <input type="text" class="form-control" placeholder="CPF" name="cpf" id="cpf">
                                         </div>
                                         <div class="col">
-                                          <input type="text" class="form-control" placeholder="CEP" name="cep" id="cep">
+                                            <input type="text" class="form-control" placeholder="RG" name="rg" id="rg">
+                                        </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input type="text" class="form-control" placeholder="E-mail" name="email" id="email">
+                                            </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Telefone" name="telefone" id="telefone">
                                         </div>
                                         <div class="col">
-                                            <input type="text" class="form-control" placeholder="Cidade" name="cidade" id="cidade">
+                                            <input type="text" class="form-control" placeholder="Celular" name="celular" id="celular">
                                         </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-1 form-group">
-                                            <label for="exampleFormControlSelect1">Estado/UF</label>
-                                            <select class="form-control" data-style="btn btn-link" id="states_id" name="states_id">
-                                              @foreach ($states as $key => $state)
-                                                <option value="{{$state->id}}">{{$state->name}}</option>
-                                              @endforeach
-                                            </select>
-                                          </div>
-                                    </div>
+                                        </div>
+                                        <br>
+                                        <h5>Endereço</h5>
+                                        <div class="form-row">
+                                            <div class="col">
+                                            <input type="text" class="form-control" placeholder="Endereço (ex: Rua)" name="endereco" id="endereco" required>
+                                            </div>
+                                            <div class="col">
+                                            <input type="text" class="form-control" placeholder="Bairro" name="bairro" id="bairro" required>
+                                            </div>
+                                            <div class="col">
+                                            <input type="text" class="form-control" placeholder="CEP" name="cep" id="cep">
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" class="form-control" placeholder="Cidade" name="cidade" id="cidade">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-1 form-group">
+                                                <label for="exampleFormControlSelect1">Estado/UF</label>
+                                                <select class="form-control" data-style="btn btn-link" id="states_id" name="states_id">
+                                                @foreach ($states as $key => $state)
+                                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                                @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <input hidden name="customer_id" id="customer_id" value="{{$selling->customer_id}}" />
                                     @endif
                                     <br/>
                                 
                                     <button type="submit" class="btn btn-success"> Fechar Venda </button>
                                     <button class="btn btn-info"> Salvar Orçamento </button>
-                                    <button class="btn btn-danger"> Cancelar Venda </button>
+
                             </form>
 
+                            <form action="{{route('vendas.destroy', ['selling' => $selling->id])}}" method="post">
+                                @method('DELETE')
+                                @csrf
+
+                                <button type="submit" class="btn btn-danger"> Cancelar Venda </button>
+                            </form>
                             
                     </div>
                 </div>

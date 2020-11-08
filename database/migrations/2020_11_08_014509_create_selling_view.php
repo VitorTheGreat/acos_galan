@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateSellingView extends Migration
@@ -13,12 +14,13 @@ class CreateSellingView extends Migration
      */
     public function up()
     {
-        // DB::statement("CREATE VIEW transfers_view AS
-        // SELECT t.id, t.updated_at, t.estoque_fornece, st.name AS estoque_a_fornecer, t.estoque_recebe, st2.name AS estoque_a_receber, p.descricao, t.qtd_prod AS quantidade, t.responsavel_retira, t.responsavel_entrega, t.status_transferencia
-        // FROM transfers AS t
-        // INNER JOIN products AS p ON p.id = t.prod_id
-        // INNER JOIN storages AS st ON st.id = t.estoque_fornece
-        // INNER JOIN storages AS st2 ON st2.id = t.estoque_recebe");
+        DB::statement("CREATE VIEW selling_view AS
+        SELECT sl.*, u.name AS vendedor, s.local as loja, c.nome, c.cpf, c.telefone, c.celular, c.bairro, c.cidade, c.cep, c.endereco, si.quantidade, si.sub_total_produto, si.preco_base, si.preco_venda_final, p.descricao FROM sellings AS sl 
+            INNER JOIN selling_items AS si ON si.sellings_id = sl.id
+            INNER JOIN products AS p ON p.id = si.product_id
+            INNER JOIN storages AS s ON s.id = si.storage_id
+            INNER JOIN users as u ON u.id = sl.user_id
+            INNER JOIN customers AS c ON c.id = sl.customer_id");
     }
 
     /**
@@ -28,7 +30,7 @@ class CreateSellingView extends Migration
      */
     public function down()
     {
-        // DB::statement("DROP VIEW selling_view");
+        DB::statement("DROP VIEW selling_view");
         // Schema::dropIfExists('selling_view');
     }
 }

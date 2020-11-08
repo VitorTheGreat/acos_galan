@@ -54,31 +54,53 @@ table.greyGridTable tfoot td {
     <hr />
 
     <div>
-        Data: <strong>000</strong>
+        Data: <strong>{{$venda[0]->created_at}}</strong> - Número da venda: <strong>{{$venda[0]->id}}</strong> - Loja: <strong>{{$venda[0]->loja}}</strong> - Vendedor: <strong>{{$venda[0]->vendedor}}</strong>
     </div>
     
     <br />
 
+    <h3>Cliente: {{$venda[0]->nome}} </h3>
+    <h4>Endereço: {{$venda[0]->endereco}} - CEP: {{$venda[0]->cep}} - {{$venda[0]->bairro}} - {{$venda[0]->cidade}} </h4>
+
+    <br />
+
     <div>
 
-        {{$venda->id}}
-        {{$venda->metodo_pagamento}}
-        {{-- <table class="greyGridTable">
+        <table class="greyGridTable">
             <tr>
-                <td>Estoque a Fornecer</td>
-                <td>Estoque a Receber</td>
-                <td>Quantidade</td>
                 <td>Produto</td>
-                <td>Responsavel retirada</td>
+                <td>Quantidade</td>
+                <td>Preço unitário</td>
+                <td>Sub Total</td>
             </tr>
+            @foreach ($venda as $key => $item)
+                <tr>
+                    <td>{{$item->descricao}}</td>
+                    <td>{{$item->quantidade}}</td>
+                    <td>R$ {{$item->preco_venda_final}}</td>
+                    <td>R$ {{$item->sub_total_produto}}</td>
+                </tr>
+            @endforeach
+        </table>
+
+        <br />
+
+        <table class="greyGridTable">
             <tr>
-                <td>{{$transfer[0]->estoque_a_fornecer}}</td>
-                <td>{{$transfer[0]->estoque_a_receber}}</td>
-                <td>{{$transfer[0]->quantidade}}</td>
-                <td>{{$transfer[0]->descricao}}</td>
-                <td>{{$transfer[0]->responsavel_retira}}</td>
+                <td>Método de Pagamento</td>
+                <td>Desconto</td>
+                <td>Valor Pago</td>
+                <td>Total</td>
+                <td>Troco</td>
             </tr>
-        </table> --}}
+              <tr>
+                  <td>{{$venda[0]->metodo_pagamento}}</td>
+                  <td>R$ {{$venda[0]->valor_desconto}}</td>
+                  <td>R$ {{$venda[0]->valor_pago}}</td>
+                  <td>R$ {{$venda[0]->total}}</td>
+                  <td>R$ {{$venda[0]->troco}}</td>
+              </tr>
+        </table>
 
     </div>
     
@@ -87,13 +109,13 @@ table.greyGridTable tfoot td {
     <div class="row">
         <p> 
             ________________________________________________<br />
-            Assinatura do Responsavel Recebimento
+            Assinatura do Cliente ({{$venda[0]->nome}})
 
         </p>
         <br />
         <p> 
                 ________________________________________________<br />
-                Assinatura do Responsavel entrega (ALGUEM)
+                Assinatura do Responsavel entrega ({{$venda[0]->vendedor}} - Aços Galan)
     
         </p>
     </div>
