@@ -115,6 +115,8 @@ Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(funct
 	Route::post('/sold', 'SellingController@sold')->name('vendas.sold');
 	Route::post('/closeSelling', 'SellingController@closeSelling')->name('vendas.closeSelling');
 
+	Route::get('/vendaPDF/{id}', 'PDFController@vendaConcluidaPdf')->name('venda.pdf');
+
 	Route::get('orcamento', function() {
 		return view('movimentacao.orcamento');
 	});

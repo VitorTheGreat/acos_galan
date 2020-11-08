@@ -114,7 +114,7 @@ class CartController extends Controller
 
         $preco_venda = ($product->preco_venda * ((float) $t['tabela'] / 100)) + $product->preco_venda;
 
-        // dd('cart', $cart);
+        // dd('cart', $cart, auth()->user()->storage_id);
 
         if (!$cart) {
 
@@ -127,6 +127,7 @@ class CartController extends Controller
                     'product_id' => (int) $product->id,
                     'quantidade' => (float) $request->quantidade,
                     'sub_total_produto' => (float) $request->quantidade * $preco_venda,
+                    'storage_id' => auth()->user()->storage_id,
                     'sellings_id' => (int) $sellings_id
                 ]
             ];

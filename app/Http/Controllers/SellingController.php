@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\SellingRequest;
-
+use App\Models\Control_storage;
 use App\Models\Selling;
 use App\Models\Customer;
 use App\Models\Product;
-
+use App\Models\SellingItem;
+use App\Models\State;
 //using for the db views
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,7 @@ class SellingController extends Controller
 
         $customers = Customer::all();
         // $products = Product::all();
+        $states = State::all();
         $products = DB::select('SELECT * FROM selling_product_info_view WHERE estoque_id = ' . auth()->user()->storage_id);
 
         $selling = Selling::where('status_venda','venda_aberta')
@@ -31,7 +33,7 @@ class SellingController extends Controller
                             ->orderBy('id', 'DESC')
                             ->first();
 
-        return view('movimentacao.vendas.selling', compact('customers', 'selling', 'products'));
+        return view('movimentacao.vendas.selling', compact('customers', 'selling', 'products', 'states'));
     }
 
     /**
@@ -66,9 +68,11 @@ class SellingController extends Controller
 
     public function closeSelling(Request $request) {
         $cart = session()->get('cart', []);
-
-        $customerData = $request->only(['nome_cliente', 'endereco_cliente', 'telefone_cliente', 'documento_cliente']);
-
+        
+        $customerData = $request->only(['nome', 'endereco', 'telefone', 'cpf', 'rg', 'email', 'celular', 'bairro', 'cep', 'cidade', 'states_id']);
+        
+        // dd($customerData);
+        
         $subTotal_venda = 0;
         
         foreach ($cart as $key => $item) {
@@ -85,7 +89,51 @@ class SellingController extends Controller
     public function sold(Request $request) {
         $cart = session()->get('cart', []);
 
-        dd($request->all(), $cart);
+        $customerData = $request->only(['nome', 'endereco', 'telefone', 'cpf', 'rg', 'email', 'celular', 'bairro', 'cep', 'cidade', 'states_id']);
+        $paidValues = $request->only(['metodo_pagamento', 'desconto', 'valor_pago', 'sub_total_real', 'sub_total', 'troco']);
+
+        // dd($cart, $customerData, $paidValues);
+
+        try {
+            
+            $customer = Customer::create($customerData);
+
+            foreach ($cart as $key => $item) {
+                $sellingItem = SellingItem::create([
+                    'quantidade' => $item['quantidade'],
+                    'sub_total_produto' => $item['sub_total_produto'],
+                    'tabela' => $item['tabela'],
+                    'product_id' => $item['product_id'],
+                    'storage_id' => $item['storage_id'],
+                    'sellings_id' => $item['sellings_id']
+                ]);
+
+                $productUpdate = Control_storage::where('id', $item['product_id'])
+                                                    ->where('storage_id', $item['storage_id'])
+                                                    ->decrement('quantidade', $item['quantidade']);
+            }
+
+            $selling = Selling::where('id', $cart[1]['sellings_id'])
+                                ->update([
+                                    'metodo_pagamento' => $paidValues['metodo_pagamento'],
+                                    'valor_pago' => $paidValues['valor_pago'],
+                                    'valor_desconto' => $paidValues['desconto'],
+                                    'preco_total_desconto' => $paidValues['sub_total'],
+                                    'total' => $paidValues['sub_total_real'],
+                                    'troco' => $paidValues['troco'],
+                                    'status_venda' => 'venda_fechada',
+                                    'customer_id' => $customer->id
+                                ]);
+
+            $request->session()->forget('cart');
+
+            return redirect()->route('venda.pdf', ['id' => $cart[1]['sellings_id']]);
+
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
 
         // return view('movimentacao.vendas.sold');
     }

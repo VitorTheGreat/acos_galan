@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Selling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
@@ -31,5 +32,16 @@ class PDFController extends Controller
         $pdf = PDF::loadView('produto.transfer_order_pdf', compact('transfer'));
 
         return $pdf->setPaper('a4')->stream('ordem_de_transferencia.pdf');
+    }
+
+    public function vendaConcluidaPdf($id) {
+
+        $venda = Selling::find($id);
+
+        $pdf = PDF::loadView('movimentacao.vendas.sold', compact('venda'));
+
+        return $pdf->setPaper('a4')->stream('venda.pdf');
+
+        // $venda = DB::table('vendas_view')->select('*')->where('id', '=', $id)->get();
     }
 }

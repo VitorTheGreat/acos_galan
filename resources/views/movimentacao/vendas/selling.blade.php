@@ -68,7 +68,7 @@
                     <div class="card-body">
                             <div class="row">
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title">Produto(s)</h4>
@@ -199,19 +199,54 @@
                                     @csrf
                                     @if ($selling->customer_id === 1)
                                     <h5>Dados Cliente</h5>
+                                    <h5>Dados Pessoais</h5>
+                                    <div class="form-row">
+                                      <div class="col">
+                                        <input type="text" class="form-control" placeholder="Nome" name="nome" id="nome">
+                                      </div>
+                                      <div class="col">
+                                        <input type="text" class="form-control" placeholder="CPF" name="cpf" id="cpf">
+                                      </div>
+                                      <div class="col">
+                                        <input type="text" class="form-control" placeholder="RG" name="rg" id="rg">
+                                      </div>
+                                    </div>
                                     <div class="form-row">
                                         <div class="col">
-                                            <input type="text" class="form-control" placeholder="Nome" name="nome_cliente">
+                                            <input type="text" class="form-control" placeholder="E-mail" name="email" id="email">
+                                          </div>
+                                      <div class="col">
+                                        <input type="text" class="form-control" placeholder="Telefone" name="telefone" id="telefone">
+                                      </div>
+                                      <div class="col">
+                                        <input type="text" class="form-control" placeholder="Celular" name="celular" id="celular">
+                                      </div>
+                                    </div>
+                                    <br>
+                                    <h5>Endereço</h5>
+                                    <div class="form-row">
+                                        <div class="col">
+                                          <input type="text" class="form-control" placeholder="Endereço (ex: Rua)" name="endereco" id="endereco" required>
                                         </div>
                                         <div class="col">
-                                            <input type="text" class="form-control" placeholder="Endereço" name="endereco_cliente">
+                                          <input type="text" class="form-control" placeholder="Bairro" name="bairro" id="bairro" required>
                                         </div>
                                         <div class="col">
-                                            <input type="text" class="form-control" placeholder="Telefone" name="telefone_cliente">
+                                          <input type="text" class="form-control" placeholder="CEP" name="cep" id="cep">
                                         </div>
                                         <div class="col">
-                                            <input type="text" class="form-control" placeholder="Documento (RG ou CPF)" name="documento_cliente">
+                                            <input type="text" class="form-control" placeholder="Cidade" name="cidade" id="cidade">
                                         </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-1 form-group">
+                                            <label for="exampleFormControlSelect1">Estado/UF</label>
+                                            <select class="form-control" data-style="btn btn-link" id="states_id" name="states_id">
+                                              @foreach ($states as $key => $state)
+                                                <option value="{{$state->id}}">{{$state->name}}</option>
+                                              @endforeach
+                                            </select>
+                                          </div>
                                     </div>
                                     @endif
                                     <br/>

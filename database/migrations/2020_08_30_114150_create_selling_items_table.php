@@ -18,6 +18,10 @@ class CreateSellingItemsTable extends Migration
             $table->float('quantidade', 8, 2);
             $table->float('sub_total_produto', 8, 2);
             $table->float('tabela', 8, 2);
+            $table->unsignedBigInteger('storage_id');
+            $table->foreign('storage_id')
+                  ->references('id')->on('storages')
+                  ->constrained();
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')
                   ->references('id')->on('products')

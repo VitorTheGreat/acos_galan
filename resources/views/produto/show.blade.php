@@ -385,7 +385,7 @@
                             <br />
                             <form action="{{route('transfer.open')}}" method="POST">
                                 @csrf
-                                <h5><strong>Estoque a enviar:</strong> {{$prod_storage->estoque}} - Estoque disponivel: {{$prod_storage->quantidade}}</h5>
+                                <h5><strong>Estoque a enviar:</strong> {{$prod_storage->estoque}} - Estoque disponivel: <span style="font-size: 30px;">{{$prod_storage->quantidade}}</span></h5>
                                 <input type="text" id="responsavel_retira" class="form-control" placeholder="Responsavel a Retirar" name="responsavel_retira" required>
                                 <div class="form-row no-wrap">
                                     <div class="col-4">

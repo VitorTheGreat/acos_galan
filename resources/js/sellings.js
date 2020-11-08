@@ -61,4 +61,5 @@ $(document).ready(() => {
     calcTotal($('#tabela').val()/100)
     $('span.percentage').text(`${$('#tabela').val()}%`)
 
+
 })
