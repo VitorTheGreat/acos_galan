@@ -102,7 +102,7 @@ class SellingController extends Controller
         try {
             
             if(!$customer) {
-                Customer::create($customerData);
+                $customer = Customer::create($customerData);
             }
 
             foreach ($cart as $key => $item) {
