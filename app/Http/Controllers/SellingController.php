@@ -137,7 +137,7 @@ class SellingController extends Controller
 
             $request->session()->forget('cart');
 
-            return redirect()->route('venda.pdf', ['id' => $cart[1]['sellings_id']]);
+            return redirect()->route('venda.pdf', ['id' => $sellingId]);
 
 
         } catch (\Exception $e) {
