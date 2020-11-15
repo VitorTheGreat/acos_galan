@@ -117,11 +117,13 @@ class SellingController extends Controller
                     'sellings_id' => $item['sellings_id']
                 ]);
 
+                $sellingId = $item['sellings_id'];
+
                 Control_storage::where('produto_id', $item['product_id'])->where('storage_id', $item['storage_id'])->decrement('quantidade', $item['quantidade']);
 
             }
 
-            Selling::where('id', $cart[1]['sellings_id'])
+            Selling::where('id', $sellingId)
                                 ->update([
                                     'metodo_pagamento' => $paidValues['metodo_pagamento'],
                                     'valor_pago' => $paidValues['valor_pago'],
