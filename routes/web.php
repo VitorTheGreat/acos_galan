@@ -117,9 +117,10 @@ Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(funct
 
 	Route::get('/vendaPDF/{id}', 'PDFController@vendaConcluidaPdf')->name('venda.pdf');
 
-	Route::get('orcamento', function() {
-		return view('movimentacao.orcamento');
-	});
+	Route::get('/orcamento', 'SellingController@orcamento')->name('orcamento');
+	Route::post('/orcamento/closeOrcamento/{id}', 'SellingController@closeOrcamento')->name('orcamento.close');
+	Route::post('/orcamento/finishOrcamento/{id}', 'SellingController@finishOrcamento')->name('orcamento.finish');
+
 	Route::get('trocas', function() {
 		return view('movimentacao.trocas');
 	});
@@ -132,6 +133,11 @@ Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(funct
 	Route::get('saida-caixa', function() {
 		return view('movimentacao.saidaCaixa');
 	});
+});
+
+//Relatórios
+Route::middleware(['middleware' => 'auth'])->prefix('relatorios')->group(function() {
+	Route::get('/', 'RelatoriosController@index')->name('relatorios');
 });
 
 

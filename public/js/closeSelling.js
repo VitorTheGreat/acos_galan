@@ -101,8 +101,8 @@ $(document).ready(function () {
     $('.sub_total span').text(sub_total - parseFloat($(this).val()));
   });
   $('#valor_pago').keyup(function () {
-    $('#troco').val(parseFloat($(this).val()) - parseFloat($('#sub_total').val()));
-    $('.troco span').text(parseFloat($(this).val()) - parseFloat($('#sub_total').val()));
+    $('#troco').val((parseFloat($(this).val()) - parseFloat($('#sub_total').val())).toFixed(2));
+    $('.troco span').text((parseFloat($(this).val()) - parseFloat($('#sub_total').val())).toFixed(2));
   });
 });
 

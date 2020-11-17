@@ -90,62 +90,159 @@ class SellingController extends Controller
     }
 
     public function sold(Request $request) {
-        $cart = session()->get('cart', []);
 
+        $button = $request->input('btn_selling');
+        
+        $cart = session()->get('cart', []);
         $customerData = $request->only(['nome', 'endereco', 'telefone', 'cpf', 'rg', 'email', 'celular', 'bairro', 'cep', 'cidade', 'states_id']);
         $paidValues = $request->only(['metodo_pagamento', 'desconto', 'valor_pago', 'sub_total_real', 'sub_total', 'troco']);
-
         $customer = Customer::where('cpf', $customerData['cpf'])->get()->first();
-
-        // dd($cart, $customerData, $paidValues, $customer);
-
-        try {
+        
+        if($button == 'close_selling') {
             
-            if(!$customer) {
-                $customer = Customer::create($customerData);
+            try {
+                
+                if(!$customer) {
+                    $customer = Customer::create($customerData);
+                }
+
+                foreach ($cart as $key => $item) {
+                    SellingItem::create([
+                        'quantidade' => $item['quantidade'],
+                        'sub_total_produto' => $item['sub_total_produto'],
+                        'preco_base' => $item['preco_base'],
+                        'preco_venda_final' => $item['preco_venda'],
+                        'tabela' => $item['tabela'],
+                        'product_id' => $item['product_id'],
+                        'storage_id' => $item['storage_id'],
+                        'sellings_id' => $item['sellings_id']
+                    ]);
+
+                    $sellingId = $item['sellings_id'];
+
+                    Control_storage::where('produto_id', $item['product_id'])->where('storage_id', $item['storage_id'])->decrement('quantidade', $item['quantidade']);
+
+                }
+
+                Selling::where('id', $sellingId)
+                                    ->update([
+                                        'metodo_pagamento' => $paidValues['metodo_pagamento'],
+                                        'valor_pago' => $paidValues['valor_pago'],
+                                        'valor_desconto' => $paidValues['desconto'],
+                                        'preco_total_desconto' => $paidValues['sub_total'],
+                                        'total' => $paidValues['sub_total_real'],
+                                        'troco' => $paidValues['troco'],
+                                        'status_venda' => 'venda_fechada',
+                                        'customer_id' => $customer->id
+                                    ]);
+
+                $request->session()->forget('cart');
+
+                return redirect()->route('venda.pdf', ['id' => $sellingId]);
+
+
+            } catch (\Exception $e) {
+                dd($e);
             }
+        }
+        else if($button == 'save_budget') {
+            try {
+                
+                if(!$customer) {
+                    $customer = Customer::create($customerData);
+                }
 
-            foreach ($cart as $key => $item) {
-                SellingItem::create([
-                    'quantidade' => $item['quantidade'],
-                    'sub_total_produto' => $item['sub_total_produto'],
-                    'preco_base' => $item['preco_base'],
-                    'preco_venda_final' => $item['preco_venda'],
-                    'tabela' => $item['tabela'],
-                    'product_id' => $item['product_id'],
-                    'storage_id' => $item['storage_id'],
-                    'sellings_id' => $item['sellings_id']
-                ]);
+                foreach ($cart as $key => $item) {
+                    SellingItem::create([
+                        'quantidade' => $item['quantidade'],
+                        'sub_total_produto' => $item['sub_total_produto'],
+                        'preco_base' => $item['preco_base'],
+                        'preco_venda_final' => $item['preco_venda'],
+                        'tabela' => $item['tabela'],
+                        'product_id' => $item['product_id'],
+                        'storage_id' => $item['storage_id'],
+                        'sellings_id' => $item['sellings_id']
+                    ]);
 
-                $sellingId = $item['sellings_id'];
+                    $sellingId = $item['sellings_id'];
 
-                Control_storage::where('produto_id', $item['product_id'])->where('storage_id', $item['storage_id'])->decrement('quantidade', $item['quantidade']);
+                    // Control_storage::where('produto_id', $item['product_id'])->where('storage_id', $item['storage_id'])->decrement('quantidade', $item['quantidade']);
 
+                }
+
+                Selling::where('id', $sellingId)
+                                    ->update([
+                                        'metodo_pagamento' => $paidValues['metodo_pagamento'],
+                                        'valor_pago' => $paidValues['valor_pago'],
+                                        'valor_desconto' => $paidValues['desconto'],
+                                        'preco_total_desconto' => $paidValues['sub_total'],
+                                        'total' => $paidValues['sub_total_real'],
+                                        'troco' => $paidValues['troco'],
+                                        'status_venda' => 'orcamento',
+                                        'customer_id' => $customer->id
+                                    ]);
+
+                $request->session()->forget('cart');
+
+                return redirect()->route('venda.pdf', ['id' => $sellingId]);
+
+
+            } catch (\Exception $e) {
+                dd($e);
             }
-
-            Selling::where('id', $sellingId)
-                                ->update([
-                                    'metodo_pagamento' => $paidValues['metodo_pagamento'],
-                                    'valor_pago' => $paidValues['valor_pago'],
-                                    'valor_desconto' => $paidValues['desconto'],
-                                    'preco_total_desconto' => $paidValues['sub_total'],
-                                    'total' => $paidValues['sub_total_real'],
-                                    'troco' => $paidValues['troco'],
-                                    'status_venda' => 'venda_fechada',
-                                    'customer_id' => $customer->id
-                                ]);
-
-            $request->session()->forget('cart');
-
-            return redirect()->route('venda.pdf', ['id' => $sellingId]);
-
-
-        } catch (\Exception $e) {
-            dd($e);
         }
 
 
         // return view('movimentacao.vendas.sold');
+    }
+
+
+    public function orcamento() {
+
+        $orcamentos = DB::table('selling_view')->select('*')->where('status_venda', 'orcamento')->where('user_id', auth()->user()->id)->groupBy('id')->get();
+
+        return view('movimentacao.orcamento', compact('orcamentos'));
+    }
+
+    public function closeOrcamento($id) {
+        
+        $orcamento = DB::table('selling_view')->select('*')->where('status_venda', 'orcamento')->where('user_id', auth()->user()->id)->where('id', $id)->get();
+        
+        // dd($orcamento);
+
+        return view('movimentacao.orcamentos.closeOrcamento', compact('orcamento'));
+
+    }
+
+    public function finishOrcamento($id) {
+
+        $orcamento = DB::table('selling_view')->select('*')->where('status_venda', 'orcamento')->where('user_id', auth()->user()->id)->where('id', $id)->get();
+
+        try {
+
+            foreach ($orcamento as $key => $item) {
+                $sellingId = $item->id;
+                
+                Control_storage::where('produto_id', $item->product_id)->where('storage_id', $item->storage_id)->decrement('quantidade', $item->quantidade);
+    
+            }
+    
+            Selling::where('id', $sellingId)
+                                ->update([
+                                    'metodo_pagamento' => $orcamento[0]->metodo_pagamento,
+                                    'valor_pago' => $orcamento[0]->valor_pago,
+                                    'valor_desconto' => $orcamento[0]->valor_desconto,
+                                    'preco_total_desconto' => $orcamento[0]->preco_total_desconto,
+                                    'total' => $orcamento[0]->total,
+                                    'troco' => $orcamento[0]->troco,
+                                    'status_venda' => 'venda_fechada',
+                                    'customer_id' => $orcamento[0]->customer_id
+                                ]);
+    
+            return redirect()->route('venda.pdf', ['id' => $sellingId]);
+        } catch (\Exception $e) {
+            dd($e);
+        }
     }
 
     /**

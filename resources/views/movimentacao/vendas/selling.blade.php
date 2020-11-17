@@ -262,7 +262,6 @@
                                     <br/>
                                 
                                     <button type="submit" class="btn btn-success"> Fechar Venda </button>
-                                    <button class="btn btn-info"> Salvar Orçamento </button>
 
                             </form>
 

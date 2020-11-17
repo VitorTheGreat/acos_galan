@@ -39,23 +39,23 @@
                     <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h4>Conclusão Venda</h4>
-                                    <form action="{{route('vendas.sold')}}" method="POST">
+                                    <h4>Conclusão Venda - Orçamento</h4>
+                                    <form action="{{route('orcamento.finish', ['id' => $orcamento[0]->id])}}" method="POST">
                                         @method('POST')
                                         @csrf
                                             <h4>Cliente</h4>
                                             <table class="table">
-                                                <input type="hidden" name="nome" value="{{$customerData['nome']}}">
-                                                <input type="hidden" name="endereco" value="{{$customerData['endereco']}}">
-                                                <input type="hidden" name="telefone" value="{{$customerData['telefone']}}">
-                                                <input type="hidden" name="cpf" value="{{$customerData['cpf']}}">
-                                                <input type="hidden" name="rg" value="{{$customerData['rg']}}">
-                                                <input type="hidden" name="email" value="{{$customerData['email']}}">
-                                                <input type="hidden" name="celular" value="{{$customerData['celular']}}">
-                                                <input type="hidden" name="bairro" value="{{$customerData['bairro']}}">
-                                                <input type="hidden" name="cep" value="{{$customerData['cep']}}">
-                                                <input type="hidden" name="cidade" value="{{$customerData['cidade']}}">
-                                                <input type="hidden" name="states_id" value="{{$customerData['states_id']}}">
+                                                {{-- <input type="hidden" name="nome" value="{{$orcamento[0]->nome}}">
+                                                <input type="hidden" name="endereco" value="{{$orcamento[0]->endereco}}">
+                                                <input type="hidden" name="telefone" value="{{$orcamento[0]->telefone}}"> --}}
+                                                <input type="hidden" name="cpf" value="{{$orcamento[0]->cpf}}">
+                                                {{-- <input type="hidden" name="rg" value="0000">
+                                                <input type="hidden" name="email" value="noemail@.com">
+                                                <input type="hidden" name="celular" value="{{$orcamento[0]->celular}}">
+                                                <input type="hidden" name="bairro" value="{{$orcamento[0]->bairro}}">
+                                                <input type="hidden" name="cep" value="{{$orcamento[0]->cep}}">
+                                                <input type="hidden" name="cidade" value="{{$orcamento[0]->cidade}}">
+                                                <input type="hidden" name="states_id" value="1"> --}}
                                                     <thead>
                                                         <tr>
                                                             <th><strong>Nome</strong></th>
@@ -66,10 +66,10 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td><strong>{{$customerData['nome']}}</strong></td>
-                                                            <td><strong>{{$customerData['endereco']}} - {{$customerData['bairro']}} - {{$customerData['cep']}} - {{$customerData['cidade']}}</strong></td>
-                                                            <td><strong>{{$customerData['telefone']}} - {{$customerData['celular']}}</strong></td>
-                                                            <td><strong>{{$customerData['cpf']}}</strong></td>
+                                                            <td><strong>{{$orcamento[0]->nome}}</strong></td>
+                                                            <td><strong>{{$orcamento[0]->endereco}} - {{$orcamento[0]->bairro}} - {{$orcamento[0]->cep}} - {{$orcamento[0]->cidade}}</strong></td>
+                                                            <td><strong>{{$orcamento[0]->telefone}} - {{$orcamento[0]->celular}}</strong></td>
+                                                            <td><strong>{{$orcamento[0]->cpf}}</strong></td>
                                                         </tr>
                                                     </tbody>
                                             </table>
@@ -85,12 +85,12 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($cart as $key =>  $item)
+                                                        @foreach ($orcamento as $key =>  $item)
                                                             <tr>
-                                                                <td><strong>{{$item['product_name']}}</strong></td>
-                                                                <td><strong>{{$item['preco_venda']}}</strong></td>
-                                                                <td><strong>{{$item['quantidade']}}</strong></td>
-                                                                <td><strong>{{$item['sub_total_produto']}}</strong></td>
+                                                                <td><strong>{{$item->descricao}}</strong></td>
+                                                                <td><strong>{{$item->preco_venda_final}}</strong></td>
+                                                                <td><strong>{{$item->quantidade}}</strong></td>
+                                                                <td><strong>{{$item->sub_total_produto}}</strong></td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>
@@ -101,6 +101,8 @@
                                             <div class="row">
                                                 <div class="col-2">
                                                     <select class="form-control" data-style="btn btn-link" name="metodo_pagamento" id="metodo_pagamento">
+                                                    <option value="{{$orcamento[0]->metodo_pagamento}}">{{$orcamento[0]->metodo_pagamento}}</option>
+                                                    <option disabled> </option>
                                                         <option value="Cartão de Crédito 1x">Cartão de Crédito 1x</option>
                                                         <option value="Cartão de Crédito 2x">Cartão de Crédito 2x</option>
                                                         <option value="Cartão de Crédito 3x">Cartão de Crédito 3x</option>
@@ -111,15 +113,20 @@
                                                     </select>
                                                 </div>
                                                 <div class="col">
-                                                    <div>Desconto: <input type="number" name="desconto" id="desconto" min="0" step="0.01" value="0" /></div> <br />
+                                                    <div>Desconto: 
+                                                    <input type="number" name="desconto" id="desconto" min="0" step="0.01" value="{{$orcamento[0]->valor_desconto}}" /></div> <br />
                                                 </div>
                                                 <div class="col">
-                                                <div>Valor Pago: <input type="number" name="valor_pago" id="valor_pago" value="{{$sub_total}}"step="0.01" required /></div> <br />
+                                                <div>Valor Pago:
+                                                     <input type="number" name="valor_pago" id="valor_pago" value="{{$orcamento[0]->valor_pago}}"step="0.01" required />
+                                                    </div> <br />
                                                 </div>
                                                 <div class="col">
-                                                    <input type="number" hidden value="{{$sub_total}}" name="sub_total_real" />
-                                                    <input type="number" name="sub_total" id="sub_total" data-sub-total-real="{{$sub_total}}" value="{{$sub_total}}" step="0.01" hidden />
-                                                    <h4 class="sub_total"><strong>Total: <span>{{$sub_total}}</span></h4>
+                                                    <input type="number" hidden value="{{$orcamento[0]->preco_total_desconto}}" name="sub_total_real" />
+                                                    <input type="number" name="sub_total" id="sub_total" data-sub-total-real="{{$orcamento[0]->preco_total_desconto}}" value="{{$orcamento[0]->preco_total_desconto}}" step="0.01" hidden />
+                                                    <h4 class="sub_total"><strong>Total: 
+                                                        <span>{{$orcamento[0]->preco_total_desconto}}</span>
+                                                    </h4>
                                                 </div>
                                                 <div class="col">
                                                     <input type="number" name="troco" id="troco" value="0" step="0.01" hidden />
@@ -131,7 +138,7 @@
                                         <br />
                                         
                                             <button type="submit" class="btn btn-success" name="btn_selling" value="close_selling" id="close_selling">Fechar Venda</button>
-                                            <button type="submit" class="btn btn-info" name="btn_selling" value="save_budget" id="save_budget"> Salvar Orçamento </button>
+                                            {{-- <button type="submit" class="btn btn-info" name="btn_selling" value="save_budget" id="save_budget"> Salvar Orçamento </button> --}}
                                         </form>
                                 </div>
                             </div>

@@ -50,7 +50,11 @@ table.greyGridTable tfoot td {
 </style>
 
 <body>
-    <h1>Venda Concluida - Aços Galan</h1>
+  @if ($venda[0]->status_venda == 'venda_fechada')
+  <h1>Venda Concluida - Aços Galan</h1>
+  @elseif ($venda[0]->status_venda == 'orcamento')
+  <h1>Orçamento - Aços Galan</h1>
+  @endif
     <hr />
 
     <div>
