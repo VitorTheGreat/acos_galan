@@ -104,6 +104,11 @@ $(document).ready(function () {
     $('#troco').val((parseFloat($(this).val()) - parseFloat($('#sub_total').val())).toFixed(2));
     $('.troco span').text((parseFloat($(this).val()) - parseFloat($('#sub_total').val())).toFixed(2));
   });
+  $('#save_budget, #close_selling').on('click', function () {
+    setTimeout(function () {
+      window.location.href = '/movimentacao/vendas';
+    }, 600);
+  });
 });
 
 /***/ }),

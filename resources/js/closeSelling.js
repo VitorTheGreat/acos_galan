@@ -13,4 +13,9 @@ $(document).ready(function() {
         $('.troco span').text( (parseFloat($(this).val()) - parseFloat($('#sub_total').val())).toFixed(2) )
     })
 
+    $('#save_budget, #close_selling').on('click', function() {
+        setTimeout(() => {
+            window.location.href = '/movimentacao/vendas';
+        }, 600);
+    })
 })

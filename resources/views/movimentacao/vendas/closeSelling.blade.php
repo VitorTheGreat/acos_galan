@@ -40,7 +40,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h4>Conclusão Venda</h4>
-                                    <form action="{{route('vendas.sold')}}" method="POST">
+                                    <form action="{{route('vendas.sold')}}" method="POST" target="_blank">
                                         @method('POST')
                                         @csrf
                                             <h4>Cliente</h4>

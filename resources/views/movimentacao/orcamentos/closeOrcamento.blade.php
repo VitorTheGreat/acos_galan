@@ -40,7 +40,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h4>Conclusão Venda - Orçamento</h4>
-                                    <form action="{{route('orcamento.finish', ['id' => $orcamento[0]->id])}}" method="POST">
+                                    <form action="{{route('orcamento.finish', ['id' => $orcamento[0]->id])}}" method="POST" target="_blank">
                                         @method('POST')
                                         @csrf
                                             <h4>Cliente</h4>
