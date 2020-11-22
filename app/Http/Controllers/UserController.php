@@ -69,6 +69,7 @@ class UserController extends Controller
     public function update(UserRequest $request, User  $user)
     {
         $hasPassword = $request->get('password');
+
         $user->update(
             $request->merge(['password' => Hash::make($request->get('password'))])
                 ->except([$hasPassword ? '' : 'password']

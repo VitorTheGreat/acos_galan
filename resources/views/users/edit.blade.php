@@ -8,7 +8,9 @@
           <form method="post" action="{{ route('user.update', $user) }}" autocomplete="off" class="form-horizontal">
             @csrf
             @method('put')
-
+            <input type="hidden" name="role_id" value="{{$user->role_id}}">
+            <input type="hidden" name="storage_id" value="{{$user->storage_id}}">
+            
             <div class="card ">
               <div class="card-header card-header-primary">
                 <h4 class="card-title">{{ __('Edit User') }}</h4>
