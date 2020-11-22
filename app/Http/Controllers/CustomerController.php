@@ -22,9 +22,9 @@ class CustomerController extends Controller
     $states = State::all();
 
     if ($search_query == '') {
-      $customers = Customer::paginate(10);
+      $customers = Customer::orderBy('nome', 'ASC')->paginate(10);
     } else {
-      $customers = DB::table('customers')->where('nome', 'LIKE', '%' . $search_query . '%')->paginate(10);
+      $customers = DB::table('customers')->where('nome', 'LIKE', '%' . $search_query . '%')->orderBy('nome', 'ASC')->paginate(10);
     }
 
     return view('cliente.actions', compact('customers', 'states'));

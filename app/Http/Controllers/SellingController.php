@@ -95,7 +95,7 @@ class SellingController extends Controller
         
         $cart = session()->get('cart', []);
         $customerData = $request->only(['nome', 'endereco', 'telefone', 'cpf', 'rg', 'email', 'celular', 'bairro', 'cep', 'cidade', 'states_id']);
-        $paidValues = $request->only(['metodo_pagamento', 'desconto', 'valor_pago', 'sub_total_real', 'sub_total', 'troco']);
+        $paidValues = $request->only(['metodo_pagamento', 'desconto', 'valor_pago', 'sub_total_real', 'sub_total', 'troco', 'observacao']);
         $customer = Customer::where('cpf', $customerData['cpf'])->get()->first();
         
         if($button == 'close_selling') {
@@ -133,6 +133,7 @@ class SellingController extends Controller
                                         'total' => $paidValues['sub_total_real'],
                                         'troco' => $paidValues['troco'],
                                         'status_venda' => 'venda_fechada',
+                                        'observacao' => $paidValues['observacao'],
                                         'customer_id' => $customer->id
                                     ]);
 
@@ -179,6 +180,7 @@ class SellingController extends Controller
                                         'total' => $paidValues['sub_total_real'],
                                         'troco' => $paidValues['troco'],
                                         'status_venda' => 'orcamento',
+                                        'observacao' => $paidValues['observacao'],
                                         'customer_id' => $customer->id
                                     ]);
 
@@ -214,9 +216,11 @@ class SellingController extends Controller
 
     }
 
-    public function finishOrcamento($id) {
+    public function finishOrcamento(Request $request, $id) {
 
         $orcamento = DB::table('selling_view')->select('*')->where('status_venda', 'orcamento')->where('user_id', auth()->user()->id)->where('id', $id)->get();
+
+        // dd($request->all(), $orcamento);
 
         try {
 
@@ -229,13 +233,14 @@ class SellingController extends Controller
     
             Selling::where('id', $sellingId)
                                 ->update([
-                                    'metodo_pagamento' => $orcamento[0]->metodo_pagamento,
-                                    'valor_pago' => $orcamento[0]->valor_pago,
-                                    'valor_desconto' => $orcamento[0]->valor_desconto,
-                                    'preco_total_desconto' => $orcamento[0]->preco_total_desconto,
-                                    'total' => $orcamento[0]->total,
-                                    'troco' => $orcamento[0]->troco,
+                                    'metodo_pagamento' => $request->metodo_pagamento,
+                                    'valor_pago' => $request->valor_pago,
+                                    'valor_desconto' => $request->desconto,
+                                    'preco_total_desconto' => $request->sub_total,
+                                    'total' => $request->sub_total_real,
+                                    'troco' => $request->troco,
                                     'status_venda' => 'venda_fechada',
+                                    'observacao' => $request->observacao,
                                     'customer_id' => $orcamento[0]->customer_id
                                 ]);
     

@@ -58,7 +58,7 @@ table.greyGridTable tfoot td {
     <hr />
 
     <div>
-        Data: <strong>{{$venda[0]->created_at}}</strong> - Número da venda: <strong>{{$venda[0]->id}}</strong> - Loja: <strong>{{$venda[0]->loja}}</strong> - Vendedor: <strong>{{$venda[0]->vendedor}}</strong>
+        Data: <strong>{{date('d/m/Y h:i:s', strtotime($venda[0]->created_at))}}</strong> - Número da venda: <strong>{{$venda[0]->id}}</strong> - Loja: <strong>{{$venda[0]->loja}}</strong> - Vendedor: <strong>{{$venda[0]->vendedor}}</strong>
     </div>
     
     <br />
@@ -106,6 +106,10 @@ table.greyGridTable tfoot td {
               </tr>
         </table>
 
+        <div>
+          <h4>Observação:</h4>
+        <p>{{$venda[0]->observacao}}</p>
+        </div>
     </div>
     
     <br />

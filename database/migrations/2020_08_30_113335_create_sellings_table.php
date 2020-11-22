@@ -23,6 +23,7 @@ class CreateSellingsTable extends Migration
             $table->string('status_venda', 45);
             $table->string('metodo_pagamento', 100);
             $table->unsignedBigInteger('user_id');
+            $table->string('observacao', 455);
             $table->foreign('user_id')
                   ->references('id')->on('users')
                   ->constrained();

@@ -105,6 +105,14 @@
                                                         <option value="Cartão de Crédito 2x">Cartão de Crédito 2x</option>
                                                         <option value="Cartão de Crédito 3x">Cartão de Crédito 3x</option>
                                                         <option value="Cartão de Crédito 4x">Cartão de Crédito 4x</option>
+                                                        <option value="Cartão de Crédito 5x">Cartão de Crédito 5x</option>
+                                                        <option value="Cartão de Crédito 6x">Cartão de Crédito 6x</option>
+                                                        <option value="Cartão de Crédito 7x">Cartão de Crédito 7x</option>
+                                                        <option value="Cartão de Crédito 8x">Cartão de Crédito 8x</option>
+                                                        <option value="Cartão de Crédito 9x">Cartão de Crédito 9x</option>
+                                                        <option value="Cartão de Crédito 10x">Cartão de Crédito 10x</option>
+                                                        <option value="Transferencia bancaria">Transferencia bancaria</option>
+                                                        <option value="Faturado">Faturado</option>
                                                         <option value="Cartão de Débito">Cartão de Débito</option>
                                                         <option value="Dinheiro / à vista">Dinheiro / à vista</option>
                                                         <option value="Cheque">Cheque</option>
@@ -126,6 +134,13 @@
                                                     <h4 class="troco"><strong>Troco: <span><span></strong></h4>
                                                 </div>
                                                 
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h4 class="troco"><strong>observacao: <span><span></strong></h4>
+                                                    <textarea type="text" name="observacao" id="observacao" /></textarea>
+                                                </div>
                                             </div>
 
                                         <br />
