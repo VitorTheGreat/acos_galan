@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,11 +16,23 @@ class RelatoriosController extends Controller
     public function index()
     {   
 
-        $venda = DB::table('selling_view')->select(DB::raw('sum(sub_total_produto) as total'), 'id')->groupBy('id')->get();
+        //vendas geral é sem filtro
+        $vendas_geral = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->paginate(10);
+        //vendas de hoje - filtro pro data
+        $vendas_hoje = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->whereDate('updated_at', Carbon::today())->paginate(10);
+        //vendas por semana - filtro de data até uma data
+        $vendas_semana = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->whereRaw('WEEKOFYEAR(updated_at) = WEEKOFYEAR(NOW())')->paginate(10);
+        //vendas por mes - filtro de data mensaç
+        $vendas_mes = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->whereRaw('YEAR(updated_at) = YEAR(NOW()) AND MONTH(updated_at)=MONTH(NOW())')->paginate(10);
 
-        dd($venda);
-
-        return view('relatorios.index');
+        
+        $total_vendas_hoje = DB::table('sellings')->select(DB::raw('sum(preco_total_desconto) as total_hoje'))->whereDate('updated_at', Carbon::today())->get()->first();
+        $total_vendas_semana = DB::table('sellings')->select(DB::raw('sum(preco_total_desconto) as total_semana'))->whereRaw('WEEKOFYEAR(updated_at) = WEEKOFYEAR(NOW())')->get()->first();
+        $total_vendas_mes = DB::table('sellings')->select(DB::raw('sum(preco_total_desconto) as total_mes'))->whereRaw('YEAR(updated_at) = YEAR(NOW()) AND MONTH(updated_at)=MONTH(NOW())')->get()->first();
+        
+        // dd($total_vendas_semana);
+        
+        return view('relatorios.index', compact(['vendas_geral', 'vendas_hoje', 'vendas_semana', 'vendas_mes', 'total_vendas_hoje', 'total_vendas_semana', 'total_vendas_mes']));
     }
 
     /**

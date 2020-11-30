@@ -18,8 +18,8 @@
                                             calendar_view_day
                                         </i>
                                     </div>
-                                    <p class="card-category">Vendas desse mês - <strong>NOVEMBRO</strong></p>
-                                    <h3 class="card-title">R$ 50.000,00
+                                <p class="card-category">Vendas desse mês - <strong>{{now()->format('F')}}</strong></p>
+                                    <h3 class="card-title">R$ {{$total_vendas_mes->total_mes}}
                                     </h3>
                                   </div>
                                   <div class="card-footer">
@@ -37,8 +37,8 @@
                                             </i>                                                    
                                     </div>
                                     <p class="card-category">Vendas dessa semana</p>
-                                    <p class="card-category"><strong>01/11/2020 à 07/11/2020</strong></p>
-                                    <h3 class="card-title">R$ 30.000,00</h3>
+                                    <p class="card-category"><strong>{{now()->startOfWeek()->format('d/m/Y')}} à {{now()->endOfWeek()->format('d/m/Y')}}</strong></p>
+                                    <h3 class="card-title">R$ {{$total_vendas_semana->total_semana}}</h3>
                                   </div>
                                   <div class="card-footer">
                                     <div class="stats">
@@ -54,8 +54,8 @@
                                                     today
                                             </i>
                                     </div>
-                                    <p class="card-category">Vendas de hoje</p>
-                                    <h3 class="card-title">R$ 10.000,00</h3>
+                                    <p class="card-category">Vendas de hoje - <strong>{{now()->format('d/m/Y')}} </strong></p>
+                                    <h3 class="card-title">R$ {{$total_vendas_hoje->total_hoje}}</h3>
                                   </div>
                                   <div class="card-footer">
                                     <div class="stats">
@@ -65,6 +65,7 @@
                               </div>
                 </div>
                 <hr />
+
                 <div class="row">
                         <div class="col-md-12">
                                 <div class="card">
@@ -74,7 +75,7 @@
                                       </div>
                                     </div>
                                     <div class="card-body">
-                                            <div class="form-row col-12"> 
+                                            {{-- <div class="form-row col-12"> 
                                                     <form action='#' method="get">
                                                         @csrf
                                                         <input placeholder="Pesquisa" name="search_query" type="text"/>
@@ -85,7 +86,7 @@
                                                             <input hidden name="search_query" type="text" value=""/>
                                                             <button type="submit" class="btn btn-info"/> Mostrar todos </button>
                                                     </form>
-                                                </div>
+                                                </div> --}}
                                             <table class="table">
                                                     <thead>
                                                         <tr>
@@ -95,7 +96,7 @@
                                                             <th>Vendedor - Loja</th>
                                                             <th>Quantidade de Produtos</th>
                                                             <th>Desconto</th>
-                                                            <th>Total Venda</th>
+                                                            <th>Total Venda (c/desconto)</th>
                                                             <th>Valor Pago</th>
                                                             <th>Troco</th>
                                                             <th>Metodo Pagamento</th>
@@ -103,27 +104,29 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>07/11/2020</td>
-                                                            <td>Vitor</td>
-                                                            <td>Shigueo - Loja 2</td>
-                                                            <td>5 produtos</td>
-                                                            <td>R$ 00,00</td>
-                                                            <td>R$ 50,00</td>
-                                                            <td>R$ 50,00</td>
-                                                            <td>R$ 00,00</td>
-                                                            <td>Dinheiro á vista</td>
-                                                            <td class="td-actions text-right">
-                                                                    <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                                                                        <i class="material-icons">receipt</i>
-                                                                    </button>
-                                                                </td>
-                           
-                                                        </tr>
-                                                     
+                                                        @foreach ($vendas_geral as $key => $venda)
+                                                            <tr>
+                                                                <td>{{$venda->id}}</td>
+                                                                <td>{{$venda->updated_at}}</td>
+                                                                <td>{{$venda->nome}}</td>
+                                                                <td>{{$venda->vendedor}} - {{$venda->loja}}</td>
+                                                                <td>{{$venda->total_produtos}} produto(s)</td>
+                                                                <td>{{$venda->valor_desconto}}</td>
+                                                                <td>{{$venda->total}}</td>
+                                                                <td>{{$venda->valor_pago}}</td>
+                                                                <td>{{$venda->troco}}</td>
+                                                                <td>{{$venda->metodo_pagamento}}</td>
+                                                                <td class="td-actions text-right">
+                                                                        <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                                                                            <i class="material-icons">receipt</i>
+                                                                        </button>
+                                                                    </td>
+                               
+                                                            </tr>
+                                                        @endforeach                                            
                                                     </tbody>
                                                 </table>
+                                                {{ $vendas_geral->links() }}
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +142,7 @@
                                       </div>
                                     </div>
                                     <div class="card-body">
-                                            <div class="form-row col-12"> 
+                                            {{-- <div class="form-row col-12"> 
                                                     <form action='#' method="get">
                                                         @csrf
                                                         <input placeholder="Pesquisa" name="search_query" type="text"/>
@@ -150,7 +153,7 @@
                                                             <input hidden name="search_query" type="text" value=""/>
                                                             <button type="submit" class="btn btn-info"/> Mostrar todos </button>
                                                     </form>
-                                                </div>
+                                                </div> --}}
                                             <table class="table">
                                                     <thead>
                                                         <tr>
@@ -160,7 +163,7 @@
                                                             <th>Vendedor - Loja</th>
                                                             <th>Quantidade de Produtos</th>
                                                             <th>Desconto</th>
-                                                            <th>Total Venda</th>
+                                                            <th>Total Venda (c/desconto)</th>
                                                             <th>Valor Pago</th>
                                                             <th>Troco</th>
                                                             <th>Metodo Pagamento</th>
@@ -168,27 +171,30 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>07/11/2020</td>
-                                                            <td>Vitor</td>
-                                                            <td>Shigueo - Loja 2</td>
-                                                            <td>5 produtos</td>
-                                                            <td>R$ 00,00</td>
-                                                            <td>R$ 50,00</td>
-                                                            <td>R$ 50,00</td>
-                                                            <td>R$ 00,00</td>
-                                                            <td>Dinheiro á vista</td>
-                                                            <td class="td-actions text-right">
-                                                                    <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                                                                        <i class="material-icons">receipt</i>
-                                                                    </button>
-                                                                </td>
-                           
-                                                        </tr>
+                                                            @foreach ($vendas_hoje as $key => $venda)
+                                                            <tr>
+                                                                <td>{{$venda->id}}</td>
+                                                                <td>{{$venda->updated_at}}</td>
+                                                                <td>{{$venda->nome}}</td>
+                                                                <td>{{$venda->vendedor}} - {{$venda->loja}}</td>
+                                                                <td>{{$venda->total_produtos}} produto(s)</td>
+                                                                <td>{{$venda->valor_desconto}}</td>
+                                                                <td>{{$venda->preco_total_desconto}}</td>
+                                                                <td>{{$venda->valor_pago}}</td>
+                                                                <td>{{$venda->troco}}</td>
+                                                                <td>{{$venda->metodo_pagamento}}</td>
+                                                                <td class="td-actions text-right">
+                                                                        <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                                                                            <i class="material-icons">receipt</i>
+                                                                        </button>
+                                                                    </td>
+                               
+                                                            </tr>
+                                                        @endforeach 
                                                      
                                                     </tbody>
                                                 </table>
+                                                {{ $vendas_hoje->links() }}
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +210,7 @@
                                       </div>
                                     </div>
                                     <div class="card-body">
-                                            <div class="form-row col-12"> 
+                                            {{-- <div class="form-row col-12"> 
                                                     <form action='#' method="get">
                                                         @csrf
                                                         <input placeholder="Pesquisa" name="search_query" type="text"/>
@@ -215,7 +221,7 @@
                                                             <input hidden name="search_query" type="text" value=""/>
                                                             <button type="submit" class="btn btn-info"/> Mostrar todos </button>
                                                     </form>
-                                                </div>
+                                                </div> --}}
                                             <table class="table">
                                                     <thead>
                                                         <tr>
@@ -225,7 +231,7 @@
                                                             <th>Vendedor - Loja</th>
                                                             <th>Quantidade de Produtos</th>
                                                             <th>Desconto</th>
-                                                            <th>Total Venda</th>
+                                                            <th>Total Venda (c/desconto)</th>
                                                             <th>Valor Pago</th>
                                                             <th>Troco</th>
                                                             <th>Metodo Pagamento</th>
@@ -233,27 +239,30 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>07/11/2020</td>
-                                                            <td>Vitor</td>
-                                                            <td>Shigueo - Loja 2</td>
-                                                            <td>5 produtos</td>
-                                                            <td>R$ 00,00</td>
-                                                            <td>R$ 50,00</td>
-                                                            <td>R$ 50,00</td>
-                                                            <td>R$ 00,00</td>
-                                                            <td>Dinheiro á vista</td>
-                                                            <td class="td-actions text-right">
-                                                                    <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                                                                        <i class="material-icons">receipt</i>
-                                                                    </button>
-                                                                </td>
-                           
-                                                        </tr>
+                                                            @foreach ($vendas_semana as $key => $venda)
+                                                            <tr>
+                                                                <td>{{$venda->id}}</td>
+                                                                <td>{{$venda->updated_at}}</td>
+                                                                <td>{{$venda->nome}}</td>
+                                                                <td>{{$venda->vendedor}} - {{$venda->loja}}</td>
+                                                                <td>{{$venda->total_produtos}} produto(s)</td>
+                                                                <td>{{$venda->valor_desconto}}</td>
+                                                                <td>{{$venda->preco_total_desconto}}</td>
+                                                                <td>{{$venda->valor_pago}}</td>
+                                                                <td>{{$venda->troco}}</td>
+                                                                <td>{{$venda->metodo_pagamento}}</td>
+                                                                <td class="td-actions text-right">
+                                                                        <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                                                                            <i class="material-icons">receipt</i>
+                                                                        </button>
+                                                                    </td>
+                               
+                                                            </tr>
+                                                        @endforeach 
                                                      
                                                     </tbody>
                                                 </table>
+                                                {{ $vendas_semana->links() }}
                                     </div>
                                 </div>
                             </div>
@@ -269,7 +278,7 @@
                                       </div>
                                     </div>
                                     <div class="card-body">
-                                            <div class="form-row col-12"> 
+                                            {{-- <div class="form-row col-12"> 
                                                     <form action='#' method="get">
                                                         @csrf
                                                         <input placeholder="Pesquisa" name="search_query" type="text"/>
@@ -280,7 +289,7 @@
                                                             <input hidden name="search_query" type="text" value=""/>
                                                             <button type="submit" class="btn btn-info"/> Mostrar todos </button>
                                                     </form>
-                                                </div>
+                                                </div> --}}
                                             <table class="table">
                                                     <thead>
                                                         <tr>
@@ -290,7 +299,7 @@
                                                             <th>Vendedor - Loja</th>
                                                             <th>Quantidade de Produtos</th>
                                                             <th>Desconto</th>
-                                                            <th>Total Venda</th>
+                                                            <th>Total Venda (c/desconto)</th>
                                                             <th>Valor Pago</th>
                                                             <th>Troco</th>
                                                             <th>Metodo Pagamento</th>
@@ -298,17 +307,18 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @foreach ($vendas_mes as $key => $venda)
                                                         <tr>
-                                                            <td>1</td>
-                                                            <td>07/11/2020</td>
-                                                            <td>Vitor</td>
-                                                            <td>Shigueo - Loja 2</td>
-                                                            <td>5 produtos</td>
-                                                            <td>R$ 00,00</td>
-                                                            <td>R$ 50,00</td>
-                                                            <td>R$ 50,00</td>
-                                                            <td>R$ 00,00</td>
-                                                            <td>Dinheiro á vista</td>
+                                                            <td>{{$venda->id}}</td>
+                                                            <td>{{$venda->updated_at}}</td>
+                                                            <td>{{$venda->nome}}</td>
+                                                            <td>{{$venda->vendedor}} - {{$venda->loja}}</td>
+                                                            <td>{{$venda->total_produtos}} produto(s)</td>
+                                                            <td>{{$venda->valor_desconto}}</td>
+                                                            <td>{{$venda->preco_total_desconto}}</td>
+                                                            <td>{{$venda->valor_pago}}</td>
+                                                            <td>{{$venda->troco}}</td>
+                                                            <td>{{$venda->metodo_pagamento}}</td>
                                                             <td class="td-actions text-right">
                                                                     <button type="button" rel="tooltip" class="btn btn-info btn-simple">
                                                                         <i class="material-icons">receipt</i>
@@ -316,9 +326,11 @@
                                                                 </td>
                            
                                                         </tr>
-                                                     
-                                                    </tbody>
-                                                </table>
+                                                    @endforeach 
+                                                 
+                                                </tbody>
+                                            </table>
+                                            {{ $vendas_mes->links() }}
                                     </div>
                                 </div>
                             </div>

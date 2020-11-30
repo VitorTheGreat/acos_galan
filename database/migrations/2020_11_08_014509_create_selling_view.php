@@ -20,7 +20,7 @@ class CreateSellingView extends Migration
             INNER JOIN products AS p ON p.id = si.product_id
             INNER JOIN storages AS s ON s.id = si.storage_id
             INNER JOIN users as u ON u.id = sl.user_id
-            INNER JOIN customers AS c ON c.id = sl.customer_id");
+            INNER JOIN customers AS c ON c.id = sl.customer_id WHERE sl.status_venda = 'venda_fechada'");
     }
 
     /**
