@@ -184,9 +184,9 @@
                                                                 <td>{{$venda->troco}}</td>
                                                                 <td>{{$venda->metodo_pagamento}}</td>
                                                                 <td class="td-actions text-right">
-                                                                        <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                                                                            <i class="material-icons">receipt</i>
-                                                                        </button>
+                                                                        <a rel="tooltip" class="btn btn-info btn-simple" href="{{route('details.venda', ['id' => $venda->id])}}">
+                                                                                <i class="material-icons">receipt</i>
+                                                                            </a>
                                                                     </td>
                                
                                                             </tr>
@@ -252,9 +252,9 @@
                                                                 <td>{{$venda->troco}}</td>
                                                                 <td>{{$venda->metodo_pagamento}}</td>
                                                                 <td class="td-actions text-right">
-                                                                        <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                                                                            <i class="material-icons">receipt</i>
-                                                                        </button>
+                                                                        <a rel="tooltip" class="btn btn-info btn-simple" href="{{route('details.venda', ['id' => $venda->id])}}">
+                                                                                <i class="material-icons">receipt</i>
+                                                                            </a>
                                                                     </td>
                                
                                                             </tr>
@@ -320,9 +320,9 @@
                                                             <td>{{$venda->troco}}</td>
                                                             <td>{{$venda->metodo_pagamento}}</td>
                                                             <td class="td-actions text-right">
-                                                                    <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                                                                        <i class="material-icons">receipt</i>
-                                                                    </button>
+                                                                    <a rel="tooltip" class="btn btn-info btn-simple" href="{{route('details.venda', ['id' => $venda->id])}}">
+                                                                            <i class="material-icons">receipt</i>
+                                                                        </a>
                                                                 </td>
                            
                                                         </tr>
