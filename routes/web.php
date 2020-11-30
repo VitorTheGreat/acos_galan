@@ -138,6 +138,8 @@ Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(funct
 //Relatórios
 Route::middleware(['middleware' => 'auth'])->prefix('relatorios')->group(function() {
 	Route::get('/', 'RelatoriosController@index')->name('relatorios');
+
+	Route::get('/venda/details/{id}', 'RelatoriosController@detailsVenda')->name('details.venda');
 });
 
 

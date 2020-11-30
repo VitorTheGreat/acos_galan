@@ -35,6 +35,15 @@ class RelatoriosController extends Controller
         return view('relatorios.index', compact(['vendas_geral', 'vendas_hoje', 'vendas_semana', 'vendas_mes', 'total_vendas_hoje', 'total_vendas_semana', 'total_vendas_mes']));
     }
 
+    public function detailsVenda($id) {
+        
+        $venda = DB::table('selling_view')->select('*')->where('id', $id)->get();
+
+        // dd($venda);
+
+        return view('relatorios.vendaDetail', compact(['venda']));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
