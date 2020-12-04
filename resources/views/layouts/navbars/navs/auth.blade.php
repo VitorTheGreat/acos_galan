@@ -43,7 +43,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="movimentacaoDropDown">
                     <a class="dropdown-item" href="{{route('relatorios')}}">Relatório de Vendas</a>
-                        <a class="dropdown-item" href="#">Relatórios de Orçamentos</a>
+                    <a class="dropdown-item" href="{{route('relatorios.orcamentos')}}">Relatórios de Orçamentos</a>
                     </div>
                 </li>
             {{-- <li class="nav-item dropdown">

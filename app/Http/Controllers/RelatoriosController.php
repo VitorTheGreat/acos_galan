@@ -17,18 +17,18 @@ class RelatoriosController extends Controller
     {   
 
         //vendas geral é sem filtro
-        $vendas_geral = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->paginate(10);
+        $vendas_geral = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->where('status_venda', 'venda_fechada')->paginate(10);
         //vendas de hoje - filtro pro data
-        $vendas_hoje = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->whereDate('updated_at', Carbon::today())->paginate(10);
+        $vendas_hoje = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->whereDate('updated_at', Carbon::today())->where('status_venda', 'venda_fechada')->paginate(10);
         //vendas por semana - filtro de data até uma data
-        $vendas_semana = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->whereRaw('WEEKOFYEAR(updated_at) = WEEKOFYEAR(NOW())')->paginate(10);
+        $vendas_semana = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->whereRaw('WEEKOFYEAR(updated_at) = WEEKOFYEAR(NOW())')->where('status_venda', 'venda_fechada')->paginate(10);
         //vendas por mes - filtro de data mensaç
-        $vendas_mes = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->whereRaw('YEAR(updated_at) = YEAR(NOW()) AND MONTH(updated_at)=MONTH(NOW())')->paginate(10);
+        $vendas_mes = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->whereRaw('YEAR(updated_at) = YEAR(NOW()) AND MONTH(updated_at)=MONTH(NOW())')->where('status_venda', 'venda_fechada')->paginate(10);
 
         
-        $total_vendas_hoje = DB::table('sellings')->select(DB::raw('sum(preco_total_desconto) as total_hoje'))->whereDate('updated_at', Carbon::today())->get()->first();
-        $total_vendas_semana = DB::table('sellings')->select(DB::raw('sum(preco_total_desconto) as total_semana'))->whereRaw('WEEKOFYEAR(updated_at) = WEEKOFYEAR(NOW())')->get()->first();
-        $total_vendas_mes = DB::table('sellings')->select(DB::raw('sum(preco_total_desconto) as total_mes'))->whereRaw('YEAR(updated_at) = YEAR(NOW()) AND MONTH(updated_at)=MONTH(NOW())')->get()->first();
+        $total_vendas_hoje = DB::table('sellings')->select(DB::raw('sum(preco_total_desconto) as total_hoje'))->whereDate('updated_at', Carbon::today())->where('status_venda', 'venda_fechada')->get()->first();
+        $total_vendas_semana = DB::table('sellings')->select(DB::raw('sum(preco_total_desconto) as total_semana'))->whereRaw('WEEKOFYEAR(updated_at) = WEEKOFYEAR(NOW())')->where('status_venda', 'venda_fechada')->get()->first();
+        $total_vendas_mes = DB::table('sellings')->select(DB::raw('sum(preco_total_desconto) as total_mes'))->whereRaw('YEAR(updated_at) = YEAR(NOW()) AND MONTH(updated_at)=MONTH(NOW())')->where('status_venda', 'venda_fechada')->get()->first();
         
         // dd($total_vendas_semana);
         
@@ -42,6 +42,26 @@ class RelatoriosController extends Controller
         // dd($venda);
 
         return view('relatorios.vendaDetail', compact(['venda']));
+    }
+
+    public function relatoriosOrcamentos() {
+                //orcamentos geral é sem filtro
+                $orcamentos_geral = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->where('status_venda', 'orcamento')->paginate(10);
+                //orcamentos de hoje - filtro pro data
+                $orcamentos_hoje = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->whereDate('updated_at', Carbon::today())->where('status_venda', 'orcamento')->paginate(10);
+                //orcamentos por semana - filtro de data até uma data
+                $orcamentos_semana = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->whereRaw('WEEKOFYEAR(updated_at) = WEEKOFYEAR(NOW())')->where('status_venda', 'orcamento')->paginate(10);
+                //orcamentos por mes - filtro de data mensaç
+                $orcamentos_mes = DB::table('selling_view')->select('*', DB::raw('count(*) as total_produtos'))->groupBy('id')->whereRaw('YEAR(updated_at) = YEAR(NOW()) AND MONTH(updated_at)=MONTH(NOW())')->where('status_venda', 'orcamento')->paginate(10);
+        
+                
+                $total_orcamentos_hoje = DB::table('sellings')->select(DB::raw('sum(preco_total_desconto) as total_hoje'))->whereDate('updated_at', Carbon::today())->where('status_venda', 'orcamento')->get()->first();
+                $total_orcamentos_semana = DB::table('sellings')->select(DB::raw('sum(preco_total_desconto) as total_semana'))->whereRaw('WEEKOFYEAR(updated_at) = WEEKOFYEAR(NOW())')->where('status_venda', 'orcamento')->get()->first();
+                $total_orcamentos_mes = DB::table('sellings')->select(DB::raw('sum(preco_total_desconto) as total_mes'))->whereRaw('YEAR(updated_at) = YEAR(NOW()) AND MONTH(updated_at)=MONTH(NOW())')->where('status_venda', 'orcamento')->get()->first();
+                
+                // dd($total_orcamentos_semana);
+                
+                return view('relatorios.relatoriosOrcamentos', compact(['orcamentos_geral', 'orcamentos_hoje', 'orcamentos_semana', 'orcamentos_mes', 'total_orcamentos_hoje', 'total_orcamentos_semana', 'total_orcamentos_mes']));
     }
 
     /**

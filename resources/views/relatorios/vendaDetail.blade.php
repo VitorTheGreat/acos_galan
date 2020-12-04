@@ -102,7 +102,7 @@
                         </div>
                     </div>
                     <br />
-                <a href="{{'/movimentacao/vendaPDF/'.$venda[0]->id}}" class="btn btn-success" target="_blank">Imprimir Comrovante de venda</a>
+                <a href="{{'/movimentacao/vendaPDF/'.$venda[0]->id}}" class="btn btn-info" target="_blank">Imprimir Comprovante de venda/Orçamento</a>
                 </div>
             </div>
         </div>

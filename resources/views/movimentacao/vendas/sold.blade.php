@@ -48,7 +48,6 @@ table.greyGridTable tfoot td {
   font-size: 16px;
 }
 </style>
-
 <body>
   @if ($venda[0]->status_venda == 'venda_fechada')
   <h1>Venda Concluida - Aços Galan</h1>
