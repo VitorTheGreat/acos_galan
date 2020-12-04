@@ -23,7 +23,7 @@ class SellingController extends Controller
     public function index()
     {
 
-        $customers = Customer::all();
+        $customers = Customer::orderBy('nome')->get();
         // $products = Product::all();
         $states = State::all();
         $products = DB::select('SELECT * FROM selling_product_info_view WHERE estoque_id = ' . auth()->user()->storage_id);
