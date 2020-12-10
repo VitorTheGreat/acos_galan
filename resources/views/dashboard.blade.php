@@ -65,16 +65,16 @@
                       <td>{{$transfer->status_transferencia}}</td>
                       <td class="td-actions">
                         @if ($transfer->status_transferencia == 'ordem_aberta')
-                            <form action="{{route('transfer.close', ['transfer' => $transfer->id])}}" method="post">
+                            <form action="{{route('transfer.close', ['transfer' => $transfer->id])}}" method="post" target="_blank">
                             @method('PATCH')
                                 @csrf
                                 <input type="text" name="responsavel_entrega" placeholder="Responsavel pela Entrega" required>
-                                <button type="submit" rel="tooltip" class="btn btn-success" title="Fechar Ordem">
+                                <button type="submit" rel="tooltip" class="btn btn-success" id="closeTransfer_btn" title="Fechar Ordem">
                                     <i class="material-icons">done</i>
                                 </button>
                             </form>
                         @elseif($transfer->status_transferencia == 'ordem_fechada')
-                        <form action="{{route('transfer.pdf', ['transfer' => $transfer->id])}}" method="get">
+                        <form action="{{route('transfer.pdf', ['transfer' => $transfer->id])}}" method="get" target="_blank">
                             @csrf
                             <button type="submit" rel="tooltip" class="btn btn-warning" title="Imprimir Ordem">
                                 <i class="material-icons">print</i>
@@ -176,5 +176,12 @@
       // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
     });
+
+    $('#closeTransfer_btn').on('click', function(e) {
+        // console.log(e.currentTarget)
+        setTimeout(() => {
+          document.location.reload(true);
+        }, 600);
+    })
   </script>
 @endpush

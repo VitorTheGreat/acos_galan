@@ -46,9 +46,9 @@
                                 <div class="col">
                                     <button type="submit" class="btn btn-info">Abrir Venda</button>
                                 </div>
-                                <div class="col">
+                                <div class="col-12">
                                     <label for="customer_id">Cliente</label>
-                                    <select class="form-control" data-style="btn btn-link" id="customer_id" name="customer_id">
+                                    <select style="font-size: 18px" class="form-control" data-style="btn btn-link" id="customer_id" name="customer_id">
                                         @foreach ($customers as $key => $customer)
                                         <option value="{{$customer->id}}">{{$customer->nome}}</option>
                                         @endforeach

@@ -24,7 +24,7 @@ class CustomerController extends Controller
     if ($search_query == '') {
       $customers = Customer::orderBy('nome', 'ASC')->paginate(10);
     } else {
-      $customers = DB::table('customers')->where('nome', 'LIKE', '%' . $search_query . '%')->orderBy('nome', 'ASC')->paginate(10);
+      $customers = DB::table('customers')->where('nome', 'LIKE', '%' . $search_query . '%')->orderBy('nome', 'ASC')->paginate(20);
     }
 
     return view('cliente.actions', compact('customers', 'states'));

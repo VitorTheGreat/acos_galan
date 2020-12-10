@@ -73,13 +73,17 @@ class TransferController extends Controller
   public function closeTransferOrder(Transfer $transfer)
   {
     
+    
     try {
       // dd($transfer);
 
       //close the transfer order
-      Transfer::where('id', $transfer->id)->update(['status_transferencia' => 'ordem_fechada', 'responsavel_entrega' => request()->responsavel_entrega]);
+      Transfer::where('id', $transfer->id)->update(['status_transferencia' => 'ordem_fechada', 'responsavel_entrega' => request()->rxitesponsavel_entrega]);
 
+
+      //!TODO - When the product does not exist in the control_storage, create it and add the new value
       //add the product quantity to the new storage (who is receiving the product = 'estoque_recebe')
+      
       Control_storage::where('produto_id', $transfer->prod_id)->where('storage_id', $transfer->estoque_recebe)->increment('quantidade', $transfer->qtd_prod);
 
       return redirect()->route('transfer.pdf', ['transfer' => $transfer]);

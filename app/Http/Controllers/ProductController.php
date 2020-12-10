@@ -29,9 +29,9 @@ class ProductController extends Controller
     $product_within_storages = DB::select('SELECT * FROM product_quantity_by_storage_view ORDER BY descricao'); // view with total sum of total products
 
     if ($search_query == '') {
-      $products_view = DB::table('product_total_quantity_view')->orderBy('descricao', 'ASC')->paginate(10);
+      $products_view = DB::table('product_total_quantity_view')->orderBy('descricao', 'ASC')->paginate(20);
     } else {
-      $products_view = DB::table('product_total_quantity_view')->where('descricao', 'LIKE', '%' . $search_query . '%')->orderBy('descricao', 'ASC')->paginate(10);
+      $products_view = DB::table('product_total_quantity_view')->where('descricao', 'LIKE', '%' . $search_query . '%')->orderBy('descricao', 'ASC')->paginate(20);
     }
 
     return view('produto.actions', compact('products_view', 'suppliers', 'storages', 'product_within_storages'));
