@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <h1>Relatórios dos Orçamentos</h1>
                 <hr />
-
+                @if (auth()->user()->role_id == 1)
                 <div class="row">
                         <div class="col-md-4">
                                 <div class="card card-stats">
@@ -65,6 +65,7 @@
                               </div>
                 </div>
                 <hr />
+                @endif
 
                 <div class="row">
                         <div class="col-md-12">
