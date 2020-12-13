@@ -8,13 +8,9 @@
     margin: 0;
     padding: 0px;
   }
-h1, p{
-    text-align: center;
-}
 table.greyGridTable {
   border: 0.8px solid #000000;
   width: 100%;
-  text-align: center;
   border-collapse: collapse;
 }
 table.greyGridTable td, table.greyGridTable th {
@@ -35,7 +31,6 @@ table.greyGridTable thead th {
   font-size: 16px;
   font-weight: bold;
   color: #333333;
-  text-align: center;
   border-left: 2px solid #333333;
 }
 table.greyGridTable thead th:first-child {
@@ -50,9 +45,6 @@ table.greyGridTable tfoot {
 }
 table.greyGridTable tfoot td {
   font-size: 16px;
-}
-.row table {
-  text-align: center
 }
 
 </style>
