@@ -12,7 +12,7 @@ h1, p{
     text-align: center;
 }
 table.greyGridTable {
-  /* border: 2px solid #000000; */
+  border: 0.8px solid #000000;
   width: 100%;
   text-align: center;
   border-collapse: collapse;
