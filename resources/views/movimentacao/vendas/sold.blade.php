@@ -4,6 +4,10 @@
 	<title>Venda Concluida</title>
 </head>
 <style>
+  * {
+    margin: 0;
+    padding: 0px;
+  }
 h1, p{
     text-align: center;
 }
@@ -14,7 +18,7 @@ table.greyGridTable {
   border-collapse: collapse;
 }
 table.greyGridTable td, table.greyGridTable th {
-  /* border: 1px solid #FFFFFF; */
+  border: 0.5px solid #FFFFFF;
   padding: 3px 4px;
 }
 table.greyGridTable tbody td {
@@ -54,25 +58,25 @@ table.greyGridTable tfoot td {
 </style>
 <body>
   @if ($venda[0]->status_venda == 'venda_fechada')
-  <h4>V Aços Galan</h4>
+  <h4 style="margin: 10px">V Aços Galan</h4>
   @elseif ($venda[0]->status_venda == 'orcamento')
-  <h4>O Aços Galan</h4>
+  <h4 style="margin: 10px">O Aços Galan</h4>
   @endif
-  <div>
+  <div style="margin: 5px 10px">
     <strong>Tels:(11) 4621-9051 - KM54</strong> - <strong>(11) 4621-9080 - Cotia 2</strong> - <strong>(15) 3248-3689 - Ibiúna</strong> - <strong>(11) 4784-3169 - São Roque</strong>
   </div>  
   <hr />
 
-    <div>
+    <div style="margin: 5px 10px">
         Data: <strong>{{date('d/m/Y h:i:s', strtotime($venda[0]->created_at))}}</strong> - Número: <strong>{{$venda[0]->id}}</strong> - Vendedor: <strong>{{$venda[0]->vendedor}}</strong>
     </div>
   
-    <h4>
+    <h4 style="margin: 5px 10px">
       Cliente: {{$venda[0]->nome}} <br />
       Endereço: {{$venda[0]->endereco}} - CEP: {{$venda[0]->cep}} - {{$venda[0]->bairro}} - {{$venda[0]->cidade}}
     </h4>
 
-    <div>
+    <div style="margin: 10px 10px">
 
         <table class="greyGridTable">
             <tr>
@@ -113,7 +117,7 @@ table.greyGridTable tfoot td {
     
     <br />
 
-    <div class="row">
+    <div class="row" style="margin: 5px 10px">
       <table>
           <td>
               ___________________________________<br />
