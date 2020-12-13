@@ -58,9 +58,9 @@ table.greyGridTable tfoot td {
 </style>
 <body>
   @if ($venda[0]->status_venda == 'venda_fechada')
-  <h4 style="margin: 10px">V Aços Galan</h4>
+  <h4 style="margin: 30px 10px 10px 10px">V Aços Galan</h4>
   @elseif ($venda[0]->status_venda == 'orcamento')
-  <h4 style="margin: 10px">O Aços Galan</h4>
+  <h4 style="margin: 30px 10px 10px 10px">O Aços Galan</h4>
   @endif
   <div style="margin: 5px 10px">
     <strong>Tels:(11) 4621-9051 - KM54</strong> - <strong>(11) 4621-9080 - Cotia 2</strong> - <strong>(15) 3248-3689 - Ibiúna</strong> - <strong>(11) 4784-3169 - São Roque</strong>
