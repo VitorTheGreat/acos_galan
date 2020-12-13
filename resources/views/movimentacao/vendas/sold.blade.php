@@ -7,6 +7,7 @@
   * {
     margin: 0;
     padding: 0px;
+    font-weight: bold;
   }
 table.greyGridTable {
   border: 0.8px solid #000000;
