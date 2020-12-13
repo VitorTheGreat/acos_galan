@@ -20,9 +20,9 @@ table.greyGridTable td, table.greyGridTable th {
 table.greyGridTable tbody td {
   font-size: 16px;
 }
-table.greyGridTable td:nth-child(even) {
+/* table.greyGridTable td:nth-child(even) {
   background: #EBEBEB;
-}
+} */
 table.greyGridTable thead {
   background: #FFFFFF;
   border-bottom: 4px solid #333333;
@@ -47,23 +47,32 @@ table.greyGridTable tfoot {
 table.greyGridTable tfoot td {
   font-size: 16px;
 }
+.row table {
+  text-align: center
+}
+
 </style>
 <body>
   @if ($venda[0]->status_venda == 'venda_fechada')
-  <h1>Venda Concluida - Aços Galan</h1>
+  <h4>V Aços Galan</h4>
   @elseif ($venda[0]->status_venda == 'orcamento')
-  <h1>Orçamento - Aços Galan</h1>
+  <h4>O Aços Galan</h4>
   @endif
-    <hr />
+  <div>
+    <strong>Tels:(11) 4621-9051 - KM54</strong> - <strong>(11) 4621-9080 - Cotia 2</strong> - <strong>(15) 3248-3689 - Ibiúna</strong> - <strong>(11) 4784-3169 - São Roque</strong>
+  </div>  
+  <hr />
 
     <div>
-        Data: <strong>{{date('d/m/Y h:i:s', strtotime($venda[0]->created_at))}}</strong> - Número da venda: <strong>{{$venda[0]->id}}</strong> - Loja: <strong>{{$venda[0]->loja}}</strong> - Vendedor: <strong>{{$venda[0]->vendedor}}</strong>
+        Data: <strong>{{date('d/m/Y h:i:s', strtotime($venda[0]->created_at))}}</strong> - Número: <strong>{{$venda[0]->id}}</strong> - Vendedor: <strong>{{$venda[0]->vendedor}}</strong>
     </div>
     
     <br />
 
-    <h3>Cliente: {{$venda[0]->nome}} </h3>
-    <h4>Endereço: {{$venda[0]->endereco}} - CEP: {{$venda[0]->cep}} - {{$venda[0]->bairro}} - {{$venda[0]->cidade}} </h4>
+    <h3>
+      Cliente: {{$venda[0]->nome}} <br />
+      Endereço: {{$venda[0]->endereco}} - CEP: {{$venda[0]->cep}} - {{$venda[0]->bairro}} - {{$venda[0]->cidade}}
+    </h3>
 
     <br />
 
@@ -90,41 +99,38 @@ table.greyGridTable tfoot td {
 
         <table class="greyGridTable">
             <tr>
-                <td>Método de Pagamento</td>
-                <td>Desconto</td>
-                <td>Valor Pago</td>
+                <td>Forma de Pagamento</td>
+
                 <td>Total</td>
-                <td>Troco</td>
             </tr>
               <tr>
                   <td>{{$venda[0]->metodo_pagamento}}</td>
-                  <td>R$ {{$venda[0]->valor_desconto}}</td>
-                  <td>R$ {{$venda[0]->valor_pago}}</td>
                   <td>R$ {{$venda[0]->total}}</td>
-                  <td>R$ {{$venda[0]->troco}}</td>
               </tr>
         </table>
 
         <div>
           <h4>Observação:</h4>
-        <p>{{$venda[0]->observacao}}</p>
+          <p>{{$venda[0]->observacao}}</p>
         </div>
     </div>
     
     <br />
 
     <div class="row">
-        <p> 
-            ________________________________________________<br />
-            Assinatura do Cliente ({{$venda[0]->nome}})
+      <table>
+          <td>
+              ___________________________________<br />
+              Assinatura do Entregador
+          </td>
+          <td>
+              __________________________________<br />
+              Assinatura do Cliente
+          </td>
+        </tr>
 
-        </p>
-        <br />
-        <p> 
-                ________________________________________________<br />
-                Assinatura do Responsavel entrega ({{$venda[0]->vendedor}} - Aços Galan)
-    
-        </p>
+      </table>
+
     </div>
     
 </body>
