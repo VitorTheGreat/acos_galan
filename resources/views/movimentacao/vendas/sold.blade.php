@@ -8,13 +8,13 @@ h1, p{
     text-align: center;
 }
 table.greyGridTable {
-  border: 2px solid #000000;
+  /* border: 2px solid #000000; */
   width: 100%;
   text-align: center;
   border-collapse: collapse;
 }
 table.greyGridTable td, table.greyGridTable th {
-  border: 1px solid #FFFFFF;
+  /* border: 1px solid #FFFFFF; */
   padding: 3px 4px;
 }
 table.greyGridTable tbody td {
@@ -66,15 +66,11 @@ table.greyGridTable tfoot td {
     <div>
         Data: <strong>{{date('d/m/Y h:i:s', strtotime($venda[0]->created_at))}}</strong> - Número: <strong>{{$venda[0]->id}}</strong> - Vendedor: <strong>{{$venda[0]->vendedor}}</strong>
     </div>
-    
-    <br />
-
-    <h3>
+  
+    <h4>
       Cliente: {{$venda[0]->nome}} <br />
       Endereço: {{$venda[0]->endereco}} - CEP: {{$venda[0]->cep}} - {{$venda[0]->bairro}} - {{$venda[0]->cidade}}
-    </h3>
-
-    <br />
+    </h4>
 
     <div>
 
