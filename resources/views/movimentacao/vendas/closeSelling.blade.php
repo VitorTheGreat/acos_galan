@@ -12,7 +12,7 @@
                 </button>
             </div>
             @endif
-    
+
             @if ($errors->any())
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 @foreach ($errors->all() as $error)
@@ -23,7 +23,7 @@
                 </button>
             </div>
             @endif
-    
+
             @if (session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong> Error - </strong> {{session('error')}} </span>
@@ -34,6 +34,8 @@
             @endif
 
         <div class="row">
+          <a class="btn btn-primary" href="javascript:history.back()">Voltar</a>
+
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -96,7 +98,7 @@
                                                     </tbody>
                                                 </table>
                                                 <br />
-                                        
+
                                         <h4>Pagamento</h4>
                                             <div class="row">
                                                 <div class="col-2">
@@ -133,7 +135,7 @@
                                                     <input type="number" name="troco" id="troco" value="0" step="0.01" hidden />
                                                     <h4 class="troco"><strong>Troco: <span><span></strong></h4>
                                                 </div>
-                                                
+
                                             </div>
 
                                             <div class="row">
@@ -144,13 +146,13 @@
                                             </div>
 
                                         <br />
-                                        
-                                            <button type="submit" class="btn btn-success" name="btn_selling" value="close_selling" id="close_selling">Fechar Venda</button>
+
+                                            <button type="submit" class="btn btn-success" name="btn_selling" value="close_selling" id="close_selling">Concluir Venda</button>
                                             <button type="submit" class="btn btn-info" name="btn_selling" value="save_budget" id="save_budget"> Salvar Orçamento </button>
                                         </form>
                                 </div>
                             </div>
-                            
+
                     </div>
                 </div>
             </div>

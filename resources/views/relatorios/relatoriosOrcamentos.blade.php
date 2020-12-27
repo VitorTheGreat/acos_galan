@@ -34,7 +34,7 @@
                                     <div class="card-icon">
                                             <i class="material-icons">
                                                     date_range
-                                            </i>                                                    
+                                            </i>
                                     </div>
                                     <p class="card-category">Orçamentos dessa semana</p>
                                     <p class="card-category"><strong>{{now()->startOfWeek()->format('d/m/Y')}} à {{now()->endOfWeek()->format('d/m/Y')}}</strong></p>
@@ -68,7 +68,41 @@
                 @endif
 
                 <div class="row">
+
+
+                  <div class="col-2">
+
+                      <form action={{route('relatorios.orcamentos')}} method="get">
+                        @method('get')
+                        @csrf
+                        <label>Filtrar por data</label>
+                        <select style="font-size: 18px" class="form-control" data-style="btn btn-link" name="orderByDate">
+                          <option value="DESC">Mais recente</option>
+                          <option value="ASC">Mais antiga</option>
+                        </select>
+                        <button type="submit" class="btn btn-info">Aplicar</button>
+                      </form>
+
+                  </div>
+                  <div class="col-8">
+                    <label>Filtrar por Cliente</label>
+                      <form action={{route('relatorios.orcamentos')}} method="get">
+                          @csrf
+                          <input placeholder="Pesquisa por Cliente" name="search_query" type="text"/>
+                          <button type="submit" class="btn btn-primary"/> Pesquisar </button>
+                      </form>
+                  </div>
+
+                <br />
+
                         <div class="col-md-12">
+                          <div class="col-1">
+                            <form action={{route('relatorios.orcamentos')}} method="get">
+                                    @csrf
+                                    <input hidden name="search_query" type="text" value=""/>
+                                    <button type="submit" class="btn btn-info"/> Zerar filtro </button>
+                            </form>
+                          </div>
                                 <div class="card">
                                     <div class="card-header card-header-text card-header-primary">
                                       <div class="card-text">
@@ -76,7 +110,7 @@
                                       </div>
                                     </div>
                                     <div class="card-body">
-                                            {{-- <div class="form-row col-12"> 
+                                            {{-- <div class="form-row col-12">
                                                     <form action='#' method="get">
                                                         @csrf
                                                         <input placeholder="Pesquisa" name="search_query" type="text"/>
@@ -122,9 +156,9 @@
                                                                             <i class="material-icons">receipt</i>
                                                                         </a>
                                                                     </td>
-                               
+
                                                             </tr>
-                                                        @endforeach                                            
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                                 {{ $orcamentos_geral->links() }}
@@ -143,7 +177,7 @@
                                       </div>
                                     </div>
                                     <div class="card-body">
-                                            {{-- <div class="form-row col-12"> 
+                                            {{-- <div class="form-row col-12">
                                                     <form action='#' method="get">
                                                         @csrf
                                                         <input placeholder="Pesquisa" name="search_query" type="text"/>
@@ -189,10 +223,10 @@
                                                                                 <i class="material-icons">receipt</i>
                                                                             </a>
                                                                     </td>
-                               
+
                                                             </tr>
-                                                        @endforeach 
-                                                     
+                                                        @endforeach
+
                                                     </tbody>
                                                 </table>
                                                 {{ $orcamentos_hoje->links() }}
@@ -211,7 +245,7 @@
                                       </div>
                                     </div>
                                     <div class="card-body">
-                                            {{-- <div class="form-row col-12"> 
+                                            {{-- <div class="form-row col-12">
                                                     <form action='#' method="get">
                                                         @csrf
                                                         <input placeholder="Pesquisa" name="search_query" type="text"/>
@@ -257,10 +291,10 @@
                                                                                 <i class="material-icons">receipt</i>
                                                                             </a>
                                                                     </td>
-                               
+
                                                             </tr>
-                                                        @endforeach 
-                                                     
+                                                        @endforeach
+
                                                     </tbody>
                                                 </table>
                                                 {{ $orcamentos_semana->links() }}
@@ -279,7 +313,7 @@
                                       </div>
                                     </div>
                                     <div class="card-body">
-                                            {{-- <div class="form-row col-12"> 
+                                            {{-- <div class="form-row col-12">
                                                     <form action='#' method="get">
                                                         @csrf
                                                         <input placeholder="Pesquisa" name="search_query" type="text"/>
@@ -325,10 +359,10 @@
                                                                             <i class="material-icons">receipt</i>
                                                                         </a>
                                                                 </td>
-                           
+
                                                         </tr>
-                                                    @endforeach 
-                                                 
+                                                    @endforeach
+
                                                 </tbody>
                                             </table>
                                             {{ $orcamentos_mes->links() }}
@@ -344,4 +378,3 @@
 </div>
 
 @endsection
-

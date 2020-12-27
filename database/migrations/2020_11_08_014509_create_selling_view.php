@@ -15,7 +15,7 @@ class CreateSellingView extends Migration
     public function up()
     {
         DB::statement("CREATE VIEW selling_view AS
-        SELECT sl.*, u.name AS vendedor, s.local as loja, c.nome, c.cpf, c.telefone, c.celular, c.bairro, c.cidade, c.cep, c.endereco, si.quantidade, si.sub_total_produto, si.preco_base, si.preco_venda_final, p.descricao, p.id as product_id, s.id as storage_id FROM sellings AS sl 
+        SELECT sl.*, u.name AS vendedor, s.local as loja, c.nome, c.cpf, c.telefone, c.celular, c.bairro, c.cidade, c.cep, c.endereco, si.quantidade, si.sub_total_produto, si.preco_base, si.preco_venda_final, p.descricao, p.id as product_id, s.id as storage_id FROM sellings AS sl
             INNER JOIN selling_items AS si ON si.sellings_id = sl.id
             INNER JOIN products AS p ON p.id = si.product_id
             INNER JOIN storages AS s ON s.id = si.storage_id
@@ -32,7 +32,7 @@ class CreateSellingView extends Migration
      */
     public function down()
     {
-        DB::statement("DROP VIEW selling_view");
-        // Schema::dropIfExists('selling_view');
+        // DB::statement("DROP VIEW selling_view");
+        Schema::dropIfExists('selling_view');
     }
 }

@@ -332,8 +332,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vanilla_masker__WEBPACK_IMPORTED_MODULE_0__);
 
 
-var toFloat = function toFloat(value) {
-  return parseFloat(value.replace('R$', '').replace(',', '.'));
+var toFloat = function toFloat(num) {
+  var dotPos = num.indexOf('.');
+  var commaPos = num.indexOf(',');
+  var sep;
+  if (dotPos < 0) dotPos = 0;
+  if (commaPos < 0) commaPos = 0;
+  if (dotPos > commaPos && dotPos) sep = dotPos;else {
+    if (commaPos > dotPos && commaPos) sep = commaPos;else sep = false;
+  }
+  if (sep == false) return parseFloat(num.replace(/[^\d]/g, ""));
+  return parseFloat(num.substr(0, sep).replace(/[^\d]/g, "") + '.' + num.substr(sep + 1, num.length).replace(/[^0-9]/, ""));
 };
 
 $(document).ready(function () {
@@ -412,7 +421,6 @@ $(document).ready(function () {
         preco_compra.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(preco_compraTotal.toFixed(2));
       }
 
-      console.log(preco_compra.value);
       preco_unitario.value == '0,00' ? preco_compra.focus() : ipi.focus();
     }, true); //preço compra
 
@@ -436,7 +444,6 @@ $(document).ready(function () {
       var preco_ventaTotal = percent * toFloat(preco_custo.value);
       var precoFinal = toFloat(preco_custo.value) + parseFloat(preco_ventaTotal.toFixed(2));
       preco_venda.value = vanilla_masker__WEBPACK_IMPORTED_MODULE_0___default.a.toMoney(precoFinal.toFixed(2));
-      console.log(preco_venda.value, precoFinal);
     }, true);
   };
 });
@@ -450,7 +457,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/vitorh/Documentos/acos_galan/resources/js/product.js */"./resources/js/product.js");
+module.exports = __webpack_require__(/*! /home/vitorh/Documents/projects/acos_galan/resources/js/product.js */"./resources/js/product.js");
 
 
 /***/ })

@@ -120,7 +120,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/vitorh/Documentos/acos_galan/resources/js/closeSelling.js */"./resources/js/closeSelling.js");
+module.exports = __webpack_require__(/*! /home/vitorh/Documents/projects/acos_galan/resources/js/closeSelling.js */"./resources/js/closeSelling.js");
 
 
 /***/ })

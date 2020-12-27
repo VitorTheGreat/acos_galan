@@ -1,7 +1,33 @@
 import VMasker from 'vanilla-masker';
 
-const toFloat = (value) => {
-    return parseFloat(value.replace('R$', '').replace(',', '.'))
+const toFloat = (num) => {
+    let dotPos = num.indexOf('.');
+    let commaPos = num.indexOf(',');
+    let sep
+
+    if (dotPos < 0)
+        dotPos = 0;
+
+    if (commaPos < 0)
+        commaPos = 0;
+
+    if ((dotPos > commaPos) && dotPos)
+        sep = dotPos;
+    else {
+        if ((commaPos > dotPos) && commaPos)
+            sep = commaPos;
+        else
+            sep = false;
+    }
+
+    if (sep == false)
+        return parseFloat(num.replace(/[^\d]/g, ""));
+
+    return parseFloat(
+        num.substr(0, sep).replace(/[^\d]/g, "") + '.' +
+        num.substr(sep+1, num.length).replace(/[^0-9]/, "")
+    );
+
 }
 
 $(document).ready(() => {
@@ -89,8 +115,6 @@ $(document).ready(() => {
                 preco_compra.value = VMasker.toMoney(preco_compraTotal.toFixed(2));
             }
 
-            console.log(preco_compra.value)
-
             preco_unitario.value == '0,00' ? preco_compra.focus() : ipi.focus();
 
         }, true);
@@ -129,8 +153,6 @@ $(document).ready(() => {
             let precoFinal = toFloat(preco_custo.value) + parseFloat(preco_ventaTotal.toFixed(2))
 
             preco_venda.value = VMasker.toMoney(precoFinal.toFixed(2));
-
-            console.log(preco_venda.value, precoFinal)
 
         }, true);
     }

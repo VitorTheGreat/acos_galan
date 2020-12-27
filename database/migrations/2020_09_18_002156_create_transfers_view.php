@@ -30,7 +30,7 @@ class CreateTransfersView extends Migration
    */
   public function down()
   {
-    DB::statement("DROP VIEW transfers_view");
-      // Schema::dropIfExists('transfers_view');
+    // DB::statement("DROP VIEW transfers_view");
+      Schema::dropIfExists('transfers_view');
   }
 }

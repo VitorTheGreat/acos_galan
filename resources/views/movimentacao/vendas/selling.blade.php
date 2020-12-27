@@ -12,7 +12,7 @@
                 </button>
             </div>
             @endif
-    
+
             @if ($errors->any())
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 @foreach ($errors->all() as $error)
@@ -23,7 +23,7 @@
                 </button>
             </div>
             @endif
-    
+
             @if (session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong> Error - </strong> {{session('error')}} </span>
@@ -92,6 +92,8 @@
                                                                     <option value="{{session('tabela')}}" selected>{{session('tabela')}} %</option>
                                                                     <option value="" disabled>  </option>
                                                                     <option value="0">0 %</option>
+                                                                    <option value="13">13 %</option>
+                                                                    <option value="10">10 %</option>
                                                                     <option value="7.5">7,5 %</option>
                                                                     <option value="5">5 %</option>
                                                                     <option value="2.5">2.5 %</option>
@@ -100,7 +102,7 @@
                                                             <div class="col-6">
                                                                 <button type="submit" class="btn btn-info" id="btn_aplly_table">Aplicar Tabela</button>
                                                             </div>
-                                               
+
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="col-9">
@@ -156,7 +158,7 @@
                                                                                 <small>R$ </small><input type="number" data-real-price="{{$item['preco_base']}}" min="1" value="{{$item['preco_venda']}}" name="preco_venda" type="text" style="width: 90px;" disabled/>
                                                                             </td>
                                                                             <td class="td-number">
-                                                                                {{$item['kg_mt']}} 
+                                                                                {{$item['kg_mt']}}
                                                                             </td>
                                                                             <td class="td-number">
                                                                                 R$ {{$item['preco_kg_mt']}}
@@ -177,9 +179,9 @@
 
                                                                                 </form>
                                                                             </td>
-                                                                        </tr> 
+                                                                        </tr>
                                                                     @endforeach
-                                                                    @else 
+                                                                    @else
                                                                     <tr>
                                                                         <td>
                                                                             <p>Sem produtos nessa venda</p>
@@ -260,7 +262,7 @@
                                         <input hidden name="customer_id" id="customer_id" value="{{$selling->customer_id}}" />
                                     @endif
                                     <br/>
-                                
+
                                     <button type="submit" class="btn btn-success"> Fechar Venda </button>
 
                             </form>
@@ -271,7 +273,7 @@
 
                                 <button type="submit" class="btn btn-danger"> Cancelar Venda </button>
                             </form>
-                            
+
                     </div>
                 </div>
                 @endif

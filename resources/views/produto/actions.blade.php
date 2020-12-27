@@ -97,7 +97,7 @@
                                                         R$
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control data-money" id="preco_compra" name="preco_compra" placeholder="Preço Compra (unidade)" value="{{old('preco_compra')}}">
+                                                <input type="text" class="form-control data-money" disabled id="preco_compra" name="preco_compra" placeholder="Preço Compra (unidade)" value="{{old('preco_compra')}}">
                                             </div>
                                         </div>
                                     </div>
@@ -165,7 +165,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-        
+
                                     </div>
                                     <button type="submit" class="btn btn-success">Cadastrar</button>
                                 </form>
@@ -178,8 +178,8 @@
                         <p class="card-category">Produtos Cadastrados</p>
                     </div>
                     <div class="card-body">
-                        
-                        <div class="form-row col-12"> 
+
+                        <div class="form-row col-12">
                             <form action={{route('produto')}} method="get">
                                 @csrf
                                 <input placeholder="Pesquisa por Descrição" name="search_query" type="text"/>
@@ -191,7 +191,7 @@
                                     <button type="submit" class="btn btn-info"/> Mostrar todos </button>
                             </form>
                         </div>
-    
+
 
                         <div class="table-responsive">
                             <table class="table">

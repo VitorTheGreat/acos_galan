@@ -36,7 +36,7 @@ services:
    WEB_DOCUMENT_ROOT: /app/public
    PHP_DISPLAY_ERRORS: 1
   volumes:
-   - "/home/vitorh/Documentos/acos_galan:/app"
+   - "/home/vitorh/Documents/projects/acos_galan:/app"
   #  - "./php_custom.ini:/etc/php7/php.ini"
   #  - "/etc/php/php.ini:/etc/php7/php.ini"
   networks:
