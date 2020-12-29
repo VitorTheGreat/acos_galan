@@ -206,6 +206,27 @@ class SellingController extends Controller
         return view('movimentacao.orcamento', compact('orcamentos'));
     }
 
+    public function editOrcamento($id) {
+        
+        $products = DB::select('SELECT * FROM selling_product_info_view WHERE estoque_id = ' . auth()->user()->storage_id);
+
+        $selling_items = DB::select('SELECT * FROM selling_items WHERE sellings_id = ' . $id);
+
+        // dd($selling_items);
+
+        foreach ($selling_items as $value) {
+            dd($value);
+        }
+
+        $selling = Selling::where('id', $id)
+                    ->where('user_id', auth()->user()->id)
+                    ->orderBy('id', 'DESC')
+                    ->first();
+        
+
+        return view('movimentacao.orcamentos.editOrcamento', compact('selling', 'products'));
+    }
+
     public function closeOrcamento($id) {
         
         $orcamento = DB::table('selling_view')->select('*')->where('status_venda', 'orcamento')->where('user_id', auth()->user()->id)->where('id', $id)->get();
@@ -248,61 +269,6 @@ class SellingController extends Controller
         } catch (\Exception $e) {
             dd($e);
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**

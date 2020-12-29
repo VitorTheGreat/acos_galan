@@ -37,6 +37,9 @@
                                   <form action="{{route('orcamento.close', ['id' => $orcamento->id])}}" method="post">
                                       @csrf
                                       @method('POST')
+                                      <a href="{{route('edit.orcamento', ['id' => $orcamento->id])}}" rel="tooltip" class="btn btn-warning">
+                                          <i class="material-icons">edit</i>
+                                      </a>
                                       <button type="submit" rel="tooltip" class="btn btn-success">
                                           <i class="material-icons">check</i>
                                       </button>
