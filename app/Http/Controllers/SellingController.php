@@ -210,13 +210,13 @@ class SellingController extends Controller
     }
 
     public function editOrcamento($id) {
-        
 
         $products = DB::select('SELECT * FROM selling_product_info_view WHERE estoque_id = ' . auth()->user()->storage_id);
 
         $selling_items = DB::select('SELECT * FROM selling_items WHERE sellings_id = ' . $id);
 
         foreach ($selling_items as $prod) {
+            // dd($prod);
             app('App\Http\Controllers\CartController')->storeSellingItemOrcamento($prod->tabela, $prod->product_id, $prod->quantidade, $id);
         }
 
@@ -233,25 +233,49 @@ class SellingController extends Controller
         
         $cart = session()->get('cart'); 
 
-                foreach ($cart as $key => $item) {
-                    // var_dump($item);
-                    if(SellingItem::find($item['product_id'])) {
-                        session()->flash('warning', 'Already in system.');
-                    }
-                    else {
-                        SellingItem::create([
-                            'quantidade' => $item['quantidade'],
-                            'sub_total_produto' => $item['sub_total_produto'],
-                            'preco_base' => $item['preco_base'],
-                            'preco_venda_final' => $item['preco_venda'],
-                            'tabela' => $item['tabela'],
-                            'product_id' => $item['product_id'],
-                            'storage_id' => $item['storage_id'],
-                            'sellings_id' => $item['sellings_id']
-                        ]);
-                    }
+        if($cart) {
 
+            try {
+                
+                foreach ($cart as $item) {
+    
+                if(!SellingItem::where('product_id',$item['product_id'])->where('sellings_id',$item['sellings_id'])->exists()) {
+                    
+                    SellingItem::create([
+                        'quantidade' => $item['quantidade'],
+                        'sub_total_produto' => $item['sub_total_produto'],
+                        'preco_base' => $item['preco_base'],
+                        'preco_venda_final' => $item['preco_venda'],
+                        'tabela' => $item['tabela'],
+                        'product_id' => $item['product_id'],
+                        'storage_id' => $item['storage_id'],
+                        'sellings_id' => $item['sellings_id']
+                    ]);
+
+                    // $sellingId = $item['sellings_id'];
+
+                    // Selling::where('id', $sellingId)
+                    //                 ->update([
+                    //                     'metodo_pagamento' => $paidValues['metodo_pagamento'],
+                    //                     'valor_pago' => $paidValues['valor_pago'],
+                    //                     'valor_desconto' => $paidValues['desconto'],
+                    //                     'preco_total_desconto' => $paidValues['sub_total'],
+                    //                     'total' => $paidValues['sub_total_real'],
+                    //                     'troco' => $paidValues['troco'],
+                    //                     'status_venda' => 'orcamento',
+                    //                     'observacao' => $paidValues['observacao'],
+                    //                     'customer_id' => $customer->id
+                    //                 ]);
                 }
+                
+                
+            }
+
+            }  catch (\Exception $e) {
+                dd($e);
+            }
+        }
+
                 
 
         $orcamento = DB::table('selling_view')->select('*')->where('status_venda', 'orcamento')->where('user_id', auth()->user()->id)->where('id', $id)->get();

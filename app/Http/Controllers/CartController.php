@@ -98,12 +98,12 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Produto adicionado.');
     }
 
-        public function storeSellingItemOrcamento($tabela, $prod_id, $quantidade, $sellings_id)
+    public function storeSellingItemOrcamento($tabela, $prod_id, $quantidade, $sellings_id)
     {
-
+        
         $t = $tabela;
-
-        session()->put('tabela', (float) $t['tabela']);
+        
+        session()->put('tabela', (float) $t);
 
         $cart = session()->get('cart', []);
 
