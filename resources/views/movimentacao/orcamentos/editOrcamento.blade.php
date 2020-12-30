@@ -156,7 +156,7 @@
                                     <span>R$</span> <input style="font-size: 50px; height: 80px;" type="text" class="form-control" placeholder="Total" disabled name="total_venda">
                                 </div>
                             </div>
-                            <form action="{{route('vendas.closeSelling')}}" method="POST">
+                            <form action="{{route('orcamento.close', ['id' => $selling->id])}}" method="POST">
                                     @method('POST')
                                     @csrf
                                     <input hidden name="customer_id" id="customer_id" value="{{$selling->customer_id}}" />

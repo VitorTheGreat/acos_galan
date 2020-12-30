@@ -13,6 +13,8 @@ use App\Models\State;
 //using for the db views
 use Illuminate\Support\Facades\DB;
 
+use App\Http\Controllers\CartController;
+
 class SellingController extends Controller
 {
     /**
@@ -101,11 +103,10 @@ class SellingController extends Controller
         if($button == 'close_selling') {
             
             try {
-                
                 if(!$customer) {
                     $customer = Customer::create($customerData);
                 }
-
+                
                 foreach ($cart as $key => $item) {
                     SellingItem::create([
                         'quantidade' => $item['quantidade'],
@@ -201,6 +202,8 @@ class SellingController extends Controller
 
     public function orcamento() {
 
+        session()->forget('cart');
+
         $orcamentos = DB::table('selling_view')->select('*')->where('status_venda', 'orcamento')->where('user_id', auth()->user()->id)->groupBy('id')->get();
 
         return view('movimentacao.orcamento', compact('orcamentos'));
@@ -208,14 +211,13 @@ class SellingController extends Controller
 
     public function editOrcamento($id) {
         
+
         $products = DB::select('SELECT * FROM selling_product_info_view WHERE estoque_id = ' . auth()->user()->storage_id);
 
         $selling_items = DB::select('SELECT * FROM selling_items WHERE sellings_id = ' . $id);
 
-        // dd($selling_items);
-
-        foreach ($selling_items as $value) {
-            dd($value);
+        foreach ($selling_items as $prod) {
+            app('App\Http\Controllers\CartController')->storeSellingItemOrcamento($prod->tabela, $prod->product_id, $prod->quantidade, $id);
         }
 
         $selling = Selling::where('id', $id)
@@ -229,6 +231,29 @@ class SellingController extends Controller
 
     public function closeOrcamento($id) {
         
+        $cart = session()->get('cart'); 
+
+                foreach ($cart as $key => $item) {
+                    // var_dump($item);
+                    if(SellingItem::find($item['product_id'])) {
+                        session()->flash('warning', 'Already in system.');
+                    }
+                    else {
+                        SellingItem::create([
+                            'quantidade' => $item['quantidade'],
+                            'sub_total_produto' => $item['sub_total_produto'],
+                            'preco_base' => $item['preco_base'],
+                            'preco_venda_final' => $item['preco_venda'],
+                            'tabela' => $item['tabela'],
+                            'product_id' => $item['product_id'],
+                            'storage_id' => $item['storage_id'],
+                            'sellings_id' => $item['sellings_id']
+                        ]);
+                    }
+
+                }
+                
+
         $orcamento = DB::table('selling_view')->select('*')->where('status_venda', 'orcamento')->where('user_id', auth()->user()->id)->where('id', $id)->get();
         
         // dd($orcamento);
