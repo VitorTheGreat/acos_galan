@@ -216,7 +216,6 @@ class SellingController extends Controller
         $selling_items = DB::select('SELECT * FROM selling_items WHERE sellings_id = ' . $id);
 
         foreach ($selling_items as $prod) {
-            // dd($prod);
             app('App\Http\Controllers\CartController')->storeSellingItemOrcamento($prod->tabela, $prod->product_id, $prod->quantidade, $id);
         }
 
@@ -229,11 +228,33 @@ class SellingController extends Controller
         return view('movimentacao.orcamentos.editOrcamento', compact('selling', 'products'));
     }
 
-    public function closeOrcamento($id) {
-        
-        $cart = session()->get('cart'); 
+    public function changeTableOrcamento(Request $request, $id) {
+        // dd($request->tabela, $id, session()->get('cart'));
 
+        $selling_items = DB::select('SELECT * FROM selling_items WHERE sellings_id = ' . $id);
+
+        foreach ($selling_items as $prod) {
+            app('App\Http\Controllers\CartController')->storeSellingItemOrcamento($request->tabela, null, $prod->quantidade, $id);
+        }
+
+        return redirect()->back();
+
+    }
+
+    public function closeOrcamento($id) {
+
+        $cart = session()->get('cart');
+
+        $subTotal_venda = 0;
+
+        
         if($cart) {
+            
+            foreach ($cart as $key => $item) {
+                $subTotal_venda += $item['sub_total_produto'];
+            }
+    
+            $sub_total = (float) number_format((float)$subTotal_venda, 2, '.', '');
 
             try {
                 
@@ -252,22 +273,14 @@ class SellingController extends Controller
                         'sellings_id' => $item['sellings_id']
                     ]);
 
-                    // $sellingId = $item['sellings_id'];
-
-                    // Selling::where('id', $sellingId)
-                    //                 ->update([
-                    //                     'metodo_pagamento' => $paidValues['metodo_pagamento'],
-                    //                     'valor_pago' => $paidValues['valor_pago'],
-                    //                     'valor_desconto' => $paidValues['desconto'],
-                    //                     'preco_total_desconto' => $paidValues['sub_total'],
-                    //                     'total' => $paidValues['sub_total_real'],
-                    //                     'troco' => $paidValues['troco'],
-                    //                     'status_venda' => 'orcamento',
-                    //                     'observacao' => $paidValues['observacao'],
-                    //                     'customer_id' => $customer->id
-                    //                 ]);
                 }
-                
+
+                Selling::where('id', $id)
+                    ->update([
+                        'valor_pago' => $sub_total,
+                        'preco_total_desconto' => $sub_total,
+                        'total' => $sub_total
+                    ]);
                 
             }
 
@@ -275,8 +288,6 @@ class SellingController extends Controller
                 dd($e);
             }
         }
-
-                
 
         $orcamento = DB::table('selling_view')->select('*')->where('status_venda', 'orcamento')->where('user_id', auth()->user()->id)->where('id', $id)->get();
         

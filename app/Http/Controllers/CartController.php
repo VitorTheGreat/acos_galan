@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\SellingItem;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -101,6 +102,8 @@ class CartController extends Controller
     public function storeSellingItemOrcamento($tabela, $prod_id, $quantidade, $sellings_id)
     {
         
+        // dd($tabela, $prod_id, $quantidade, $sellings_id);
+
         $t = $tabela;
         
         session()->put('tabela', (float) $t);
@@ -108,10 +111,17 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
 
         if (!isset($prod_id)) {
+
             foreach ($cart as $key => $item) {
                 $cart[$key]['tabela'] = (float) $t;
                 $cart[$key]['preco_venda'] = ($cart[$key]['preco_base'] * ((float) $t / 100)) + $cart[$key]['preco_base'];
-                $cart[$key]['sub_total_produto'] = (float) $cart[$key]['quantidade'] * $cart[$key]['preco_venda'];
+                $cart[$key]['sub_total_produto'] = (float) $quantidade * $cart[$key]['preco_venda'];
+
+                $updateOrcamento = SellingItem::where('sellings_id', $sellings_id)->where('product_id', $cart[$key]['product_id'])->update([
+                                        'sub_total_produto' => (float) $quantidade * $cart[$key]['preco_venda'],
+                                        'preco_venda_final' => $item['preco_venda'],
+                                        'tabela' => $t
+                                    ]);
 
                 session()->put('cart', $cart);
             }

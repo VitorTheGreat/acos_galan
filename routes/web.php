@@ -119,6 +119,7 @@ Route::middleware(['middleware' => 'auth'])->prefix('movimentacao')->group(funct
 
 	Route::get('/orcamento', 'SellingController@orcamento')->name('orcamento');
 	Route::get('/edit/orcamento/{id}', 'SellingController@editOrcamento')->name('edit.orcamento');
+	Route::post('/edit/orcamento/{id}', 'SellingController@changeTableOrcamento')->name('edit.orcamento.table');
 	Route::post('/orcamento/closeOrcamento/{id}', 'SellingController@closeOrcamento')->name('orcamento.close');
 	Route::post('/orcamento/finishOrcamento/{id}', 'SellingController@finishOrcamento')->name('orcamento.finish');
 

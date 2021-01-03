@@ -26,7 +26,7 @@
                                             <h4 class="card-title">Produto(s)</h4>
                                         </div>
                                         <div class="card-body">
-                                            <form action="{{route('sellingItem.store', ['sellings_id' => $selling->id])}}" method="post">
+                                            <form action="{{route('edit.orcamento.table', ['id' => $selling->id])}}" method="post">
                                                 @method('POST')
                                                 @csrf
                                                 <div class="col-6 row">
