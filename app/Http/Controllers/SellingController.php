@@ -215,6 +215,8 @@ class SellingController extends Controller
 
         $selling_items = DB::select('SELECT * FROM selling_items WHERE sellings_id = ' . $id);
 
+        // dd($selling_items);
+
         foreach ($selling_items as $prod) {
             app('App\Http\Controllers\CartController')->storeSellingItemOrcamento($prod->tabela, $prod->product_id, $prod->quantidade, $id);
         }

@@ -26,6 +26,7 @@
                                             <h4 class="card-title">Produto(s)</h4>
                                         </div>
                                         <div class="card-body">
+
                                             <form action="{{route('edit.orcamento.table', ['id' => $selling->id])}}" method="post">
                                                 @method('POST')
                                                 @csrf
@@ -56,7 +57,12 @@
                                                             </div>
 
                                                 </div>
+                                                </form>
+                                            <form action="{{route('sellingItem.store', ['sellings_id' => $selling->id])}}" method="post">
+                                                @method('POST')
+                                                @csrf
                                                 <div class="form-row">
+                                                <input hidden value="{{session('tabela')}}" name="tabela"/>
                                                     <div class="col-9">
                                                         <div class="form-group">
                                                             <input type="text" autofocus list="prod" class="form-control" placeholder="Descrição ou EAN" name="product_id" id="prod_input_insert">
