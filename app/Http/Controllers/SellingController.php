@@ -327,6 +327,8 @@ class SellingController extends Controller
                                     'customer_id' => $orcamento[0]->customer_id
                                 ]);
     
+            session()->forget('cart');
+            
             return redirect()->route('venda.pdf', ['id' => $sellingId]);
         } catch (\Exception $e) {
             dd($e);

@@ -75,7 +75,7 @@
                                                     </div>
                                                     <div class="col-3">
                                                         <div class="form-group">
-                                                            <input type="number" class="form-control" placeholder="Quantidade" name="quantidade" min="0.1" value="1" step="0.01">
+                                                            <input hidden type="number" class="form-control" placeholder="Quantidade" name="quantidade" min="0.1" value="1" step="0.01">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -122,13 +122,21 @@
                                                                                 R$ {{$item['preco_kg_mt']}}
                                                                             </td>
                                                                             <td class="td-number">
-                                                                            <input value="{{$item['quantidade']}}" type="number" min="1" type="text" name="quantidade" style="width: 50px;"/>
+                                                                                <form action="{{route('edit.orcamento.quantity', ['prod_id' => $product_id, 'selling_id' => $item['sellings_id']])}}" method="post">
+                                                                                    @csrf
+                                                                                    @method('post')
+                                                                                    <input value="{{$item['quantidade']}}" type="number" min="1" type="text" name="quantidade" style="width: 50px;"/>
+                                                                                    <button type ="submit" data-placement="left" class="btn btn-success" style="width: 35px; height: 33px; padding: 0;">
+                                                                                        <i class="material-icons">add_box</i>
+                                                                                    </button>
+
+                                                                                </form>
                                                                             </td>
                                                                             <td class="td-number preco_venda_final">
                                                                                 <small>R$ </small>{{$item['sub_total_produto']}}
                                                                             </td>
                                                                             <td class="td-actions">
-                                                                                <form action="{{route('sellingItem.remove', ['id' => $product_id])}}" method="post">
+                                                                                <form action="{{route('edit.orcamento.removeItem', ['prod_id' => $product_id, 'selling_id' => $item['sellings_id']])}}" method="post">
                                                                                     @csrf
                                                                                     @method('DELETE')
                                                                                     <button type ="submit" data-placement="left" class="btn btn-simple">

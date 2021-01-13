@@ -99,6 +99,72 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Produto adicionado.');
     }
 
+    public function changeQuantityCartEditOrcamento(Request $request, $prod_id, $selling_id) {
+        
+        // dd($request->quantidade, $prod_id, $selling_id);
+
+        $cart = session()->get('cart', []);
+
+        $itemCheck = SellingItem::where('sellings_id', $selling_id)->where('product_id', $prod_id)->get();
+
+        // dd($itemCheck[0]);
+
+        if(count($itemCheck) > 0) {
+
+            $updateOrcamento = SellingItem::where('sellings_id', $selling_id)->where('product_id', $prod_id)->update([
+                        'sub_total_produto' => (float) $request->quantidade * $itemCheck[0]->preco_venda_final,
+                        'preco_venda_final' => $itemCheck[0]->preco_venda_final,
+                        'quantidade' => $request->quantidade
+                    ]);
+
+                    return back()->with('status', 'Quantidade Atualizada');
+        }
+        else {
+
+                $cart[$prod_id]['quantidade'] = (float) $request->quantidade;
+                $cart[$prod_id]['sub_total_produto'] = (float) $request->quantidade * $cart[$prod_id]['preco_venda'];
+
+                session()->put('cart', $cart);
+
+                return redirect()->back();
+            
+        }
+
+
+    }
+
+    public function removeItemEditOrcamento($prod_id, $selling_id) {
+        
+        $cart = session()->get('cart', []);
+
+        $itemCheck = SellingItem::where('sellings_id', $selling_id)->where('product_id', $prod_id)->get();
+
+        // dd($itemCheck[0]);
+
+        if(count($itemCheck) > 0) {
+
+            $updateOrcamento = SellingItem::where('sellings_id', $selling_id)->where('product_id', $prod_id)->delete();
+
+            unset($cart[$prod_id]);
+
+            session()->put('cart', $cart);
+
+            return back()->with('status', 'Produto exlcuido do carrinho');
+        }
+        else {
+
+            if (isset($cart[$prod_id])) {
+
+                unset($cart[$prod_id]);
+
+                session()->put('cart', $cart);
+            }
+
+                return redirect()->back();
+            
+        }
+    }
+
     public function storeSellingItemOrcamento($tabela, $prod_id, $quantidade, $sellings_id)
     {
         
@@ -128,7 +194,7 @@ class CartController extends Controller
 
             return back()->with('status', 'Tabela Atualizada');
         }
-
+        
         $product = Product::find($prod_id);
 
         $preco_venda = ($product->preco_venda * ((float) $t / 100)) + $product->preco_venda;
